@@ -75,4 +75,21 @@
         {{{footer.scripts}}}
 
     </body>
+    <script>
+        // if the template file is a product template
+        if ("{{template_file}}".includes("product")) {
+            // callback function for the observer to call
+            const callback = (mutationList, observer) => {
+                // if the quantity input is disabled (variant isn't purchasable)
+                if(mutationList[0].target.disabled) {
+                    // change the price label
+                    document.querySelectorAll(".price").forEach(price => price.innerText = "Inquire for Price");
+                }
+            };
+            // create an observer to listen for mutations and call the callback function on mutate
+            const observer = new MutationObserver(callback);
+            // observe the quantity input to mutate on attribute change (style attribute changes visibility)
+            observer.observe(document.getElementById("qty[]"), { attributes: true });
+        }
+    </script>
 </html>
