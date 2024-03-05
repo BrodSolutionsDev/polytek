@@ -1,0 +1,21 @@
+<article class="blog{{#if post.body}} full-post{{/if}}">
+  <div class="blog-post-body">
+    <header class="blog-header">
+      
+      <h1 class="page-title" style="text-align: center;">{{post.title}}</h1>
+    </header>
+    <div class="flex flex-top">
+      <div class="flex-66 blog-post">{{{post.body}}}</div>
+      {{#if show_tags}}
+      <div id="blog-footer-tags" class="flex-33">
+        {{>components/common/share}}
+        <h4>Tutorial Tags</h4>
+         {{#if post.tags}} <ul>{{#each post.tags}}
+            <li><a class="button button--primary" href="{{url}}">#{{name}}</a></li>
+          {{/each}} </ul> {{/if}}
+        {{/if}} 
+      </div>
+    </div>
+  </div>
+  {{>components/custom/blog-footer}}
+</article>

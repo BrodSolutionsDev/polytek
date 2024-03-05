@@ -1,0 +1,915 @@
+<script>
+  var productID = document.querySelector('input[name=product_id]').value;
+  if (productID) {
+    function fetchmetafield() {
+      fetch('/graphql', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer {{ settings.storefront_api.token }}',
+        },
+        body: JSON.stringify({
+          query: `
+                     query SingleProduct {
+           site {
+             products (entityIds: ${productID}) {
+               edges {
+                 node {
+                   id
+                   entityId
+                   name
+                   metafields(namespace:"Specific Volume", keys:"specificVolume") {
+                     edges {
+                       node {
+                         id
+                         key
+                         value
+                       }
+                     }
+                   }
+                 }
+               }
+             }
+           }
+         }
+                     `,
+        }),
+      })
+        .then((res) => res.json())
+        .then(
+          (volume) =>
+            (specificVolume =
+              volume.data.site.products.edges[0].node.metafields.edges[0].node
+                .value)
+        )
+        .catch((error) => {
+          document.getElementsByClassName(
+            'material-calculator'
+          )[0].style.display = 'none';
+        });
+    }
+    var specificVolume = fetchmetafield();
+  }
+</script>
+<script>
+  var productIDCalculators = [
+    {
+      id: 185,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 186,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 295,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 187,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 188,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 189,
+      brush: '',
+      hollow: 'Cast Hollow',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 182,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 190,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 191,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 192,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 193,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 194,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: '',
+    },
+    {
+      id: 148,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 149,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 150,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 151,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 222,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: '',
+    },
+    {
+      id: 223,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: '',
+    },
+    {
+      id: 224,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: '',
+    },
+    {
+      id: 136,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 122,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 135,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 132,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 115,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 130,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 112,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 116,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 121,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 113,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 119,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 124,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 131,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 118,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 140,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 139,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 141,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 142,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 143,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 133,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 114,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 128,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 227,
+      brush: 'Cast Solid',
+      hollow: '',
+      solid: '',
+      poured: '',
+    },
+    {
+      id: 144,
+      brush: 'Cast Solid',
+      hollow: '',
+      solid: '',
+      poured: '',
+    },
+    {
+      id: null,
+      brush: 'Cast Solid',
+      hollow: '',
+      solid: '',
+      poured: '',
+    },
+    {
+      id: null,
+      brush: '',
+      hollow: 'Cast Hollow',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: null,
+      brush: 'Cast Solid',
+      hollow: '',
+      solid: '',
+      poured: '',
+    },
+    {
+      id: null,
+      brush: 'Cast Solid',
+      hollow: '',
+      solid: '',
+      poured: '',
+    },
+    {
+      id: null,
+      brush: '',
+      hollow: 'Cast Hollow',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 152,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 145,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 153,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 154,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 155,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 156,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 157,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 158,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 159,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 160,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 161,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 162,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 163,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 164,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 165,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 166,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 167,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 168,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 169,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 170,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 171,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 172,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 201,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 180,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 286,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 173,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 208,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 183,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 212,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 215,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 219,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 184,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 220,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 228,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 229,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 230,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 233,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 236,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 146,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: '',
+    },
+    {
+      id: 174,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: '',
+    },
+    {
+      id: 175,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: '',
+    },
+    {
+      id: 296,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: '',
+    },
+    {
+      id: 297,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: '',
+    },
+    {
+      id: 298,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: '',
+    },
+    {
+      id: 299,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: '',
+    },
+    {
+      id: 300,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 301,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 306,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: '',
+    },
+    {
+      id: 307,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: '',
+    },
+    {
+      id: 308,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: '',
+    },
+    {
+      id: 302,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 303,
+      brush: '',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: '',
+    },
+    {
+      id: 147,
+      brush: 'Brush-On Mold',
+      hollow: 'Cast Hollow',
+      solid: 'Cast Solid',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 176,
+      brush: 'Brush-On Mold',
+      hollow: 'Cast Hollow',
+      solid: 'Cast Solid',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 177,
+      brush: 'Brush-On Mold',
+      hollow: 'Cast Hollow',
+      solid: 'Cast Solid',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 178,
+      brush: 'Brush-On Mold',
+      hollow: 'Cast Hollow',
+      solid: 'Cast Solid',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 179,
+      brush: 'Brush-On Mold',
+      hollow: 'Cast Hollow',
+      solid: 'Cast Solid',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 181,
+      brush: 'Brush-On Mold',
+      hollow: 'Cast Hollow',
+      solid: 'Cast Solid',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 137,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 134,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 127,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 123,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 126,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 117,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 125,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: 'Poured Mold',
+    },
+    {
+      id: 129,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: '',
+      poured: '',
+    },
+    {
+      id: 120,
+      brush: 'Brush-On Mold',
+      hollow: '',
+      solid: 'Cast Solid',
+      poured: 'Poured Mold',
+    },
+  ];
+</script>
+<script>
+  function getSpecVolume() {
+    document.getElementById('specVolume').innerHTML =
+      'Specific Volume: ' + specificVolume + ' in³/lb';
+    var found = productIDCalculators.find((element) => element.id == productID);
+    if (found.solid === '') {
+      document.getElementById('solid-calc-form').style.display = 'none';
+    }
+    if (found.hollow === '') {
+      document.getElementById('hollow-calc-form').style.display = 'none';
+    }
+    if (found.brush === '') {
+      document.getElementById('brush-calc-form').style.display = 'none';
+    }
+    if (found.poured === '') {
+      document.getElementById('poured-calc-form').style.display = 'none';
+    }
+  }
+  $('#solid-calc-button').click(function () {
+    $('#solid-calc-form').toggle();
+  });
+</script>
+
+<div class="modal-header">
+  <h2 class="modal-header-title">MATERIAL CALCULATOR</h2>
+  <a
+    href="#"
+    class="modal-close"
+    aria-label="{{lang 'common.close'}}"
+    role="button"
+  >
+    <span aria-hidden="true">&#215;</span>
+  </a>
+</div>
+<div class="modal-body">
+  <div class="writeReview-productDetails">
+    <div class="writeReview-productImage-container">
+      <img
+        class="lazyload"
+        data-sizes="auto"
+        src="{{cdn 'img/loading.svg'}}"
+        data-src="{{getImage product.main_image 'product_size' (cdn theme_settings.default_image_product)}}"
+      />
+    </div>
+    <h3 class="product-title">{{ product.title }}</h3>
+    <h4 id="specVolume"></h4>
+  </div>
+
+  {{> components/custom/calculators/solid-casting}} {{>
+  components/custom/calculators/hollow-casting}} {{>
+  components/custom/calculators/brush-on}} {{>
+  components/custom/calculators/poured-mold}}
+</div>

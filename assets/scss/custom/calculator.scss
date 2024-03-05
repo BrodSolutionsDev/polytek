@@ -1,0 +1,82 @@
+.material-calculator-page {
+  .polytek-cards {
+    .polytek-card {
+      .polytek-card-button {
+        .button {
+          background-color: $black;
+          border-color: $black;
+        }
+      }
+    }
+  }
+}
+// material calculator modal
+#material-calculator-modal,
+#poured-mold-modal,
+#brush-on-mold-modal,
+#solid-casting-mold-modal,
+#hollow-casting-mold-modal,
+#weight-volume-conv-modal,
+#weight-surface-conv-modal,
+#weight-mix-conv-modal {
+  .form-row {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    .result-area {
+      padding-left: 5px;
+    }
+    label {
+      width: 100%;
+      color: $blue;
+    }
+  }
+  select {
+    width: auto;
+  }
+  input {
+    width: 100px;
+  }
+  input,
+  select {
+    text-indent: 5px;
+    margin: 5px;
+  }
+  // Remove arrows
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+}
+
+.writeReview-productDetails {
+  position: relative;
+}
+
+.link-to-product,
+.link-to-product:hover,
+.link-to-product:visited,
+.link-to-product:active {
+  position: absolute;
+  bottom: 0;
+  padding: 0.5rem 1.25rem;
+  background: #286ac8;
+  color: white;
+  text-decoration: none;
+  font-family: 'Roboto Condensed';
+  font-weight: bold;
+  font-size: 15px;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+
+.hide {
+  display: none;
+}

@@ -1,0 +1,120 @@
+.industries-tier-two {
+  /* .hero {
+    background: $blue-light;
+    display: flex;
+    flex-wrap: wrap;
+    .hero-text {
+      flex: 0 0 50%;
+      align-self: center;
+      padding: 0 15px;
+      .hero-text-container {
+        width: 585px;
+        float:right;
+        padding-right: 25px;
+      }
+    }
+    .hero-img {
+      flex: 1 0 50%;
+      img {
+        max-height: 300px;
+        object-fit: cover;
+        width: 100%;
+      }
+    }
+    h1,
+    h2 {
+      color: $white;
+      text-transform: none;
+      line-height: 1.2;
+    }
+    h2 {
+      font-size: 1.25em;
+    }    
+  } */
+  .hero {
+    position: relative;
+    height: 600px;
+    .hero-text {
+      background-color: $blue-light;
+      width: 60%;
+      position: absolute;
+      top: 200px;
+      padding: 15px 15px 15px 25px;
+      text-align: center;
+      opacity: 0.8;
+      left: 20%;
+      text-align: left;
+      .hero-text-container {
+        display: inline;
+        .button {
+          margin-right: 25px;
+        }
+      }
+    }
+    .hero-img {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      z-index: -1;
+      img {
+        height: 600px;
+        object-fit: cover;
+        width: 100%;
+      }
+    }
+    h1,
+    h2 {
+      color: $white;
+      text-transform: capitalize;
+      line-height: 1.2;
+    }
+    h2 {
+      font-size: 1.25em;
+    }
+  }
+  .intro {
+    padding: 20px 0;
+    h4 {
+      color: $blue-light;
+    }
+  }
+  .materials {
+    .material {
+      padding: 15px;
+    }
+    .material:nth-child(odd) {
+      background-color: $grey;
+    }
+    h3 {
+      text-align: left;
+      padding: 0 10px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1250px) {
+  .industries-tier-two {
+    .hero {
+      .hero-text {
+        .hero-text-container {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .industries-tier-two {
+    .hero {
+      .hero-text {
+        top:125px;
+        width:80%;
+        left:10%;
+      }
+    }
+  }
+}

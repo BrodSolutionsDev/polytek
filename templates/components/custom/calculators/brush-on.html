@@ -1,0 +1,74 @@
+
+  <form id="brush-calc-form" class="form writeReview-form" action="#">
+	<h5>Brush On Estimator</h5>
+		<div class="form-row">
+		</div>
+		<div class="form-row">
+			<label for="model-volume">Model Surface Area</label>
+			<input type="number" name="brush-surface-area" pattern="[0-9]" class="brush-surface-area number-field" val="">
+			<select name="brush-sa-unit" class="brush-sa-unit">
+        <option value="square inches">Square Inches (in²)</option>
+        <option value="square feet">Square Feet (ft²)</option>
+        <option value="square millimeters">Square Millimeters (mm²)</option>
+        <option value="square centimeters">Square Centimeters (cm²)</option>
+        <option value="square meters">Square Meters (m²)</option> </select>
+			<div><small>*assumes a 3/8" (9.5 mm) thickness</small></div>
+		</div>
+		 <div class="form-row">
+			<label for="brush-result-unit">Display Results As</label>
+			<select name="brush-unit" class="brush-result-unit">
+        <option value="pounds">Pounds (LB)</option>
+        <option value="ounces">Ounces (Oz)</option>
+        <option value="grams">Grams (g)</option>
+        <option value="kilograms">Kilograms (kg)</option> </select>
+		</div>
+		<div class="form-row">
+			<button class="button button--primary" type="submit" id="brush-submit">Calculate</button>
+		</div>
+		<div class="form-row result-row">
+			Result: <span class="brush-form-result result-area"></span>
+		</div>
+	</form>
+
+
+<script>
+  /*
+		BRUSH ON MOLD FORMULA
+	*/
+	function brushFormula(surfaceArea, surfaceAreaUnit, specificVolume, resultUnit) {
+		switch (surfaceAreaUnit) {
+			case "square inches":
+			surfaceArea = surfaceArea;break;
+			case "square feet":
+			surfaceArea = surfaceArea/0.00694444;break;
+			case "square millimeters":
+			surfaceArea = surfaceArea/645.16;break;
+			case "square centimeters":
+			surfaceArea = surfaceArea/6.45;break;
+			case "square meters":
+			surfaceArea = surfaceArea/0.00064516;break;
+		}
+		var resultLBS = (surfaceArea * 0.375) / specificVolume;
+		// Answer conversion from display as
+		switch (resultUnit) {
+			case "pounds":
+			result = resultLBS;break;
+			case "ounces":
+        	result = resultLBS*16;break;
+			case "grams":
+        	result = resultLBS*453.592;	break;
+			case "kilograms":
+        	result = resultLBS*0.453592;break;
+		}
+		return Math.round(100*result)/100 + " " + resultUnit;
+	};
+
+	$('#brush-submit').click(function(event){
+		event.preventDefault();
+		var surfaceArea = $('.brush-surface-area').val();
+		var surfaceAreaUnit = $('.brush-sa-unit').val();
+		var resultUnit = $('.brush-result-unit').val();
+
+		$('.brush-form-result').html(brushFormula(surfaceArea, surfaceAreaUnit, specificVolume, resultUnit));
+	});
+</script>

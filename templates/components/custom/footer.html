@@ -1,0 +1,163 @@
+{{#if banners.bottom}} {{#if settings.data_tag_enabled}}
+<div class="banners" data-banner-location="bottom">
+  {{#each (limit banners.bottom_metadata 1)}}
+  <div
+    class="banner"
+    data-event-type="promotion"
+    data-entity-id="{{this.id}}"
+    data-name="{{this.banner-name}}"
+    data-position="{{this.location}}"
+    data-name="{{this.banner-name}}"
+  >
+    <div data-event-type="promotion-click">{{{this.content}}}</div>
+  </div>
+  {{/each}}
+</div>
+{{else}}
+<div class="banners" data-banner-location="bottom">
+  <div class="banner">{{{limit banners.bottom 1}}}</div>
+</div>
+{{/if}} {{/if}} {{#if settings.show_newsletter_box}}
+<div class="footer-newsletter">{{> components/common/subscription-form}}</div>
+{{/if}}
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <section class="footer-info 4a616d6573">
+      <article
+        class="footer-info-col footer-info-dropdown footer-info-col--small"
+        data-section-type="footer-categories"
+      >
+        <h5 class="footer-info-heading">
+          Product Categories
+          <i class="icon" aria-hidden="true">
+            <svg><use xlink:href="#icon-downselector" /></svg>
+          </i>
+        </h5>
+        <ul class="footer-info-list">
+          <li>
+            <a href="/products/">Products</a>
+          </li>
+          {{#each categories}} {{#each children}}
+          <li>
+            <a href="{{url}}">{{name}}</a>
+          </li>
+          {{/each}} {{/each}}
+        </ul>
+      </article>
+
+      <article
+        class="footer-info-col footer-info-dropdown footer-info-col--small"
+        data-section-type="footer-webPages"
+      >
+        <h5 class="footer-info-heading">
+          Polytek<sup>&reg;</sup> Development Corp
+          <i class="icon" aria-hidden="true">
+            <svg><use xlink:href="#icon-downselector" /></svg>
+          </i>
+        </h5>
+        <ul class="footer-info-list">
+          <li>
+            <a href="/about">The Company</a>
+          </li>
+          <li>
+            <a href="https://corporation.polytek.com/careers">Careers</a>
+          </li>
+          <li>
+            <a href="https://corporation.polytek.com/">Corporation</a>
+          </li>
+          <li>
+            <a href="/polytek-distributors">Distributors</a>
+          </li>
+          <li>
+            <a href="/about/shipping">Shipping</a>
+          </li>
+          <li>
+            <a href="/purchase-orders-terms-and-conditions"
+              >Purchase Order Terms</a
+            >
+          </li>
+          <li>
+            <a href="/terms-conditions-sale">Terms & Conditions of Sale</a>
+          </li>
+        </ul>
+      </article>
+
+      <article
+        class="footer-info-col footer-info-dropdown footer-info-col--small"
+        data-section-type="footer-brands"
+      >
+        <h5 class="footer-info-heading">
+          Store
+          <i class="icon" aria-hidden="true">
+            <svg><use xlink:href="#icon-downselector" /></svg>
+          </i>
+        </h5>
+        <ul class="footer-info-list">
+          <li>
+            <a href="/login.php">Sign In</a>
+          </li>
+          <li>
+            <a href="/login.php?action=create_account">Create Account</a>
+          </li>
+          <li>
+            <a href="/cart.php">Cart</a>
+          </li>
+        </ul>
+      </article>
+
+      {{#if settings.address}}
+      <article
+        class="footer-info-col footer-mobile-limited footer-info-col--small"
+        data-section-type="storeInfo"
+      >
+        <h5 class="footer-info-heading footer-store-name">Contact Us</h5>
+
+        <ul class="footer-info-list">
+          <li>
+            <a href="https://support.polytek.com/hc/en-us/requests/new"
+              >Send a Message</a
+            >
+          </li>
+          <li>
+            <i class="icon" aria-hidden="true">
+              <svg><use xlink:href="#icon-envelope" /></svg> </i
+            >&nbsp;&nbsp;<a href="mailto:sales@polytek.com"
+              >sales@polytek.com</a
+            >
+          </li>
+          <li>
+            <i class="icon" aria-hidden="true">
+              <svg><use xlink:href="#icon-phone" /></svg> </i
+            >&nbsp;&nbsp;<a href="tel:16105598620">610.559.8620</a> or
+            <a href="tel:18008585990">800.858.5990</a>
+          </li>
+        </ul>
+        <p class="business-hours">Monday-Friday<br />8:30am - 4:30pm (EST)</p>
+        <address>55 Hilton Street, Easton, PA 18042</address>
+      </article>
+      {{/if}}
+    </section>
+    {{#if theme_settings.geotrust_ssl_common_name}}
+    <div class="footer-geotrust-ssl-seal">
+      {{> components/common/geotrust-ssl-seal}}
+    </div>
+    {{/if}}
+
+    <div class="footer-copyright">
+      {{> components/common/payment-icons}}
+      <div class="footer-site-policy">
+        <a href="/about/purchase-orders-terms-conditions">Privacy Policy</a>&nbsp;|&nbsp;
+        <a href="/about/terms-of-use/">Terms of Use</a>&nbsp;|&nbsp;
+        <a href="{{urls.sitemap}}">{{lang 'sitemap.page_title'}}</a>
+      </div>
+    </div>
+
+    <div class="footer-copyright">
+      <p class="powered-by">
+        1984-{{moment format="YYYY"}} &copy; Polytek<sup>&reg;</sup> Development
+        Corp. All Rights Reserved.
+      </p>
+    </div>
+  </div>
+</footer>

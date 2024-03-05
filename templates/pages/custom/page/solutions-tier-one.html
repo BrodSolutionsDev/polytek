@@ -1,0 +1,102 @@
+---
+category:
+    shop_by_price: true
+    products:
+        limit: {{theme_settings.categorypage_products_per_page}}
+---
+{{inject "categoryProductsPerPage" theme_settings.categorypage_products_per_page}}
+{{inject "categoryId" category.id}}
+{{#partial "page"}}
+<script>
+
+    async function fetchdescfield(){
+        await fetch("/graphql", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer {{ settings.storefront_api.token }}",
+        },
+        body: JSON.stringify({
+          query: `query CategoryTree3LevelsDeep {
+  site {
+    categoryTree {
+      name
+  path
+  entityId
+      description
+      children {
+        name
+  path
+  entityId
+        description
+        children {
+          name
+  path
+  entityId
+          description
+        }
+      }
+    }
+  }
+}`,
+        }),
+      })
+        .then((res) => res.json())
+        //.then((log) => console.log(log.data.site.categoryTree));
+        .then((categories) => categories = categories.data.site.categoryTree);
+    }
+    var categories = fetchdescfield();
+</script>
+
+<!--{{#if banners.top}}
+    <div class="banners" data-banner-location="top">
+        {{#each (limit banners.top_metadata 1)}}
+        <div class="banner" data-event-type="promotion" data-entity-id="{{this.id}}" data-name="{{this.banner-name}}" data-position="{{this.location}}" data-banner-id="{{this.banner-name}}">
+            <div data-event-type="promotion-click">
+                {{{this.content}}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}-->
+
+<div class="container solutions-tier-one">
+    <main class="page">
+        <div class="page-content">
+                {{{page.content}}}
+        </div>
+
+            <div class="polytek-cards">
+                {{#forEach categories.0.children.2.children}}
+                <div class="polytek-card">
+                    <img src="{{{getImage image 'thumbnail'}}}" alt="{{{ categories.0.children.2.children.1.image.alt}}}">
+                    <div class="polytek-card-text">
+                    <h4>{{{name}}}</h4>
+                    <p>A simple tagline goes here.</p>
+                  </div>
+                  <div class="polytek-card-button">
+                      <a class="button button--secondary" href="/solutions/epoxy/{{{name}}}">Learn More</a>
+                      <a class="button button--primary" href="{{{url}}}">View {{{count}}} {{{name}}} Products</a>
+                </div>
+              </div>
+                {{/forEach}}
+              </div>
+              
+              {{> components/custom/product-assistance}}            
+       
+        {{#if page.feed}}
+            <ul>
+                {{#each page.feed}}
+                    <li>
+                        <h6><a href="{{url}}" target="_blank">{{title}}</a></h6>
+                        <p>{{content}}</p>
+                    </li>
+                {{/each}}
+            </ul>
+        {{/if}}
+    </main>
+</div>
+
+{{/partial}}
+
+{{> layout/base}}

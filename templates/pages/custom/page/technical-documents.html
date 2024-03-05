@@ -1,0 +1,1059 @@
+{{#partial "page"}}
+
+<div class="container technical-document-page">
+        {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+        <main class="page">
+            {{#unless theme_settings.hide_page_heading }}
+                <h1 class="page-heading">{{ page.title }}</h1>
+            {{/unless}}
+        
+            {{{region name="page_builder_content"}}}
+        
+            <div class="page-content">
+                    {{{page.content}}}
+                    <div id="technical-document-page-product" class="custom-fields">
+                      <div class="flex" style="align-items: unset;justify-content: start;">
+                        <div class="flex-75">
+                          <select id="technical-selection" name="tech-prod-docs">
+                          </select>
+                        </div>
+                        <div class="flex-25" style="float:left">
+                          <button class="button material-calculator" id="get-technical">Go</button>
+                        </div>
+                      </div>
+                    <div id="technical-warranty" style="text-align:center;"><p>&nbsp;</p></div>
+                  </div>
+            </div>
+        </main>
+</div>
+
+{{/partial}}
+
+ <script>
+	 // v3/catalog/products?include_fields=id,name,warranty&limit=250&sort=name
+     var productIDCalculators = [
+        {
+            "id": 251,
+            "name": "2\" Oil Gate Valve",
+            "warranty": ""
+        },
+        {
+            "id": 234,
+            "name": "Acid Brushes",
+            "warranty": ""
+        },
+        {
+            "id": 185,
+            "name": "BC-8002 Kwik-Kast II Gray Urethane Resin",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_KwikKast_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_BC8000A_BC8002A_8010A_8650A_09-19-2019.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_BC8001B_8002B_8009GB_8009BB_8010B_80102B_8645B_8650B_09-19-2019.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n<table>\n    <caption><b>Kit Components</b></caption>\n    <thead>\n        <tr>\n            <th>BC-8002 Kwik-Kast II Gray Urethane Resin</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>5-lb kit includes:</td>\n            <td>22.5 lb of BC-8002 Part A (~1 quart)<br>2.5 lb of BC-8002 Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>20-lb kit includes:</td>\n            <td>10 lb of BC-8002 Part A (~1 gallon)<br>10 lb of BC-8002 Part B (~1 gallon)</td>\n        </tr>\n        \n    </tbody>\n</table>"
+        },
+        {
+            "id": 186,
+            "name": "BC-8009 Slo-Kast Gray Urethane Resin",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_KwikKast_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_BC8000A_BC8002A_8010A_8650A_09-19-2019.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_BC8001B_8002B_8009GB_8009BB_8010B_80102B_8645B_8650B_09-19-2019.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n<table>\n    <caption><b>Kit Components</b></caption>\n    <thead>\n        <tr>\n            <th>BC-8009</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>5-lb kit includes:</td>\n            <td>2.5 lb of BC-8009 Gray Part A (~1 quart)<br>2.5 lb of BC-8009 Gray Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>20-lb kit includes:</td>\n            <td>10 lb of BC-8009 Slo-Kast Gray Part A (~1 gallon)<br>10 lb of BC-8009 Slo-Kast Gray Part B (~1 gallon)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 295,
+            "name": "BC-8010 Metal-Kast Urethane Resin",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_KwikKast_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_BC8000A_BC8002A_8010A_8650A_09-19-2019.pdf\" target=\"_blank\">Safety Data Sheet - A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_BC8001B_8002B_8009GB_8009BB_8010B_80102B_8645B_8650B_09-19-2019.pdf\" target=\"_blank\">Safety Data Sheet - B</a></p> \n<table>\n    <caption><b>Kit Components</b></caption>\n    <thead>\n        <tr>\n            <th><strong>BC-8010</strong></th>\n            <th><strong>Components</strong></th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>5-lb kit includes:</td>\n            <td>2.5 lb of BC-8010 Metal-Kast Part A (~1 quart)<br>2.5 lb of BC-8010 Metal-Kast Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>20-lb kit includes:</td>\n            <td>10 lb of BC-8010 Metal-Kast Part A (~1 gallon)<br>10 lb of BC-8010 Metal-Kast Part B (~1 gallon)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 187,
+            "name": "BC-8655 Kwik-Kast II Blue Urethane Resin",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_KwikKast_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_BC8655A_09-19-2019.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_BC8655B_09-05-2019.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n<table>\n    <caption><b>Kit Components</b></caption>\n    <thead>\n        <tr>\n            <th>BC-8655</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>5-lb kit includes:</td>\n            <td>2.5 lb of BC-8655 Kwik-Kast II Blue Part A (~1 quart)<br>2.5 lb of BC-8655 Kwik-Kast II Blue Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>20-lb kit includes:</td>\n            <td>10 lb of BC-8655 Kwik-Kast II Blue Part A (~1 gallon)<br>10 lb of BC-8655 Kwik-Kast II Blue Part B (~1 gallon)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 235,
+            "name": "Bronze Powder (325 Mesh)",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Bronze_02-24-2015.pdf\" target=\"_blank\">Safety Data Sheet</a></p> "
+        },
+        {
+            "id": 237,
+            "name": "China Brushes",
+            "warranty": ""
+        },
+        {
+            "id": 288,
+            "name": "Concrete Mold Making Starter Kit",
+            "warranty": "<table><caption><p style=\"text-align: left;\"><strong>Kit Components</strong></p></caption><thead><tr><th>Concrete Starter Kit</th><th>Components</th></tr></thead><tbody><tr><td>This kit includes:</td><td><p>Poly 74-45 Liquid Rubber (16-lb KIt)</p><p>Poly PVA Solution (1 Quart)</p><p>Pol-Ease<sup>®</sup>&nbsp;2300 Release Agent (12 oz. Can)</p><p>Pol-Ease<sup>®</sup>&nbsp;2650 Concrete Casting Release Agent (1 Quart)</p><p>One 5-Gallon Mixing Pail</p><p>Poly Paddle Mixing Tool</p><p>3 Brushes - Plasticine Clay (1 lb)</p><p>Instructional Brochure (Stepping Stone Project)</p></td></tr></tbody></table>"
+        },
+        {
+            "id": 238,
+            "name": "Digital Scales",
+            "warranty": ""
+        },
+        {
+            "id": 239,
+            "name": "Drierite Cartridge",
+            "warranty": ""
+        },
+        {
+            "id": 240,
+            "name": "Drierite Cartridge Drum Adapter",
+            "warranty": ""
+        },
+        {
+            "id": 241,
+            "name": "Drum Bung Wrench",
+            "warranty": ""
+        },
+        {
+            "id": 188,
+            "name": "EasyFlo 100 FR Liquid Plastic",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_EasyFloSeries_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/EZFLOFR100A-21.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/EZF100FR-Spray%20FR-B-21.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p><table><caption><b>Kit Components</b></caption><thead><tr><th>EasyFlo 100 FR</th><th>Components</th></tr></thead><tbody><tr><td>4.5-lb kit includes:</td><td>2.25 lb of EasyFlo 100 FR Part A (~1 quart)<br>2.25 lb of EasyFlo 100 FR Part B (~1 quart)</td></tr><tr><td>18-lb kit includes:</td><td>9 lb of EasyFlo 100 FR Part A (~1 gallon)<br>9 lb of EasyFlo 100 FR Part B (~1 gallon)</td></tr><tr><td>90-lb kit includes:</td><td>45 lb of EasyFlo 100 FR Part A (~5 gallons)<br>45 lb of EasyFlo 100 FR Part B (~5 gallons)</td></tr></tbody></table>"
+        },
+        {
+            "id": 189,
+            "name": "EasyFlo 120 Liquid Plastic",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_EasyFloSeries_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/EZFLO120_SprayA-21.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/EZFlo60-120-clr-B-21.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n<table>\n    <caption><b>Kit Components</b></caption>\n    <thead>\n        <tr>\n            <th>EasyFlo 120</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>3.8-lb kit includes:</td>\n            <td>2 lb of EasyFlo 120 Part A (~1 quart)<br>1.8 lb of EasyFlo 120 Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>15.2-lb kit includes:</td>\n            <td>8 lb of EasyFlo 120 Part A (~1 gallon)<br>7.2 lb of EasyFlo 120 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>76-lb kit includes:</td>\n            <td>40 lb of EasyFlo 120 Part A (~5 gallons)<br>36 lb of EasyFlo 120 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 182,
+            "name": "EasyFlo 60 Liquid Plastic",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_EasyFloSeries_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/EZ60_ClearA-21.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/EZFlo60-120-clr-B-21.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>\n<table>\n    <caption><b>Kit Components</b></caption>\n    <thead>\n        <tr>\n            <th>EasyFlo 60</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>3.8-lb kit includes:</td>\n            <td>2 lb of EasyFlo 60 Part A (~1 quart)<br>1.8 lb of EasyFlo 60 Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>15.2-lb kit includes:</td>\n            <td>8 lb of EasyFlo 60 Part A (~1 gallon)<br>7.2 lb of EasyFlo 60 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>76-lb kit includes:</td>\n            <td>40 lb of EasyFlo 60 Part A (~5 gallons)<br>36 lb of EasyFlo 60 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 190,
+            "name": "EasyFlo 90 Liquid Plastic",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_EasyFloSeries_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/EZF90A-21.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/EZF90B-21.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n<table>\n    <caption><b>Kit Components</b></caption>\n    <thead>\n        <tr>\n            <th>EasyFlo 90</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>3.8-lb kit includes:</td>\n            <td>2 lb of EasyFlo 90 Part A (~1 quart)<br>1.8 lb of EasyFlo 90 Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>15.2-lb kit includes:</td>\n            <td>8 lb of EasyFlo 90 Part A (~1 gallon)<br>7.2 lb of EasyFlo 90 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>76-lb kit includes:</td>\n            <td>40 lb of EasyFlo 90 Part A (~5 gallons)<br>36 lb of EasyFlo 90 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 191,
+            "name": "EasyFlo 95 Liquid Plastic",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_EasyFloSeries_11-30-2018.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_EZF-60-95-120-100FR-Clear-Spray_03-20-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_EZF95-B-new15-2_11-16-2015.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> <p><a class=\"sds\" href=\"/content/pdf/physicalproperties/Polytek_PPB_Easy-Flo-Series_11-30-2018.pdf\" target=\"_blank\">Physical Properties Bulletin</a></p> <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>EasyFlo 95</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>76-lb kit includes:</td>\n            <td>40 lb of EasyFlo 95 Part A (~5 gallons)<br>36 lb of EasyFlo 95 Part B (~5 gallons)</td>\n        </tr>\n        <tr>\n            <td>3.8-lb kit includes:</td>\n            <td>2 lb of EasyFlo 95 Part A (~1 quart)<br>1.8 lb of EasyFlo 95 Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>15.2-lb kit includes:</td>\n            <td>8 lb of EasyFlo 95 Part A (~1 gallon)<br>7.2 lb of EasyFlo 95 Part B (~1 gallon)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 192,
+            "name": "EasyFlo Black Liquid Plastic",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_EasyFloSeries_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_EZF-Black-A_09-13-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_EZF-Black-B_09-13-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n<table>\n    <caption><b>Kit Components</b></caption>\n    <thead>\n        <tr>\n            <th>EasyFlo Black</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>4-lb kit includes:</td>\n            <td>2 lb of EasyFlo Black Part A (~1 quart)<br>2.0 lb of EasyFlo Black Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of EasyFlo Black Part A (~1 gallon)<br>8 lb of EasyFlo Black Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of EasyFlo Black Part A (~5 gallons)<br>40 lb of EasyFlo Black Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 193,
+            "name": "EasyFlo Clear Liquid Plastic",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_EasyFloSeries_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> \n\n<p><a class=\"sds\" href=\"/content/pdf/SDS/EZ60_ClearA-21.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> \n\n<p><a class=\"sds\" href=\"/content/pdf/SDS/EZFlo60-120-clr-B-21.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>\n\n\n<table>\n    <caption><b>Kit Components</b></caption>\n    <thead>\n        <tr>\n            <th>EasyFlo Clear</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>3.7-lb kit includes:</td>\n            <td>2 lb of EasyFlo Clear Part A (~1 quart)<br>1.7 lb of EasyFlo Clear Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>14.8-lb kit includes:</td>\n            <td>8 lb of EasyFlo Clear Part A (~1 gallon)<br>6.8 lb of EasyFlo Clear Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>74-lb kit includes:</td>\n            <td>40 lb of EasyFlo Clear Part A (~5 gallons)<br>34 lb of EasyFlo Clear Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 194,
+            "name": "EasyFlo Spray FR Liquid Plastic",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_EasyFloSeries_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> \n\n<p><a class=\"sds\" href=\"/content/pdf/SDS/EZFLO120_SprayA-21.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> \n\n<p><a class=\"sds\" href=\"/content/pdf/SDS/EZF100FR-Spray%20FR-B-21.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n\n\n<table>\n    <caption><b>Kit Components</b></caption>\n    <thead>\n        <tr>\n            <th>EasyFlo Spray</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>95-lb kit includes:</td>\n            <td>50 lb of EasyFlo Spray FR Part A (~5 gallons)<br>45 lb of EasyFlo Spray FR Part B (~5 gallons)</td>\n        </tr>\n</tbody>\n</table>"
+        },
+        {
+            "id": 217,
+            "name": "EpoxyBond Adhesive",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-1010-EpoxyBond-A_08-30-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_EpoxyBondB_05-26-2015.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n<table>\n    <caption><b>Kit Components</b></caption>\n    <thead>\n        <tr>\n            <th>EpoxyBond Adhesive</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>85-lb kit includes:</td>\n            <td>45 lb of EpoxyBond Epoxy Resin (~5 gallons)<br>40 lb of EpoxyBond Epoxy Curative (~5 gallons)</td>\n        </tr>\n</tbody>\n</table>"
+        },
+        {
+            "id": 148,
+            "name": "FormRub 35 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_FormRub_02-15-2017.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_FormRubA-18_08-30-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_FormRub35-50B-15_02-15-2015.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> <p><a class=\"sds\" href=\"/content/pdf/physicalproperties/Polytek_PPB_FormRub_03-02-2017.pdf\" target=\"_blank\">Physical Properties Bulletin</a></p> \n<table>\n    <caption><b>Kit Components</b></caption>\n    <thead>\n        <tr>\n            <th>FormRub 35</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>This 16-lb kit includes:</td>\n            <td>8 lb of FormRub 35 Part A (~1 gallon)<br>8 lb of FormRub 35 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>This 80-lb kit includes:</td>\n            <td>40 lb of FormRub 35 Part A (~5 gallons)<br>40 lb of FormRub 35 Part B (~5 gallons)</td>\n        </tr>\n</tbody>\n</table>"
+        },
+        {
+            "id": 149,
+            "name": "FormRub 50 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_FormRub_02-15-2017.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_FormRubA-18_08-30-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_FormRub35-50B-15_02-15-2015.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> <p><a class=\"sds\" href=\"/content/pdf/physicalproperties/Polytek_PPB_FormRub_03-02-2017.pdf\" target=\"_blank\">Physical Properties Bulletin</a></p> \n<table>\n    <caption><b>Kit Components</b></caption>\n    <thead>\n        <tr>\n            <th>FormRub 50</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>This 16-lb kit includes:</td>\n            <td>8 lb of FormRub 50 Part A (~1 gallon)<br>8 lb of FormRub 50 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>This 80-lb kit includes:</td>\n            <td>40 lb of FormRub 50 Part A (~5 gallons)<br>40 lb of FormRub 50 Part B (~5 gallons)</td>\n        </tr>\n</tbody>\n</table>"
+        },
+        {
+            "id": 150,
+            "name": "FormRub 60 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_FormRub_02-15-2017.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_FormRubA-18_08-30-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_FormRub-60B-15_01-15-2015.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> <p><a class=\"sds\" href=\"/content/pdf/physicalproperties/Polytek_PPB_FormRub_03-02-2017.pdf\" target=\"_blank\">Physical Properties Bulletin</a></p> \n<table>\n    <caption><b>Kit Components</b></caption>\n    <thead>\n        <tr>\n            <th>FormRub 60</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>This 16-lb kit includes:</td>\n            <td>8 lb of FormRub 60 Part A (~1 gallon)<br>8 lb of FormRub 60 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>This 80-lb kit includes:</td>\n            <td>40 lb of FormRub 60 Part A (~5 gallons)<br>40 lb of FormRub 60 Part B (~5 gallons)</td>\n        </tr>\n</tbody>\n</table>"
+        },
+        {
+            "id": 151,
+            "name": "FormRub 65 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_FormRub_02-15-2017.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_FormRubA-18_08-30-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_FormRub-65B_01-15-2015.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> <p><a class=\"sds\" href=\"/content/pdf/physicalproperties/Polytek_PPB_FormRub_03-02-2017.pdf\" target=\"_blank\">Physical Properties Bulletin</a></p> <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>FormRub 65</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of FormRub 65 Part A (~1 gallon)<br>8 lb of FormRub 65 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of FormRub 65 Part A (~5 gallons)<br>40 lb of FormRub 65 Part B (~5 gallons)</td>\n        </tr> </tbody>\n</table>"
+        },
+        {
+            "id": 242,
+            "name": "Fumed Silica",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Fumed-Silica_06-02-2015.pdf\" target=\"_blank\">Safety Data Sheet</a></p> "
+        },
+        {
+            "id": 245,
+            "name": "Hemp",
+            "warranty": ""
+        },
+        {
+            "id": 214,
+            "name": "Hydrogel® Alginate Mold Compound",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_Hydrogel_05-24-2016.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Hydrogel-16-SDS_02-09-2016.pdf\" target=\"_blank\">Safety Data Sheet</a></p> "
+        },
+        {
+            "id": 246,
+            "name": "Hydrogel® Retarder",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_Hydrogel_05-24-2016.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Hydrogel-N-Ret_02-09-2016.pdf\" target=\"_blank\">Safety Data Sheet</a></p> "
+        },
+        {
+            "id": 247,
+            "name": "Jiffy Mixers",
+            "warranty": ""
+        },
+        {
+            "id": 289,
+            "name": "Mold Box",
+            "warranty": ""
+        },
+        {
+            "id": 248,
+            "name": "Mold Key Knife",
+            "warranty": ""
+        },
+        {
+            "id": 221,
+            "name": "NaturForm™ 30 Mask Making Latex Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_NaturForm_MaskMakingLatex_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_NaturForm-30_09-07-2018.pdf\" target=\"_blank\">Safety Data Sheet</a></p>"
+        },
+        {
+            "id": 222,
+            "name": "NaturForm™ 60 Molding Latex Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_NaturForm_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_NaturForm-60_60R_09-26-2018.pdf\" target=\"_blank\">Safety Data Sheet</a></p>"
+        },
+        {
+            "id": 223,
+            "name": "NaturForm™ 60-R Molding Latex Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_NaturForm_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_NaturForm-60_60R_09-26-2018.pdf\" target=\"_blank\">Safety Data Sheet</a></p>"
+        },
+        {
+            "id": 224,
+            "name": "NaturForm™ 74 Molding Latex Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_NaturForm_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_NaturForm-74_09-26-2018.pdf\" target=\"_blank\">Safety Data Sheet</a></p>"
+        },
+        {
+            "id": 225,
+            "name": "NaturForm™ 74-R Molding Latex Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_NaturForm_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_NaturForm-74R_09-07-2018.pdf\" target=\"_blank\">Safety Data Sheet</a></p>"
+        },
+        {
+            "id": 249,
+            "name": "Nitrile Gloves (Size Large - Box of 100)",
+            "warranty": ""
+        },
+        {
+            "id": 250,
+            "name": "Nylon Mesh Mold Straps",
+            "warranty": ""
+        },
+        {
+            "id": 252,
+            "name": "Pail Opener",
+            "warranty": ""
+        },
+        {
+            "id": 203,
+            "name": "Petroleum Jelly",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Petroleum-Jelly-14_04-09_2014.pdf\" target=\"_blank\">Safety Data Sheet</a></p> \n\n<table><thead><tr><th>Unit Sizes</th></tr></thead><tbody><tr><td>35-lb Unit of Petroleum Jelly is approximately 5 gallons</td></tr></tbody></table>"
+        },
+        {
+            "id": 253,
+            "name": "PlasPak Cartridge Assemblies",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PlasPak_09-08-2008.pdf\" target=\"_blank\">Technical Bulletin</a></p> "
+        },
+        {
+            "id": 254,
+            "name": "PlasPak Spray Gun & Regulator Kits",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PlasPak_09-08-2008.pdf\" target=\"_blank\">Technical Bulletin</a></p> "
+        },
+        {
+            "id": 255,
+            "name": "PlasPak Static Mixer",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PlasPak_09-08-2008.pdf\" target=\"_blank\">Technical Bulletin</a></p> "
+        },
+        {
+            "id": 136,
+            "name": "PlatSil® 71-10 Silicone Rubber",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-NonHaz-AB_11-07-2019.pdf\" target=\"_blank\">Safety Data Sheet</a></p> <p><a class=\"sds\" href=\"/content/pdf/physicalproperties/Polytek_PPB_Platsil-71-73-Gel-FS-HTS_07-30-2018.pdf\" target=\"_blank\">Physical Properties Bulletin</a></p> <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PlatSil® 71-10</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>1-lb kit includes:</td>\n            <td>0.1 lb of PlatSil® 71-10 Part A (~2 oz)<br>0.9 lb of PlatSil® 71-10 Part B (~1 pint)</td>\n        </tr>\n        <tr>\n            <td>9-lb kit includes:</td>\n            <td>0.9 lb of PlatSil® 71-10 Part A (~1 pint)<br>8.1 lb of PlatSil® 71-10 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>44-lb kit includes:</td>\n            <td>4 lb of PlatSil® 71-10 Part A (~2 quarts)<br>40 lb of PlatSil® 71-10 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 122,
+            "name": "PlatSil® 71-11 Silicone Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_71 and 73Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-NonHaz-AB_11-07-2019.pdf\" target=\"_blank\">Safety Data Sheet</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PlatSil® 71-11</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>2-lb kit includes:</td>\n            <td>1 lb of PlatSil® 71-11 Part A (~1 pint)<br>1 lb of PlatSil® 71-11 Part B (~1 pint)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of PlatSil® 71-11 Part A (~1 gallon)<br>8 lb of PlatSil® 71-11 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of PlatSil® 71-11 Part A (~5 gallons)<br>40 lb of PlatSil® 71-11 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 135,
+            "name": "PlatSil® 71-20 Silicone Rubber",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-NonHaz-AB_11-07-2019.pdf\" target=\"_blank\">Safety Data Sheet</a></p> <p><a class=\"sds\" href=\"/content/pdf/physicalproperties/Polytek_PPB_Platsil-71-73-Gel-FS-HTS_07-30-2018.pdf\" target=\"_blank\">Physical Properties Bulletin</a></p> <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PlatSil® 71-20</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of PlatSil® 71-20 Part A (~1 gallon)<br>8 lb of PlatSil® 71-20 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>2-lb kit includes:</td>\n            <td>1 lb of PlatSil® 71-20 Part A (~1 pint)<br>1 lb of PlatSil® 71-20 Part B (~1 pint)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of PlatSil® 71-20 Part A (~5 gallons)<br>40 lb of PlatSil® 71-20 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 132,
+            "name": "PlatSil® 71-25 Silicone Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_71 and 73Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-NonHaz-AB_11-07-2019.pdf\" target=\"_blank\">Safety Data Sheet</a></p> <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PlatSil® 71-25</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>2-lb kit includes:</td>\n            <td>1 lb of PlatSil® 71-25 Part A (~1 pint)<br>1 lb of PlatSil® 71-25 Part B (~1 pint)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of PlatSil® 71-25 Part A (~1 gallon)<br>8 lb of PlatSil® 71-25 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of PlatSil® 71-25 Part A (~5 gallons)<br>40 lb of PlatSil® 71-25 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 115,
+            "name": "PlatSil® 71-40 Silicone Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_71 and 73Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Platsil-71-40-A_04-16-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-NonHaz-AB_11-07-2019.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n\n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PlatSil® 71-40</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>9-lb kit includes:</td>\n            <td>0.9 lb of PlatSil® 71-40 Part A (~1 pint)<br>8.1 lb of PlatSil® 71-40 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>44-lb kit includes:</td>\n            <td>4 lb of PlatSil® 71-40 Part A (~2 quarts)<br>40 lb of PlatSil® 71-40 Part B (~5 gallons)</td>\n        </tr></tbody>\n</table>"
+        },
+        {
+            "id": 256,
+            "name": "PlatSil® 71/73 Part R Retarder",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-NonHaz-AB_11-07-2019.pdf\" target=\"_blank\">Safety Data Sheet</a></p> "
+        },
+        {
+            "id": 257,
+            "name": "PlatSil® 71/73 Part X Accelerator",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PlatSilGels_02-15-2017.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-NonHaz-AB_11-07-2019.pdf\" target=\"_blank\">Safety Data Sheet</a></p> "
+        },
+        {
+            "id": 130,
+            "name": "PlatSil® 73-15 Silicone Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_71 and 73Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-NonHaz-AB_11-07-2019.pdf\" target=\"_blank\">Safety Data Sheet</a></p> \n <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PlatSil® 73-15</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>2-lb kit includes:</td>\n            <td>1 lb of PlatSil® 73-15 Part A (~1 pint)<br>1 lb of PlatSil® 73-15 Part B (~1 pint)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of PlatSil® 73-15 Part A (~1 gallon)<br>8 lb of PlatSil® 73-15 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of PlatSil® 73-15 Part A (~5 gallons)<br>40 lb of PlatSil® 73-15 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 112,
+            "name": "PlatSil® 73-20 Silicone Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_71 and 73Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-NonHaz-AB_11-07-2019.pdf\" target=\"_blank\">Safety Data Sheet</a></p> \n <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PlatSil® 73-20</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>2-lb kit includes:</td>\n            <td>1 lb of PlatSil® 73-20 Part A (~1 pint)<br>1 lb of PlatSil® 73-20 Part B (~1 pint)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of PlatSil® 73-20 Part A (~1 gallon)<br>8 lb of PlatSil® 73-20 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of PlatSil® 73-20 Part A (~5 gallons)<br>40 lb of PlatSil® 73-20 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 116,
+            "name": "PlatSil® 73-25 Silicone Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_71 and 73Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-NonHaz-AB_11-07-2019.pdf\" target=\"_blank\">Safety Data Sheet</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PlatSil® 73-25</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>2-lb kit includes:</td>\n            <td>1 lb of PlatSil® 73-25 Part A (~1 pint)<br>1 lb of PlatSil® 73-25 Part B (~1 pint)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of PlatSil® 73-25 Part A (~1 gallon)<br>8 lb of PlatSil® 73-25 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of PlatSil® 73-25 Part A (~5 gallons)<br>40 lb of PlatSil® 73-25 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 121,
+            "name": "PlatSil® 73-29 Silicone Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_70Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-73-29-40-45-55-60-A_01-28-2015.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-NonHaz-AB_11-07-2019.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PlatSil® 73-29</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>1-lb kit includes:</td>\n            <td>0.1 lb of PlatSil® 73-29 Part A (~2 oz)<br>0.9 lb of PlatSil® 73-29 Part B (~1 pint)</td>\n        </tr>\n        <tr>\n            <td>9-lb kit includes:</td>\n            <td>0.9 lb of PlatSil® 73-29 Part A (~1 pint)<br>8.1 lb of PlatSil® 73-29 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>44-lb kit includes:</td>\n            <td>4 lb of PlatSil® 73-29 Part A (~2 quarts)<br>40 lb of PlatSil® 73-29 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 113,
+            "name": "PlatSil® 73-40 Silicone Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_71-73-Series_1-06-2019.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-73-29-40-45-55-60-A_01-28-2015.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-NonHaz-AB_11-07-2019.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> <p><a class=\"sds\" href=\"/content/pdf/physicalproperties/Polytek_PPB_Platsil-71-73-Gel-FS-HTS_07-30-2018.pdf\" target=\"_blank\">Physical Properties Bulletin</a></p> <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PlatSil® 73-40</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>1-lb kit includes:</td>\n            <td>0.1 lb of PlatSil® 73-40 Part A (~2 oz)<br>0.9 lb of PlatSil® 73-40 Part B (~1 pint)</td>\n        </tr>\n        <tr>\n            <td>44-lb kit includes:</td>\n            <td>4 lb of PlatSil® 73-40 Part A (~2 quarts)<br>40 lb of PlatSil® 73-40 Part B (~5 gallons)</td>\n        </tr>\n        <tr>\n            <td>9-lb kit includes:</td>\n            <td>0.9 lb of PlatSil® 73-40 Part A (~1 pint)<br>8.1 lb of PlatSil® 73-40 Part B (~1 gallon)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 119,
+            "name": "PlatSil® 73-45 Silicone Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"//content/pdf/technicalbulletin/Polytek_TB_71 and 73Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-73-29-40-45-55-60-A_01-28-2015.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-NonHaz-AB_11-07-2019.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>\n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PlatSil® 73-45</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>1-lb kit includes:</td>\n            <td>0.1 lb of PlatSil® 73-45 Part A (~2 oz)<br>0.9 lb of PlatSil® 73-45 Part B (~1 pint)</td>\n        </tr>\n        <tr>\n            <td>9-lb kit includes:</td>\n            <td>0.9 lb of PlatSil® 73-45 Part A (~1 pint)<br>8.1 lb of PlatSil® 73-45 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>44-lb kit includes:</td>\n            <td>4 lb of PlatSil® 73-45 Part A (~2 quarts)<br>40 lb of PlatSil® 73-45 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 124,
+            "name": "PlatSil® 73-60 Silicone Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_71 and 73Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-73-29-40-45-55-60-A_01-28-2015.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-NonHaz-AB_11-07-2019.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PlatSil® 73-60</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>1-lb kit includes:</td>\n            <td>0.1 lb of PlatSil® 73-60 Part A (~2 oz)<br>0.9 lb of PlatSil® 73-60 Part B (~1 pint)</td>\n        </tr>\n        <tr>\n            <td>9-lb kit includes:</td>\n            <td>0.9 lb of PlatSil® 73-60 Part A (~1 pint)<br>8.1 lb of PlatSil® 73-60 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>44-lb kit includes:</td>\n            <td>4 lb of PlatSil® 73-60 Part A (~2 quarts)<br>40 lb of PlatSil® 73-60 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 258,
+            "name": "PlatSil® Deadener LV",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_Deadener_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-NonHaz-AB_11-07-2019.pdf\" target=\"_blank\">Safety Data Sheet</a></p>"
+        },
+        {
+            "id": 131,
+            "name": "PlatSil® FS-10 Silicone Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PlatSil_FS-Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Plastsil-FS10-20AB_04-02-2018.pdf\" target=\"_blank\">Safety Data Sheet</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PlatSil® FS-10</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>2-lb kit includes:</td>\n            <td>1 lb of PlatSil® FS-10 Part A (~1 pint)<br>1 lb of PlatSil® FS-10 Part B (~1 pint)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of PlatSil® FS-10 Part A (~1 gallon)<br>8 lb of PlatSil® FS-10 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of PlatSil® FS-10 Part A (~5 gallons)<br>40 lb of PlatSil® FS-10 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 118,
+            "name": "PlatSil® FS-20 Silicone Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PlatSil_FS-Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Plastsil-FS10-20AB_04-02-2018.pdf\" target=\"_blank\">Safety Data Sheet</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PlatSil® FS-20</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>2-lb kit includes:</td>\n            <td>1 lb of PlatSil® FS-20 Part A (~1 pint)<br>1 lb of PlatSil® FS-20 Part B (~1 pint)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of PlatSil® FS-20 Part A (~1 gallon)<br>8 lb of PlatSil® FS-20 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of PlatSil® FS-20 Part A (~5 gallons)<br>40 lb of PlatSil® FS-20 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 140,
+            "name": "PlatSil® Gel-10",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PlatSilGels_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-NonHaz-AB_11-07-2019.pdf\" target=\"_blank\">Safety Data Sheet</a></p> \n <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PlatSil® Gel-10</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>2-lb kit includes:</td>\n            <td>1 lb of PlatSil® Gel-10 Part A (~1 pint)<br>1 lb of PlatSil® Gel-10 Part B (~1 pint)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of PlatSil® Gel-10 Part A (~1 gallon)<br>8 lb of PlatSil® Gel-10 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of PlatSil® Gel-10 Part A (~5 gallons)<br>40 lb of PlatSil® Gel-10 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 139,
+            "name": "PlatSil® Gel-25",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PlatSilGels_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-NonHaz-AB_11-07-2019.pdf\" target=\"_blank\">Safety Data Sheet</a></p>\n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PlatSil® Gel-25</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>2-lb kit includes:</td>\n            <td>1 lb of PlatSil® Gel-25 Part A (~1 pint)<br>1 lb of PlatSil® Gel-25 Part B (~1 pint)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of PlatSil® Gel-25 Part A (~1 gallon)<br>8 lb of PlatSil® Gel-25 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of PlatSil® Gel-25 Part A (~5 gallons)<br>40 lb of PlatSil® Gel-25 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 141,
+            "name": "PlatSil® Gel-OO",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PlatSilGels_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-NonHaz-AB_11-07-2019.pdf\" target=\"_blank\">Safety Data Sheet</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PlatSil® Gel-OO</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>2-lb kit includes:</td>\n            <td>1 lb of PlatSil® Gel-OO Part A (~1 pint)<br>1 lb of PlatSil® Gel-OO Part B (~1 pint)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of PlatSil® Gel-OO Part A (~1 gallon)<br>8 lb of PlatSil® Gel-OO Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of PlatSil® Gel-OO Part A (~5 gallons)<br>40 lb of PlatSil® Gel-OO Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 142,
+            "name": "PlatSil® Gel-OO20",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PlatSilGels_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-NonHaz-AB_11-07-2019.pdf\" target=\"_blank\">Safety Data Sheet</a></p> \n <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PlatSil® Gel-OO20</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>2-lb kit includes:</td>\n            <td>1 lb of PlatSil® Gel-OO20 Part A (~1 pint)<br>1 lb of PlatSil® Gel-OO20 Part B (~1 pint)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of PlatSil® Gel-OO20 Part A (~1 gallon)<br>8 lb of PlatSil® Gel-OO20 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of PlatSil® Gel-OO20 Part A (~5 gallons)<br>40 lb of PlatSil® Gel-OO20 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 143,
+            "name": "PlatSil® Gel-OO30",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PlatSilGels_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-NonHaz-AB_11-07-2019.pdf\" target=\"_blank\">Safety Data Sheet</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PlatSil® Gel-OO30</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>2-lb kit includes:</td>\n            <td>1 lb of PlatSil® Gel-OO30 Part A (~1 pint)<br>1 lb of PlatSil® Gel-OO30 Part B (~1 pint)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of PlatSil® Gel-OO30 Part A (~1 gallon)<br>8 lb of PlatSil® Gel-OO30 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of PlatSil® Gel-OO30 Part A (~5 gallons)<br>40 lb of PlatSil® Gel-OO30 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 133,
+            "name": "PlatSil® HTS-25 Fast Silicone Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_HTSSeries_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p><p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Platsil-HTS-40-25-25-Fast-A_07-27-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Platsil-HTS-B_07-27-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>\n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PlatSil® HTS-25 Fast</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>9-lb kit includes:</td>\n            <td>0.9 lb of PlatSil® HTS-25 FAST Part A (~1 pint)<br>8.1 lb of PlatSil® HTS-Series Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>44-lb kit include</td>\n            <td>4 lb of PlatSil® HTS-25 FAST Part A (~2 quarts)<br>40 lb of PlatSil® HTS-Series Part B (~5 gallons)</td>\n        </tr></tbody>\n</table>"
+        },
+        {
+            "id": 114,
+            "name": "PlatSil® HTS-25 Silicone Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_HTSSeries_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Platsil-HTS-40-25-25-Fast-A_07-27-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Platsil-HTS-B_07-27-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PlatSil® HTS-25</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>9-lb kit includes:</td>\n            <td>0.9 lb of PlatSil® HTS-25 Part A (~1 pint)<br>8.1 lb of PlatSil® HTS-Series Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>44-lb kit includes:</td>\n            <td>4 lb of PlatSil® HTS-25 Part A (~2 quarts)<br>40 lb of PlatSil® HTS-Series Part B (~5 gallons)</td>\n        </tr></tbody>\n</table>"
+        },
+        {
+            "id": 128,
+            "name": "PlatSil® HTS-40 Silicone Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_HTSSeries_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p><p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Platsil-HTS-40-25-25-Fast-A_07-27-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Platsil-HTS-B_07-27-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PlatSil® HTS-40</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>9-lb kit includes:</td>\n            <td>0.9 lb of PlatSil® HTS-40 Part A (~1 pint)<br>8.1 lb of PlatSil® HTS-Series Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>44-lb kit includes:</td>\n            <td>4 lb of PlatSil® HTS-40 Part A (~2 quarts)<br>40 lb of PlatSil® HTS-Series Part B (~5 gallons)</td>\n        </tr></tbody>\n</table>"
+        },
+        {
+            "id": 259,
+            "name": "PlatSil® Part H Hardener",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_Deadener_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-NonHaz-AB_11-07-2019.pdf\" target=\"_blank\">Safety Data Sheet</a></p>"
+        },
+        {
+            "id": 227,
+            "name": "PlatSil® SiliFoam Casting Foam",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_SiliFoam_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_SiliFoam-AB_11-04-2014.pdf\" target=\"_blank\">Safety Data Sheet</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PlatSil® SiliFoam</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>3.7-lb kit includes:</td>\n            <td>1.7 lb of PlatSil® SiliFoam Part A (~1 quart)<br>2 lb of PlatSil® SiliFoam Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>14.8-lb kit includes:</td>\n            <td>6.8 lb of PlatSil® SiliFoam Part A (~1 gallon)<br>8 lb of PlatSil® SiliFoam Part B (~1 gallon)</td>\n        </tr>\n</tbody>\n</table>"
+        },
+        {
+            "id": 144,
+            "name": "PlatSil® SiliGlass",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_71 and 73Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-NonHaz-AB_11-07-2019.pdf\" target=\"_blank\">Safety Data Sheet</a></p> <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PlatSil® SiliGlass</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of PlatSil® SiliGlass Part A (~1 gallon)<br>8 lb of PlatSil® SiliGlass Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of PlatSil® SiliGlass Part A (~5 gallons)<br>40 lb of PlatSil® SiliGlass Part B (~5 gallons)</td>\n        </tr> </tbody>\n</table>"
+        },
+        {
+            "id": 260,
+            "name": "PlatThix Liquid Thickening Agent",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-NonHaz-AB_11-07-2019.pdf\" target=\"_blank\">Safety Data Sheet</a></p> "
+        },
+        {
+            "id": 202,
+            "name": "Pol-Ease® 2300 Release Agent",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Ease-2300-2500-14_03-07-2014.pdf\" target=\"_blank\">Safety Data Sheet</a></p> <p><a class=\"tds\" href=\"/content/pdf/other/SealerandReleaseAgent_SelectionGuide_0.pdf\" target=\"_blank\">Release Agent & Sealer Selection Guide</a></p>"
+        },
+        {
+            "id": 204,
+            "name": "Pol-Ease® 2350 Sealer & Release Agent",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Ease-2350-14_02-04-2014.pdf\" target=\"_blank\">Safety Data Sheet</a></p> <p><a class=\"tds\" href=\"/content/pdf/other/SealerandReleaseAgent_SelectionGuide_0.pdf\" target=\"_blank\">Release Agent & Sealer Selection Guide</a></p>\n\n<table><thead><tr><th>Unit Sizes</th></tr></thead><tbody><tr><td>1.5-lb Unit of Pol-Ease® 2350 Sealer &amp; Release Agent is approximately 1 quart</td></tr><tr><td>26-lb Unit of Pol-Ease® 2350 Sealer &amp; Release Agent is approximately 5 gallons</td></tr></tbody></table>"
+        },
+        {
+            "id": 205,
+            "name": "Pol-Ease® 2450 Release Agent",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Ease-2450-14_02-04-2014.pdf\" target=\"_blank\">Safety Data Sheet</a></p> <p><a class=\"tds\" href=\"/content/pdf/other/SealerandReleaseAgent_SelectionGuide_0.pdf\" target=\"_blank\">Release Agent & Sealer Selection Guide</a></p>\n\n<table><thead><tr><th>Unit Sizes</th></tr></thead><tbody><tr><td>1.5-lb Unit of Pol-Ease® 2450 Release Agent is approximately 1 quart</td></tr><tr><td>30-lb Unit of Pol-Ease® 2450 Release Agent is approximately 3 gallons</td></tr></tbody></table>"
+        },
+        {
+            "id": 206,
+            "name": "Pol-Ease® 2500 Release Agent",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Ease-2300-2500-14_03-07-2014.pdf\" target=\"_blank\">Safety Data Sheet</a></p><p><a class=\"tds\" href=\"/content/pdf/other/SealerandReleaseAgent_SelectionGuide_0.pdf\" target=\"_blank\">Release Agent & Sealer Selection Guide</a></p>"
+        },
+        {
+            "id": 207,
+            "name": "Pol-Ease® 2601 Release Agent",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Pol-Ease-2601_01-28-2015.pdf\" target=\"_blank\">Safety Data Sheet</a></p><p><a class=\"tds\" href=\"/content/pdf/other/SealerandReleaseAgent_SelectionGuide_0.pdf\" target=\"_blank\">Release Agent & Sealer Selection Guide</a></p>\n\n<table><thead><tr><th>Unit Sizes</th></tr></thead><tbody><tr><td>2-lb Unit of Pol-Ease® 2601 Release Agent is approximately 1 quart</td></tr><tr><td>40-lb Unit of Pol-Ease® 2601 Release Agent is approximately 5 gallons</td></tr></tbody></table>"
+        },
+        {
+            "id": 209,
+            "name": "Pol-Ease® 2650 Release Agent",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Pol-Ease-2650_02-10-2015.pdf\" target=\"_blank\">Safety Data Sheet</a></p><p><a class=\"tds\" href=\"/content/pdf/other/SealerandReleaseAgent_SelectionGuide_0.pdf\" target=\"_blank\">Release Agent & Sealer Selection Guide</a></p>\n\n<table><thead><tr><th>Unit Sizes</th></tr></thead><tbody><tr><td>1.5-lb Unit of Pol-Ease® 2650 Release Agent is approximately 1 quart</td></tr><tr><td>35-lb Unit of Pol-Ease® 2650 Release Agent is approximately 5 gallons</td></tr></tbody></table>"
+        },
+        {
+            "id": 210,
+            "name": "Pol-Ease® 2750 Latex Release Agent",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Ease-2750_09-07-2018.pdf\" target=\"_blank\">Safety Data Sheet</a></p><p><a class=\"tds\" href=\"/content/pdf/other/SealerandReleaseAgent_SelectionGuide_0.pdf\" target=\"_blank\">Release Agent & Sealer Selection Guide</a></p>\n\n<table><thead><tr><th>Unit Sizes</th></tr></thead><tbody><tr><td>2-lb Unit of Pol-Ease® 2750 Latex Release Agent is approximately 1 quart</td></tr><tr><td>8-lb Unit of Pol-Ease® 2750 Latex Release Agent is approximately 1 gallon</td></tr><tr><td>40-lb Unit of Pol-Ease® 2750 Latex Release Agent is approximately 5 gallons</td></tr></tbody></table>"
+        },
+        {
+            "id": 261,
+            "name": "Pol-Ease® Mold Dressing",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_MoldDressing_02-24-2015.pdf\" target=\"_blank\">Safety Data Sheet</a></p> "
+        },
+        {
+            "id": 262,
+            "name": "Pol-Ease® Mold Rinse",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_MoldRinse_05-13-2015.pdf\" target=\"_blank\">Safety Data Sheet</a></p> "
+        },
+        {
+            "id": 263,
+            "name": "Poly 15 Part X Accelerator",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Poly-15-X_08-05-2011.pdf\" target=\"_blank\">Safety Data Sheet</a></p> "
+        },
+        {
+            "id": 195,
+            "name": "Poly 15-3 Liquid Plastic",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_15Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/15A-21.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/15-3-3XB-21.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>\n\n\n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly 15-3</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n  <tr>\n            <td>5-lb kit includes:</td>\n            <td>2.5 lb of Poly 15-3 Part A (~1 quart)<br>2.5 lb of Poly 15-3 Part B (~1 quart)</td>\n        </tr>  \n   <tr>\n            <td>20-lb kit includes:</td>\n            <td>10 lb of Poly 15-3 Part A (~1 gallon)<br>10 lb of Poly 15-3 Part B (~1 gallon)</td>\n        </tr>     \n <tr>\n            <td>100-lb kit includes:</td>\n            <td>50 lb of Poly 15-3 Part A (~5 gallons)<br>50 lb of Poly 15-3 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 196,
+            "name": "Poly 15-3X Liquid Plastic",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_15Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/15A-21.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/15-3-3XB-21.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>\n\n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly 15-3X</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>5-lb kit includes:</td>\n            <td>2.5 lb of Poly 15-3X Part A (~1 quart)<br>2.5 lb of Poly 15-3X Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>20-lb kit includes:</td>\n            <td>10 lb of Poly 15-3X Part A (~1 gallon)<br>10 lb of Poly 15-3X Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>100-lb kit includes:</td>\n            <td>50 lb of Poly 15-3X Part A (~5 gallons)<br>50 lb of Poly 15-3X Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 197,
+            "name": "Poly 1511 Liquid Plastic",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_15Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/15A-21.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/1511-1512-1512X-B-21.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly 1511</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>4-lb kit includes:</td>\n            <td>2 lb of Poly 1511 Part A (~1 quart)<br>2 lb of Poly 1511 Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of Poly 1511 Part A (~1 gallon)<br>8 lb of Poly 1511 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of Poly 1511 Part A (~5 gallons)<br>40 lb of Poly 1511 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 198,
+            "name": "Poly 1512 Liquid Plastic",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_15Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/15A-21.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/1511-1512-1512X-B-21.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n\n<table>\n<caption>\n<strong>Kit Components</strong></caption>\n<thead>\n<tr>\n<th>Poly 1512</th><th>Components</th></tr></thead><tbody><tr>\n<td>4-lb kit includes:</td><td>2 lb of Poly 1512 Part A (~1 quart)<br>2 lb of Poly 1512 Part B (~1 quart)</td></tr>\n\n<tr><td>16-lb kit includes:</td><td>8 lb of Poly 1512 Part A (~1 gallon)<br>8 lb of Poly 1512 Part B (~1 gallon)</td>\n\n</tr><tr><td>80-lb kit includes:</td><td>40 lb of Poly 1512 Part A (~5 gallons)<br>40 lb of Poly 1512 Part B (~5 gallons)</td></tr>\n</tbody>\n</table>"
+        },
+        {
+            "id": 200,
+            "name": "Poly 1512X Liquid Plastic",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_15Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_15A-18_0_08-30-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_1511-12-12X-B_05-29-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n\n<table><caption><strong>Kit Components</strong></caption><thead><tr><th>Poly 1512x</th><th>Components</th></tr></thead><tbody><tr>\n<td>4-lb kit includes:</td><td>2 lb of Poly 1512X Part A (~1 quart)<br>2 lb of Poly 1512X Part B (~1 quart)</td></tr><tr><td>16-lb kit includes:</td><td>8 lb of Poly 1512X Part A (~1 gallon)<br>8 lb of Poly 1512X Part B (~1 gallon)</td></tr><tr><td>80-lb kit includes:</td><td>40 lb of Poly 1512X Part A (~5 gallons)<br>40 lb of Poly 1512X Part B (~5 gallons)</td></tr></tbody></table>"
+        },
+        {
+            "id": 152,
+            "name": "Poly 74-20 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_74Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-75-A-18_08-09-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-B-18-GHS_10-02-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly 74-20</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>6-lb kit includes:</td>\n            <td>2 lb of Poly 74-Series Part A (~1 quart)<br>4 lb of Poly 74-20 Part B (~2 quarts)</td>\n        </tr>       \n <tr>\n            <td>24-lb kit includes:</td>\n            <td>8 lb of Poly 74-Series Part A (~1 gallon)<br>16 lb of Poly 74-20 Part B (~2 gallon)</td>\n        </tr>\n        <tr>\n            <td>120-lb kit includes:</td>\n            <td>40 lb of Poly 74-Series Part A (~5 gallons)<br>80 lb of Poly 74-20 Part B (~10 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 145,
+            "name": "Poly 74-24 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_74Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-75-A-18_08-09-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-B-18-GHS_10-02-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>  <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly 74-24</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of Poly 74-Series Part A (~1 gallon)<br>8 lb of Poly 74-24 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of Poly 74-Series Part A (~5 gallons)<br>40 lb of Poly 74-24 Part B (~5 gallons)</td>\n        </tr></tbody>\n</table>"
+        },
+        {
+            "id": 153,
+            "name": "Poly 74-29 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_74Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-75-A-18_08-09-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-B-18-GHS_10-02-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p><table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly 74-29</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of Poly 74-Series Part A (~1 gallon)<br>8 lb of Poly 74-29 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of Poly 74-Series Part A (~5 gallons)<br>40 lb of Poly 74-29 Part B (~5 gallons)</td>\n        </tr></tbody>\n</table>"
+        },
+        {
+            "id": 154,
+            "name": "Poly 74-30 Clear Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_74Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-75-A-18_08-09-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-B-18-GHS_10-02-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>  <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly 74-30 Clear</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>4-lb kit includes:</td>\n            <td>2 lb of Poly 74-Series Part A (~5 gallons)<br>2 lb of Poly 74-30 Clear Part B (~5 gallons)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of Poly 74-Series Part A (~1 gallon)<br>8 lb of Poly 74-30 Clear Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of Poly 74-Series Part A (~5 gallons)<br>40 lb of Poly 74-30 Clear Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 155,
+            "name": "Poly 74-30 HT Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_74Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-75-A-18_08-09-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-B-18-GHS_10-02-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly 74-30 HT</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of Poly 74-Series Part A (~1 gallon)<br>8 lb of Poly 74-30 HT Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of Poly 74-Series Part A (~5 gallons)<br>40 lb of Poly 74-30 HT Part B (~5 gallons)</td>\n        </tr></tbody>\n</table>"
+        },
+        {
+            "id": 156,
+            "name": "Poly 74-30 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_74Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-75-A-18_08-09-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-B-18-GHS_10-02-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>  <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly 74-30</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>4-lb kit includes:</td>\n            <td>2 lb of Poly 74-Series Part A (~1 quart)<br>2 lb of Poly 74-30 Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of Poly 74-Series Part A (~1 gallon)<br>8 lb of Poly 74-30 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of Poly 74-Series Part A (~5 gallons)<br>40 lb of Poly 74-30 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 157,
+            "name": "Poly 74-40 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_74Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-75-A-18_08-09-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-B-18-GHS_10-02-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>  <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly 74-40</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>24-lb kit includes:</td>\n            <td>16 lb of Poly 74-Series Part A (~2 gallons)<br>8 lb of Poly 74-40 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>120-lb kit includes:</td>\n            <td>80 lb of Poly 74-Series Part A (~10 gallons)<br>40 lb of Poly 74-40 Part B (~5 gallons)</td>\n        </tr>\n</tbody>\n</table>"
+        },
+        {
+            "id": 158,
+            "name": "Poly 74-41 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_74Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-75-A-18_08-09-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-B-18-GHS_10-02-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>  <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly 74-41</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>4-lb kit includes:</td>\n            <td>2 lb of Poly 74-Series Part A (~5 gallons)<br>2 lb of Poly 74-41 Part B (~5 gallons)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of Poly 74-Series Part A (~1 gallon)<br>8 lb of Poly 74-41 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of Poly 74-Series Part A (~5 gallons)<br>40 lb of Poly 74-41 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 159,
+            "name": "Poly 74-44 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_74Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-75-A-18_08-09-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-B-18-GHS_10-02-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>  <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly 74-44</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>24-lb kit includes:</td>\n            <td>16 lb of Poly 74-Series Part A (~2 gallons)<br>8 lb of Poly 74-44 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>120-lb kit includes:</td>\n            <td>80 lb of Poly 74-Series Part A (~10 gallons)<br>40 lb of Poly 74-44 Part B (~5 gallons)</td>\n        </tr>\n</tbody>\n</table>"
+        },
+        {
+            "id": 160,
+            "name": "Poly 74-45 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_74Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-75-A-18_08-09-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-B-18-GHS_10-02-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>  <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly 74-45</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>4-lb kit includes:</td>\n            <td>2 lb of Poly 74-Series Part A (~1 quart)<br>2 lb of Poly 74-45 Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of Poly 74-Series Part A (~1 gallon)<br>8 lb of Poly 74-45 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of Poly 74-Series Part A (~5 gallons)<br>40 lb of Poly 74-45 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 161,
+            "name": "Poly 74-55 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_74Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-75-A-18_08-09-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-B-18-GHS_10-02-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>  <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly 74-55</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>5-lb kit includes:</td>\n            <td>4 lb of Poly 74-Series Part A (~2 quarts)<br>1 lb of Poly 74-55 Part B (~1 pint)</td>\n        </tr>\n        <tr>\n            <td>20-lb kit includes:</td>\n            <td>16 lb of Poly 74-Series Part A (~2 gallons)<br>4 lb of Poly 74-55 Part B (~2 quarts)</td>\n        </tr>\n        <tr>\n            <td>40-lb kit includes:</td>\n            <td>32 lb of Poly 74-Series Part A (~4 gallons)<br>8 lb of Poly 74-55 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>100-lb kit includes:</td>\n            <td>80 lb of Poly 74-Series Part A (~10 gallons)<br>20 lb of Poly 74-55 Part B (~2.5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 264,
+            "name": "Poly 74/75 Part C Softener",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Poly-7475-C_09-13-2011.pdf\" target=\"_blank\">Safety Data Sheet</a></p> "
+        },
+        {
+            "id": 232,
+            "name": "Poly 74/75 Part X Accelerator",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-75-X-14_02-20-2014.pdf\" target=\"_blank\">Safety Data Sheet</a></p> "
+        },
+        {
+            "id": 162,
+            "name": "Poly 75-59 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_75Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-75-A-18_08-09-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_75-59-60B-18_06-14-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly 75-59</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of Poly 75-Series Part A (~1 gallon)<br>8 lb of Poly 75-59 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of Poly 75-Series Part A (~5 gallons)<br>40 lb of Poly 75-59 Part B (~5 gallons)</td>\n        </tr></tbody>\n</table>"
+        },
+        {
+            "id": 163,
+            "name": "Poly 75-60 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_75Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-75-A-18_08-09-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_75-59-60B-18_06-14-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly 75-60</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>4-lb kit includes:</td>\n            <td>2 lb of Poly 75-Series Part A (~1 quart)<br>2 lb of Poly 75-60 Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of Poly 75-Series Part A (~1 gallon)<br>8 lb of Poly 75-60 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of Poly 75-Series Part A (~5 gallons)<br>40 lb of Poly 75-60 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 164,
+            "name": "Poly 75-65 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_75Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-75-A-18_08-09-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_75-65-79-80B_08-09-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>  <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly 75-65</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of Poly 75-Series Part A (~1 gallon)<br>8 lb of Poly 75-65 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of Poly 75-Series Part A (~5 gallons)<br>40 lb of Poly 75-65 Part B (~5 gallons)</td>\n        </tr></tbody>\n</table>"
+        },
+        {
+            "id": 165,
+            "name": "Poly 75-70 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_75Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-75-A-18_08-09-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_75-70-75-90B-18_06-13-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>  <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly 75-70</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>4-lb kit includes:</td>\n            <td>2 lb of Poly 75-Series Part A (~1 quart)<br>2 lb of Poly 75-70 Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of Poly 75-Series Part A (~1 gallon)<br>8 lb of Poly 75-70 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of Poly 75-Series Part A (~5 gallons)<br>40 lb of Poly 75-70 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 166,
+            "name": "Poly 75-75 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_75Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-75-A-18_08-09-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_75-70-75-90B-18_06-13-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>  <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly 75-75</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>24-lb kit includes:</td>\n            <td>16 lb of Poly 75-Series Part A (~2 gallons)<br>8 lb of Poly 75-75 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>120-lb kit includes:</td>\n            <td>80 lb of Poly 75-Series Part A (~10 gallons)<br>40 lb of Poly 75-75 Part B (~5 gallons)</td>\n        </tr>\n </tbody>\n</table>"
+        },
+        {
+            "id": 167,
+            "name": "Poly 75-79 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_75Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-75-A-18_08-09-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_75-65-79-80B_08-09-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>\n<table>\n    <caption><b>Kit Components</b></caption>\n    <thead>\n        <tr>\n            <th>Poly 75-79</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>120-lb kit includes:</td>\n            <td>80 lb of Poly 75-Series Part A (~10 gallons)<br>40 lb of Poly 75-79 Part B (~5 gallons)</td>\n        </tr>\n</tbody>\n</table>"
+        },
+        {
+            "id": 168,
+            "name": "Poly 75-80 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_75Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-75-A-18_08-09-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_75-65-79-80B_08-09-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>  <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly 75-80</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>6-lb kit includes:</td>\n            <td>4 lb of Poly 75-Series Part A (~2 quarts)<br>2 lb of Poly 75-80 Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>24-lb kit includes:</td>\n            <td>16 lb of Poly 75-Series Part A (~2 gallons)<br>8 lb of Poly 75-80 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>120-lb kit includes:</td>\n            <td>80 lb of Poly 75-Series Part A (~10 gallons)<br>40 lb of Poly 75-80 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 169,
+            "name": "Poly 75-90 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_75Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_74-75-A-18_08-09-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_75-70-75-90B-18_06-13-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly 75-90</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>24-lb kit includes:</td>\n            <td>16 lb of Poly 75-Series Part A (~2 gallons)<br>8 lb of Poly 75-90 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>120-lb kit includes:</td>\n            <td>80 lb of Poly 75-Series Part A (~10 gallons)<br>40 lb of Poly 75-90 Part B (~5 gallons)</td>\n        </tr>\n</tbody>\n</table>"
+        },
+        {
+            "id": 170,
+            "name": "Poly 81-90 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_81Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_81-A_09-21-2016.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_81-B_06-13-2014.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>  <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly 81-90</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>11.2-lb kit includes:</td>\n            <td>8 lb of Poly 81-Series Part A (~1 gallon)<br>3.2 lb of Poly 81-90 Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>56-lb kit includes:</td>\n            <td>40 lb of Poly 81-Series Part A (~5 gallons)<br>16 lb of Poly 81-90 Part B (~2 gallons)</td>\n        </tr></tbody>\n</table>"
+        },
+        {
+            "id": 171,
+            "name": "Poly 81-D45 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_81Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_81-A_09-21-2016.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_81-B_06-13-2014.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>  <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly 81-D45</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>9.6-lb kit includes:</td>\n            <td>8 lb of Poly 81-Series Part A (~1 gallon)<br>1.6 lb of Poly 81-D45 Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>48-lb kit includes:</td>\n            <td>40 lb of Poly 81-Series Part A (~5 gallons)<br>8 lb of Poly 81-D45 Part B (~1 gallon)</td>\n        </tr>\n</tbody>\n</table>"
+        },
+        {
+            "id": 172,
+            "name": "Poly GlassRub 50 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_GlassRub50_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_GlassRub50-A-14_05-06-2014.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_GlassRub50-B-14_05-06-2014.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>  <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly GlassRub 50</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n        <tr>\n            <td>4-lb kit includes:</td>\n            <td>2 lb of Poly GlassRub 50 Part A (~1 quart)<br>2 lb of Poly GlassRub 50 Part B (~1 quart)</td>\n        </tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of Poly GlassRub 50 Part A (~1 gallon)<br>8 lb of Poly GlassRub 50 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of Poly GlassRub 50 Part A (~5 gallons)<br>40 lb of Poly GlassRub 50 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 201,
+            "name": "Poly LiteCast Liquid Plastic",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyLiteCast-PlastiFlex_01-06-2019.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_LiteCast-A_08-30-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_LiteCast-B_09-11-2014.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> <p><a class=\"sds\" href=\"/content/pdf/physicalproperties/Polytek_PPB_Poly-Plasti-Flex-LiteCast_03-02-2017.pdf\" target=\"_blank\">Physical Properties Bulletin</a></p> \n\n<table><caption><strong>Kit Components</strong></caption><thead><tr><th>Poly LiteCast</th><th>Components</th></tr></thead><tbody><tr><td>60-lb kit includes:&nbsp;</td><td>30 lb of Poly LiteCast Part A (~5 gallons)<br>30 lb of Poly LiteCast&nbsp;Part B (~5 gallons)</td></tr></tbody></table>"
+        },
+        {
+            "id": 265,
+            "name": "Poly Paddle Mixing Tool",
+            "warranty": ""
+        },
+        {
+            "id": 180,
+            "name": "Poly Plasti-Flex Liquid Plastic",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PlastiFlex_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Plasti-Flex-A-14_03-28-2014.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Plasti-Flex-B-18_11-21-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>  <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly Plasti-Flex</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>8.1-lb kit includes:</td>\n            <td>2.1 lb of Poly Plasti-Flex Part A (~1 quart)<br>6 lb of Poly Plasti-Flex Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>38.5-lb kit includes:</td>\n            <td>10 lb of Poly Plasti-Flex Part A (~1 gallons)<br>28.5 lb of Poly Plasti-Flex Part B (~5 gallons)</td>\n        </tr>\n        <tr>\n            <td>192.5-lb kit includes:</td>\n            <td>50 lb of Poly Plasti-Flex Part A (~5 gallons)<br>142.5 lb of Poly Plasti-Flex Part B (~25 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 266,
+            "name": "Poly Plasticine Clay",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Clay_12-1-2015.pdf\" target=\"_blank\">Safety Data Sheet</a></p> "
+        },
+        {
+            "id": 211,
+            "name": "Poly PVA Solution",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PVA_09-04-2014.pdf\" target=\"_blank\">Safety Data Sheet</a></p><p><a class=\"tds\" href=\"/content/pdf/other/SealerandReleaseAgent_SelectionGuide_0.pdf\" target=\"_blank\">Release Agent & Sealer Selection Guide</a></p>\n\n<table><thead><tr><th>Unit Sizes</th></tr></thead><tbody><tr><td>2-lb Unit of Poly PVA Solution is approximately 1 quart</td></tr><tr><td>35-lb Unit of Poly PVA Solution is approximately 1 gallon</td></tr></tbody></table>"
+        },
+        {
+            "id": 290,
+            "name": "Poly Skin-Wax",
+            "warranty": ""
+        },
+        {
+            "id": 199,
+            "name": "Poly Wax 15",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyWax15_05-24-2016.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Wax15-SkinWax_01-28-2016.pdf\" target=\"_blank\">Safety Data Sheet</a></p> "
+        },
+        {
+            "id": 267,
+            "name": "Poly-Fast 72 Part C Softener",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_72Series_09-14-2016.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Poly-Fast-72-40-B-72-C_10-14-2015.pdf\" target=\"_blank\">Safety Data Sheet</a></p> "
+        },
+        {
+            "id": 268,
+            "name": "Poly-Fast 72 Part D Thickener",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_72Series_09-14-2016.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Poly-Fast-72-D_04-23-2014.pdf\" target=\"_blank\">Safety Data Sheet</a></p> "
+        },
+        {
+            "id": 286,
+            "name": "Poly-Fast 72-40 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_72Series_09-14-2016.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Poly-Fast-72-40-A_04-23-2014.pdf\" target=\"_blank\">Safety Data Sheet - A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Poly-Fast-72-40-B-72-C_10-14-2015.pdf\" target=\"_blank\">Safety Data Sheet - B & C</a></p> <p><a class=\"sds\" href=\"/content/pdf/physicalproperties/Polytek_PPB_Polygel-81-72-GlassRub_03-02-2017.pdf\" target=\"_blank\">Physical Properties Bulletin</a></p> \n<table>\n    <thead>\n        <tr>\n            <th>Unit Sizes</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>4.5 lb of Poly-Fast 72-40 Part A (~2 quarts)</td>\n        </tr>\n        <tr>\n            <td>45 lb of Poly-Fast 72-40 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 269,
+            "name": "Poly-Optic® 14 Part R Retarder",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyOptic_14-Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyOptic-14-R_05-07-2015.pdf\" target=\"_blank\">Safety Data Sheet</a></p>"
+        },
+        {
+            "id": 270,
+            "name": "Poly-Optic® 14 Part X Accelerator",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyOptic_14-Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyOptic-14-X_03-26-2015.pdf\" target=\"_blank\">Safety Data Sheet</a></p>"
+        },
+        {
+            "id": 173,
+            "name": "Poly-Optic® 14-70 Clear Casting Resin",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_14Series_01-30-2019.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyOptic-1410-11-12-20-70-A_06-03-2014.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyOptic-1410-70B_01-28-2020.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> <p><a class=\"sds\" href=\"/content/pdf/physicalproperties/Polytek_PPB_Poly-Optic-14_02-06-2019.pdf\" target=\"_blank\">Physical Properties Bulletin</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly-Optic® 14-70</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>14.4-lb kit includes:</td>\n            <td>6.4 lb of Poly-Optic® 14-70 Part A (~3 quarts)<br>8 lb of Poly-Optic® 14-70 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>72-lb kit includes:</td>\n            <td>32 lb of Poly-Optic® 14-70 Part A (~5 gallons)<br>40 lb of Poly-Optic® 14-70 Part B (~5 gallons)</td>\n        </tr>\n</tbody>\n</table>"
+        },
+        {
+            "id": 208,
+            "name": "Poly-Optic® 1410 Clear Casting Resin",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_14Series_01-30-2019.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyOptic-1410-11-12-20-70-A_06-03-2014.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyOptic-1410-70B_01-28-2020.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> <p><a class=\"sds\" href=\"/content/pdf/physicalproperties/Polytek_PPB_Poly-Optic-14_02-06-2019.pdf\" target=\"_blank\">Physical Properties Bulletin</a></p> \n\n<table><caption><strong>Kit Components</strong></caption><thead><tr><th>Poly-Optic® 1410</th><th>Components</th></tr></thead><tbody><tr><td>10-lb kit includes:</td><td>6 lb of Poly-Optic® 1410 Part A (~3 quarts)<br>4 lb of Poly-Optic® 1410 Part B (~2 quarts)</td></tr><tr><td>60-lb kit includes:</td><td>36 lb of Poly-Optic® 1410 Part A (~5 gallons)<br>24 lb of Poly-Optic® 1410 Part B (~3 gallons)</td></tr></tbody></table>"
+        },
+        {
+            "id": 183,
+            "name": "Poly-Optic® 1411 Clear Casting Resin",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyOptic_14-Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyOptic-1410-11-12-20-70-A_06-03-2014.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyOptic-1411-12-B_02-25-2020.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly-Optic® 1411</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>3.8-lb kit includes:</td>\n            <td>2 lb of Poly-Optic® 1411 Part A (~1 quart)<br>1.8 lb of Poly-Optic® 1411 Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>15.2-lb kit includes:</td>\n            <td>8 lb of Poly-Optic® 1411 Part A (~1 gallon)<br>7.2 lb of Poly-Optic® 1411 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>76-lb kit includes:</td>\n            <td>40 lb of Poly-Optic® 1411 Part A (~5 gallons)<br>36 lb of Poly-Optic® 1411 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 243,
+            "name": "Poly-Optic® 1411 ES7 Clear Casting Resin",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_14Series_01-30-2019.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyOptic-1410-11-12-20-70-A_06-03-2014.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyOptic-1411-12-B_02-25-2020.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> "
+        },
+        {
+            "id": 212,
+            "name": "Poly-Optic® 1412 Clear Casting Resin",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_14Series_01-30-2019.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyOptic-1410-11-12-20-70-A_06-03-2014.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyOptic-1411-12-B_02-25-2020.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> <p><a class=\"sds\" href=\"/content/pdf/physicalproperties/Polytek_PPB_Poly-Optic-14_02-06-2019.pdf\" target=\"_blank\">Physical Properties Bulletin</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly-Optic® 1412</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>18-lb kit includes:</td>\n            <td>9 lb of Poly-Optic® 1412 Part A (~1 gallon)<br>9 lb of Poly-Optic® 1412 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>4.5-lb kit includes:</td>\n            <td>2.25 lb of Poly-Optic® 1412 Part A (~1 quart)<br>2.25 lb of Poly-Optic® 1412 Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>90-lb kit includes:</td>\n            <td>45 lb of Poly-Optic® 1412 Part A (~5 gallons)<br>45 lb of Poly-Optic® 1412 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 215,
+            "name": "Poly-Optic® 1420 Clear Casting Resin",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyOptic_14-Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyOptic-1410-11-12-20-70-A_06-03-2014.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyOptic-1420-B_02-25-2020.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>\n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly-Optic® 1420</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>6-lb kit includes:</td>\n            <td>4 lb of Poly-Optic® 1420 Part A (~2 quarts)<br>2 lb of Poly-Optic® 1420 Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>24-lb kit includes:</td>\n            <td>16 lb of Poly-Optic® 1420 Part A (~2 gallons)<br>8 lb of Poly-Optic® 1420 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>120-lb kit includes:</td>\n            <td>80 lb of Poly-Optic® 1420 Part A (~10 gallons)<br>40 lb of Poly-Optic® 1420 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 219,
+            "name": "Poly-Optic® 1730 Clear Urethane Resin",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyOptic_17Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyOptic-1730XA-1730A_10-22-2019.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyOptic-1730XB_1730B_10-22-2019.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly-Optic® 1730</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>4-lb kit includes:</td>\n            <td>2 lb of Poly-Optic® 1730 Part A (~1 quart)<br>2 lb of Poly-Optic® 1730 Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of Poly-Optic® 1730 Part A (~1 gallon)<br>8 lb of Poly-Optic® 1730 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of Poly-Optic® 1730 Part A (~5 gallons)<br>40 lb of Poly-Optic® 1730 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 184,
+            "name": "Poly-Optic® 1730X Clear Urethane Resin",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyOptic_17Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyOptic-1730XA-1730A_10-22-2019.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyOptic-1730XB_1730B_10-22-2019.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n<table>\n    <caption><b>Kit Components</b></caption>\n    <thead>\n        <tr>\n            <th>Poly-Optic® 1730X</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>4-lb kit includes:</td>\n            <td>2 lb of Poly-Optic® 1730X Part A (~1 quart)<br>2 lb of Poly-Optic® 1730X Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of Poly-Optic® 1730X Part A (~1 gallon)<br>8 lb of Poly-Optic® 1730X Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of Poly-Optic® 1730X Part A (~5 gallons)<br>40 lb of Poly-Optic® 1730X Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 220,
+            "name": "Poly-Optic® 1740 Clear Urethane Resin",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyOptic_17Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyOptic-1740A_10-22-2019.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyOptic-1740B_10-22-2019.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Poly-Optic® 1740</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>4-lb kit includes:</td>\n            <td>2 lb of Poly-Optic® 1740 Part A (~1 quart)<br>2 lb of Poly-Optic® 1740 Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of Poly-Optic® 1740 Part A (~1 gallon)<br>8 lb of Poly-Optic® 1740 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of Poly-Optic® 1740 Part A (~5 gallons)<br>40 lb of Poly-Optic® 1740 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 218,
+            "name": "PolyBond Polyurethane Adhesive",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyBondA_05-29-2015.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyBondB_05-29-2015.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n<table>\n    <thead>\n        <tr>\n            <th>Unit Sizes</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>0.5 lb of PolyBond Part A (~1 pint)</td>\n        </tr>\n        <tr>\n            <td>1.5 lb of PolyBond Part B (~1 quart)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 213,
+            "name": "PolyCoat Sealer & Release Agent",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyCoat-14_02-04-2014.pdf\" target=\"_blank\">Safety Data Sheet</a></p><p><a class=\"tds\" href=\"/content/pdf/other/SealerandReleaseAgent_SelectionGuide_0.pdf\" target=\"_blank\">Release Agent & Sealer Selection Guide</a></p>"
+        },
+        {
+            "id": 271,
+            "name": "PolyColor Dyes",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyColor-Bla-Blu-Fl-Wh_01-25-2018.pdf\" target=\"_blank\">Safety Data Sheet - Black, Blue, Fleshtone, White</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyColor-Green-16_08-10-2016.pdf\" target=\"_blank\">Safety Data Sheet - Green</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyColor-Red-18_01-25-2018.pdf\" target=\"_blank\">Safety Data Sheet - Red</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyColor-Brown-17_04-12-2017.pdf\" target=\"_blank\">Safety Data Sheet - Brown</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyColor-Yellow-18_01-25-2018.pdf\" target=\"_blank\">Safety Data Sheet - Yellow</a></p> "
+        },
+        {
+            "id": 216,
+            "name": "PolyCure 1212 Epoxy Curative",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyPoxy-1010_06-09-2020.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyCure-1212_05-19-2015.pdf\" target=\"_blank\">Safety Data Sheet</a></p> "
+        },
+        {
+            "id": 287,
+            "name": "PolyCure 1220 Epoxy Curative",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyPoxy-1010_06-09-2020.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_1220_05-28-2015.pdf\" target=\"_blank\">Safety Data Sheet</a></p> "
+        },
+        {
+            "id": 272,
+            "name": "PolyFiber II Thickener",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyFiberIIz_08-15-2014.pdf\" target=\"_blank\">Safety Data Sheet</a></p> "
+        },
+        {
+            "id": 273,
+            "name": "PolyFil ND (Neutral-Density) Filler",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyFil-ND_09-26-2016.pdf\" target=\"_blank\">Safety Data Sheet</a></p> "
+        },
+        {
+            "id": 228,
+            "name": "PolyFoam F-3 Casting Foam",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyFoam_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_FoamF3-R2-R5-R8-A-14_03-12-2014.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_FoamF3-F5-B-14_03-04-2014.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PolyFoam F-3</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>6-lb kit includes:</td>\n            <td>2 lb of PolyFoam F-3 Part A (~1 quart)<br>4 lb of PolyFoam F-3 Part B (~2 quarts)</td>\n        </tr>\n        <tr>\n            <td>24-lb kit includes:</td>\n            <td>8 lb of PolyFoam F-3 Part A (~1 gallon)<br>16 lb of PolyFoam F-3 Part B (~2 gallons)</td>\n        </tr>\n        <tr>\n            <td>120-lb kit includes:</td>\n            <td>40 lb of PolyFoam F-3 Part A (~5 gallons)<br>80 lb of PolyFoam F-3 Part B (~10 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 229,
+            "name": "PolyFoam F-5 Casting Foam",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyFoam_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_FoamF5-A-18_08-30-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_FoamF3-F5-B-14_03-04-2014.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PolyFoam F-5</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>4-lb kit includes:</td>\n            <td>2 lb of PolyFoam F-5 Part A (~1 quart)<br>2 lb of PolyFoam F-5 Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of PolyFoam F-5 Part A (~1 gallon)<br>8 lb of PolyFoam F-5 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of PolyFoam F-5 Part A (~5 gallons)<br>40 lb of PolyFoam F-5 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 230,
+            "name": "PolyFoam R-2 Casting Foam",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyFoam_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_FoamF3-R2-R5-R8-A-14_03-12-2014.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_FoamR2-R5-R8-B-14_03-12-2014.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PolyFoam R-2</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>4-lb kit includes:</td>\n            <td>2 lb of PolyFoam R-2 Part A (~1 quart)<br>2 lb of PolyFoam R-2 Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of PolyFoam R-2 Part A (~1 gallon)<br>8 lb of PolyFoam R-2 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of PolyFoam R-2 Part A (~5 gallons)<br>40 lb of PolyFoam R-2 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 233,
+            "name": "PolyFoam R-5 Casting Foam",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyFoam_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_FoamF3-R2-R5-R8-A-14_03-12-2014.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_FoamR2-R5-R8-B-14_03-12-2014.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PolyFoam R-5</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>4-lb kit includes:</td>\n            <td>2 lb of PolyFoam R-5 Part A (~1 quart)<br>2 lb of PolyFoam R-5 Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of PolyFoam R-5 Part A (~1 gallon)<br>8 lb of PolyFoam R-5 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of PolyFoam R-5 Part A (~5 gallons)<br>40 lb of PolyFoam R-5 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 236,
+            "name": "PolyFoam R-8 Casting Foam",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyFoam_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_FoamF3-R2-R5-R8-A-14_03-12-2014.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_FoamR2-R5-R8-B-14_03-12-2014.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PolyFoam R-8</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>4-lb kit includes:</td>\n            <td>2 lb of PolyFoam R-8 Part A (~1 quart)<br>2 lb of PolyFoam R-8 Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of PolyFoam R-8 Part A (~1 gallon)<br>8 lb of PolyFoam R-8 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of PolyFoam R-8 Part A (~5 gallons)<br>40 lb of PolyFoam R-8 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 146,
+            "name": "Polygel® Brush-On 35 Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_Polygel_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolygelA-18_11-21-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Polygel35B-14_04-11-2014.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>Polygel® Brush-On 35</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>4-lb kit includes:</td>\n            <td>2 lb of Polygel® Brush-On 35 Part A (~1 quart)<br>2 lb of Polygel® Brush-On 35 Part B (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of Polygel® Brush-On 35 Part A (~1 gallon)<br>8 lb of Polygel® Brush-On 35 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of Polygel® Brush-On 35 Part A (~5 gallons)<br>40 lb of Polygel® Brush-On 35 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 174,
+            "name": "Polygel® Spray 35 Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_Polygel_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolygelA-18_11-21-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolygelSpray35-Spray50B-14_04-11-2014.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>  \n\n<table>\n    <caption><b>Kit Components</b></caption>\n    <thead>\n        <tr>\n            <th>Polygel® 35</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of Polygel® Spray 35 Part A (~5 gallons)<br>40 lb of Polygel® Spray 35 Part B (~5 gallons)</td>\n        </tr>\n</tbody>\n</table>"
+        },
+        {
+            "id": 175,
+            "name": "Polygel® Spray 50 Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_Polygel_02-15-2017.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolygelA-18_11-21-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolygelSpray35-Spray50B-14_04-11-2014.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> <p><a class=\"sds\" href=\"/content/pdf/physicalproperties/Polytek_PPB_Polygel-81-72-GlassRub_03-02-2017.pdf\" target=\"_blank\">Physical Properties Bulletin</a></p> <table>\n    <thead>\n        <tr>\n            <th>Unit Sizes</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>40 lb of Polygel® Spray 50 Part A (~5 gallons)</td>\n        </tr>\n        <tr>\n            <td>40 lb of Polygel® Spray 50 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 231,
+            "name": "PolyPoxy® 1010 Epoxy Resin",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyPoxy-1010_06-09-2020.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_1010-EpoxyBondA-18_08-30-2018.pdf\" target=\"_blank\">Safety Data Sheet</a></p> "
+        },
+        {
+            "id": 305,
+            "name": "PolyPoxy® 5003 Adhesive/Laminating Epoxy",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyPoxy_EpoxyAdhesive_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-5003-Resin_05-14-2020.pdf\" target=\"_blank\">Safety Data Sheet - Resin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-5003-Hardener_01-28-2020.pdf\" target=\"_blank\">Safety Data Sheet - Hardener</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PolyPoxy® 5003</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>9.6-lb kit includes:</td>\n            <td>8 lb of PolyPoxy® 5003 Resin (~1 gallon)<br>1.6 lb of PolyPoxy® 5003 Hardener (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>48-lb kit includes:</td>\n            <td>40 lb of PolyPoxy® 5003 Resin (~5 gallons)<br>8 lb of PolyPoxy® 5003 Hardener (~1 gallon)</td>\n        </tr>\n</tbody>\n</table>"
+        },
+        {
+            "id": 296,
+            "name": "PolyPoxy® 5008-2 Laminating Epoxy",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyPoxy_LaminatingSeries_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-5010-Resin_01-08-2020.pdf\" target=\"_blank\">Safety Data Sheet - Resin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-5010-Hardener_11-14-2019.pdf\" target=\"_blank\">Safety Data Sheet - Hardener</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PolyPoxy® 5008-2</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>10-lb kit includes:</td>\n            <td>8 lb of PolyPoxy® 5008-2 Resin (~1 gallon)<br>2 lb of PolyPoxy® 5008-2 Hardener (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>55-lb kit includes:</td>\n            <td>45 lb of PolyPoxy® 5008-2 Resin (~5 gallons)<br>8 lb of PolyPoxy® 5008-2 Hardener (~1 gallon)</td>\n        </tr>\n </tbody>\n</table>"
+        },
+        {
+            "id": 297,
+            "name": "PolyPoxy® 5010 Laminating Epoxy",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyPoxy_LaminatingSeries_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-5010-Resin_01-08-2020.pdf\" target=\"_blank\">Safety Data Sheet - Resin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-5010-Hardener_11-14-2019.pdf\" target=\"_blank\">Safety Data Sheet - Hardener</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PolyPoxy® 5010</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>2.34-lb kit includes:</td>\n            <td>2 lb of PolyPoxy® 5010 Resin (~1 quart)<br>0.34 lb of PolyPoxy® 5010 Hardener (~0.5 pint)</td>\n        </tr>\n        <tr>\n            <td>53-lb kit includes:</td>\n            <td>45 lb of PolyPoxy® 5010 Resin (~5 gallons)<br>8 lb of PolyPoxy® 5010 Hardener (~1 gallon)</td>\n        </tr>\n</tbody>\n</table>"
+        },
+        {
+            "id": 298,
+            "name": "PolyPoxy® 5105 Laminating Epoxy",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyPoxy_LaminatingSeries_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-5105-Resin_05-24-2020.pdf\" target=\"_blank\">Safety Data Sheet - Resin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-5105-Hardener_01-09-2020.pdf\" target=\"_blank\">Safety Data Sheet - Hardener</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PolyPoxy® 5105</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>9.36-lb kit includes:</td>\n            <td>8 lb of PolyPoxy® 5105 Resin (~1 gallon)<br>1.36 lb of PolyPoxy® 5105 Hardener (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>48-lb kit includes:</td>\n            <td>41 lb of PolyPoxy® 5105 Resin (~5 gallons)<br>7 lb of PolyPoxy® 5105 Hardener (~1 gallon)</td>\n        </tr>\n</tbody>\n</table>"
+        },
+        {
+            "id": 299,
+            "name": "PolyPoxy® 5114 Laminating Epoxy",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyPoxy_LaminatingSeries_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-5114-Resin_05-14-2020.pdf\" target=\"_blank\">Safety Data Sheet - Resin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-5114-Hardener_01-09-2020.pdf\" target=\"_blank\">Safety Data Sheet - Hardener</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PolyPoxy® 5114</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>12-lb kit includes:</td>\n            <td>10.6 lb of PolyPoxy® 5114 Resin (~1 gallon)<br>1.4 lb of PolyPoxy® 5114 Hardener (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>60-lb kit includes:</td>\n            <td>53 lb of PolyPoxy® 5114 Resin (~5 gallons)<br>7 lb of PolyPoxy® 5114 Hardener (~1 gallon)</td>\n        </tr>\n</tbody>\n</table>"
+        },
+        {
+            "id": 300,
+            "name": "PolyPoxy® 5403 Epoxy Clay",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyPoxy_EpoxyClay_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-5403-Resin_11-25-2019.pdf\" target=\"_blank\">Safety Data Sheet - Resin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-5403-Hardener_02-05-2020.pdf\" target=\"_blank\">Safety Data Sheet - Hardener</a></p> \n<table>\n    <thead>\n        <tr>\n            <th>Unit Sizes</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>1.8 lb of PolyPoxy® 5403 Hardener (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>9 lb of PolyPoxy® 5403 Resin (~1 gallon)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 301,
+            "name": "PolyPoxy® 5700 Epoxy Clay",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyPoxy_EpoxyClay_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-5700-Resin_11-25-2019.pdf\" target=\"_blank\">Safety Data Sheet - Resin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-5700-Hardener_11-25-2019.pdf\" target=\"_blank\">Safety Data Sheet - Hardener</a></p> <table>\n    <thead>\n        <tr>\n            <th>Unit Sizes</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>2.5 lb of PolyPoxy® 5700 Resin (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>2.5 lb of PolyPoxy® 5700 Hardener (~1 gallon)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 306,
+            "name": "PolyPoxy® 6005 Surface Coat Epoxy",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyPoxy_SurfaceCoatEpoxy_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-6005-Resin_02-11-2020.pdf\" target=\"_blank\">Safety Data Sheet - Resin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-6005-Hardener_12-03-2019.pdf\" target=\"_blank\">Safety Data Sheet - Hardener</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PolyPoxy® 6005</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>2.75-lb kit includes:</td>\n            <td>2.33 lb of PolyPoxy® 6005 Resin (~1 quart)<br>0.42 lb of PolyPoxy® 6005 Hardener (~0.5 pint)</td>\n        </tr>\n        <tr>\n            <td>9.34-lb kit includes:</td>\n            <td>8 lb of PolyPoxy® 6005 Resin (~1 gallon)<br>1.34 lb of PolyPoxy® 6005 Hardener (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>53-lb kit includes:</td>\n            <td>45 lb of PolyPoxy® 6005 Resin (~5 gallons)<br>8 lb of PolyPoxy® 6005 Hardener (~1 gallon)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 307,
+            "name": "PolyPoxy® 6060 Surface Coat Epoxy",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyPoxy_SurfaceCoatEpoxy_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-6060-Resin_11-20-2019.pdf\" target=\"_blank\">Safety Data Sheet - Resin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-6060-Hardener_01-28-2020.pdf\" target=\"_blank\">Safety Data Sheet - Hardener</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PolyPoxy® 6060</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>3.08-lb kit includes:</td>\n            <td>2.8 lb of PolyPoxy® 6060 Resin (~1 quart)<br>0.28 lb of PolyPoxy® 6060 Hardener (~0.5 pint)</td>\n        </tr>\n        <tr>\n            <td>65.5-lb kit includes:</td>\n            <td>60 lb of PolyPoxy® 6060 Resin (~5 gallons)<br>5.5 lb of PolyPoxy® 6060 Hardener (~1 gallon)</td>\n        </tr>\n </tbody>\n</table>"
+        },
+        {
+            "id": 308,
+            "name": "PolyPoxy® 6126 Surface Coat Epoxy",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyPoxy_SurfaceCoatEpoxy_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-6126-Resin_11-18-2019.pdf\" target=\"_blank\">Safety Data Sheet - Resin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-6126-Hardener_11-18-2019.pdf\" target=\"_blank\">Safety Data Sheet - Hardener</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PolyPoxy® 6126</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>2.66-lb kit includes:</td>\n            <td>2.4 lb of PolyPoxy® 6126 Resin (~1 quart)<br>0.26 lb of PolyPoxy® 6126 Hardener (~0.5 pint)</td>\n        </tr>\n        <tr>\n            <td>12.2-lb kit includes:</td>\n            <td>11 lb of PolyPoxy® 6126 Resin (~1 gallon)<br>1.2 lb of PolyPoxy® 6126 Hardener (~1 quart)</td>\n        </tr>\n        <tr>\n            <td>61-lb kit includes:</td>\n            <td>55 lb of PolyPoxy® 6126 Resin (~5 gallons)<br>6 lb of PolyPoxy® 6126 Hardener (~1 gallon)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 302,
+            "name": "PolyPoxy® 7136 Casting Epoxy",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyPoxy_CastingEpoxy_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-7136-Resin_10-25-2019.pdf\" target=\"_blank\">Safety Data Sheet - Resin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-7136-Hardener_01-09-2020.pdf\" target=\"_blank\">Safety Data Sheet - Hardener</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PolyPoxy® 7136</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>12.85-lb kit includes:</td>\n            <td>12 lb of PolyPoxy® 7136 Resin (~1 gallon)<br>0.85 lb of PolyPoxy® 7136 Hardener (~1 pint)</td>\n        </tr>\n        <tr>\n            <td>72-lb kit includes:</td>\n            <td>65 lb of PolyPoxy® 7136 Resin (~5 gallons)<br>7 lb of PolyPoxy® 7136 Hardener (~1 gallon)</td>\n        </tr>\n</tbody>\n</table>"
+        },
+        {
+            "id": 304,
+            "name": "PolyPoxy® 9024 Fast-Set Epoxy Adhesive",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyPoxy_EpoxyAdhesive_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-9024-Resin_02-11-2020.pdf\" target=\"_blank\">Safety Data Sheet - Resin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-9024-Hardener_02-07-2020.pdf\" target=\"_blank\">Safety Data Sheet - Hardener</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PolyPoxy® 9024</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>2-lb kit includes:</td>\n            <td>1 lb of PolyPoxy® 9024 Resin (~1 pint)<br>1 lb of PolyPoxy® 9024 Hardener (~1 pint)</td>\n        </tr>\n        <tr>\n            <td>16-lb kit includes:</td>\n            <td>8 lb of PolyPoxy® 9024 Resin (~1 gallon)<br>8 lb of PolyPoxy® 9024 Hardener (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of PolyPoxy® 9024 Resin (~5 gallons)<br>40 lb of PolyPoxy® 9024 Hardener (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 303,
+            "name": "PolyPoxy® 7136-2 Casting Epoxy",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PolyPoxy_CastingEpoxy_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-7136-2-Resin-10-25-2019.pdf\" target=\"_blank\">Safety Data Sheet - Resin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPoxy-7136-2-Hardener_12-30-2019.pdf\" target=\"_blank\">Safety Data Sheet - Hardener</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PolyPoxy® 7136-2</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>13.08-lb kit includes:</td>\n            <td>12 lb of PolyPoxy® 7136 Resin (~1 gallon)<br>1.08 lb of PolyPoxy® 7136-2 Hardener (~1 pint)</td>\n        </tr>\n        <tr>\n            <td>72-lb kit includes:</td>\n            <td>65 lb of PolyPoxy® 7136 Resin (~5 gallons)<br>7 lb of PolyPoxy® 7136-2 Hardener (~1 gallon)</td>\n        </tr>\n</tbody>\n</table>"
+        },
+        {
+            "id": 274,
+            "name": "PolyPurge Dry Aerosol Gas",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PolyPurge_08-03-2015.pdf\" target=\"_blank\">Safety Data Sheet</a></p> "
+        },
+        {
+            "id": 275,
+            "name": "Polytek® Cured Sample Book",
+            "warranty": ""
+        },
+        {
+            "id": 276,
+            "name": "Polytek® Mixing Cups & Lids",
+            "warranty": ""
+        },
+        {
+            "id": 147,
+            "name": "PT Flex 20 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PTFlexSeries_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PTFlex-20-50-60-70-85A-18_08-27-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PTFlex-20B_08-27-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>  <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PT Flex 20</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of PT Flex 20 Part A (~5 gallons)<br>40 lb of PT Flex 20 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 176,
+            "name": "PT Flex 50 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PTFlexSeries_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PTFlex-20-50-60-70-85A-18_08-27-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PTFlex-50-60-65FR-70-85B-18_08-27-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PT Flex 50</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of PT Flex 50 Part A (~5 gallons)<br>40 lb of PT Flex 50 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 177,
+            "name": "PT Flex 60 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PTFlexSeries_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PTFlex-20-50-60-70-85A-18_08-27-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PTFlex-50-60-65FR-70-85B-18_08-27-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>  <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PT Flex 60</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of PT Flex 60 Part A (~5 gallons)<br>40 lb of PT Flex 60 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 178,
+            "name": "PT Flex 70 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PTFlexSeries_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PTFlex-20-50-60-70-85A-18_08-27-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PTFlex-50-60-65FR-70-85B-18_08-27-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PT Flex 70</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of PT Flex 70 Part A (~5 gallons)<br>40 lb of PT Flex 70 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 179,
+            "name": "PT Flex 85 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PTFlexSeries_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PTFlex-20-50-60-70-85A-18_08-27-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PTFlex-50-60-65FR-70-85B-18_08-27-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>PT Flex 85</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>80-lb kit includes:</td>\n            <td>40 lb of PT Flex 85 Part A (~5 gallons)<br>40 lb of PT Flex 85 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 181,
+            "name": "PT Flex D60 Liquid Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_PTFlexSeries_07-23-2019.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PTFlexD60A_08-15-2014.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PTFlexD60B_08-27-2018.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n<table>\n    <thead>\n        <tr>\n            <th>Unit Sizes</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>80 lb of PT Flex 85 Part A (~10 gallons)</td>\n        </tr>\n        <tr>\n            <td>40 lb of PT Flex 85 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 277,
+            "name": "Rubber Bands",
+            "warranty": ""
+        },
+        {
+            "id": 278,
+            "name": "Silicone Color Pigments",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_SiliconeColor-16_07-07-2016.pdf\" target=\"_blank\">Safety Data Sheet</a></p> "
+        },
+        {
+            "id": 279,
+            "name": "Silicone Fluid (50 cSt)",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_Silicone-Fluid_10-12-2015.pdf\" target=\"_blank\">Safety Data Sheet</a></p> "
+        },
+        {
+            "id": 280,
+            "name": "Smith's Theatrical Prosthetic Deadener",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_Deadener_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_PlatSil-NonHaz-AB_11-07-2019.pdf\" target=\"_blank\">Safety Data Sheet</a></p>"
+        },
+        {
+            "id": 281,
+            "name": "Solvent Dispensing Can",
+            "warranty": ""
+        },
+        {
+            "id": 282,
+            "name": "Stainless Steel Mixing Spatulas",
+            "warranty": ""
+        },
+        {
+            "id": 283,
+            "name": "SureShot Mini Atomizer",
+            "warranty": ""
+        },
+        {
+            "id": 284,
+            "name": "Tietex® Fabric",
+            "warranty": ""
+        },
+        {
+            "id": 137,
+            "name": "TinSil® 70-11 Silicone Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_70Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_TinSil-70-10-Gel10-Spray25-A_02-10-2015.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_TINSILB-GHS_05-25-2016.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>\n<table>\n    <thead>\n        <tr>\n            <th>Unit Sizes</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>4 lb of TinSil® 70-11 Part A (~2 quarts)</td>\n        </tr>\n        <tr>\n            <td>40 lb of TinSil® 70-11 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 134,
+            "name": "TinSil® 70-20 Silicone Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_70-Series_02-28-2020.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_TinSil-70-25-A_02-10-2015.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_TINSILB-GHS_05-25-2016.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> <table>\n    <thead>\n        <tr>\n            <th>Unit Sizes</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>4 lb of TinSil® 70-20 Part A (~2 quarts)</td>\n        </tr>\n        <tr>\n            <td>40 lb of TinSil® 70-20 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 127,
+            "name": "TinSil® 70-25 Silicone Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_70-Series_02-28-2020.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_TinSil-70-25-A_02-10-2015.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_TINSILB-GHS_05-25-2016.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> <p><a class=\"sds\" href=\"/content/pdf/physicalproperties/Polytek_PPB_TilSil_06-29-2018.pdf\" target=\"_blank\">Physical Properties Bulletin</a></p> <table>\n    <thead>\n        <tr>\n            <th>Unit Sizes</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>4 lb of TinSil® 70-25 Part A (~2 quarts)</td>\n        </tr>\n        <tr>\n            <td>40 lb of TinSil® 70-25 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 123,
+            "name": "TinSil® 70-60 Silicone Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_70Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_TinSil-70-30-60-A-FastCat_02-10-2015.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_TINSILB-GHS_05-25-2016.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>TinSil® 70-60</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>1.05-lb kit includes:</td>\n            <td>0.05 lb of TinSil® 70-60 Part A (~1 oz)<br>1 lb of TinSil® 70-60 Part B (~1 pint)</td>\n        </tr>\n        <tr>\n            <td>8.4-lb kit includes:</td>\n            <td>0.4 lb of TinSil® 70-60 Part A (~1/2 pint)<br>8 lb of TinSil® 70-60 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>42-lb kit includes:</td>\n            <td>2 lb of TinSil® 70-60 Part A (~1 quart)<br>40 lb of TinSil® 70-60 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 126,
+            "name": "TinSil® 80-15 Silicone Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_80Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_TinSil-80A_01-28-2015.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_TINSILB-GHS_05-25-2016.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>TinSil® 80-15</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>1-lb kit includes:</td>\n            <td>0.1 lb of TinSil® 80-15 Part A (~2 oz)<br>0.9 lb of TinSil® 80-15 Part B (~1 pint))</td>\n        </tr>\n        <tr>\n            <td>9-lb kit includes:</td>\n            <td>0.9 lb of TinSil® 80-15 Part A (~1 pint)<br>8.1 lb of TinSil® 80-15 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>44-lb kit includes:</td>\n            <td>4 lb of TinSil® 80-15 Part A (~2 quarts)<br>40 lb of TinSil® 80-15 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 117,
+            "name": "TinSil® 80-30 Silicone Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_80Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_TinSil-80A_01-28-2015.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_TINSILB-GHS_05-25-2016.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p>\n <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>TinSil® 80-30</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>1-lb kit includes:</td>\n            <td>0.1 lb of TinSil® 80-30 Part A (~2 oz)<br>0.9 lb of TinSil® 80-30 Part B (~1 pint)</td>\n        </tr>\n        <tr>\n            <td>9-lb kit includes:</td>\n            <td>0.9 lb of TinSil® 80-30 Part A (~1 pint)<br>8.1 lb of TinSil® 80-30 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>44-lb kit includes:</td>\n            <td>4 lb of TinSil® 80-30 Part A (~2 quarts)<br>40 lb of TinSil® 80-30 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 125,
+            "name": "TinSil® 80-40 Silicone Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_80Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_TinSil-80A_01-28-2015.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_TINSILB-GHS_05-25-2016.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n <table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>TinSil® 80-40</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>1-lb kit includes:</td>\n            <td>0.1 lb of TinSil® 80-40 Part A (~2 oz)<br>0.9 lb of TinSil® 80-40 Part B (~1 pint)</td>\n        </tr>\n        <tr>\n            <td>9-lb kit includes:</td>\n            <td>0.9 lb of TinSil® 80-40 Part A (~1 pint)<br>8.1 lb of TinSil® 80-40 Part B (~1 gallon)</td>\n        </tr>\n        <tr>\n            <td>44-lb kit includes:</td>\n            <td>4 lb of TinSil® 80-40 Part A (~2 quarts)<br>40 lb of TinSil® 80-40 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 129,
+            "name": "TinSil® Brush/Spray 25 Silicone Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_70-Series_02-28-2020.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_TinSil-70-10-Gel10-Spray25-A_02-10-2015.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_TINSILB-GHS_05-25-2016.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> <p><a class=\"sds\" href=\"/content/pdf/physicalproperties/Polytek_PPB_TilSil_06-29-2018.pdf\" target=\"_blank\">Physical Properties Bulletin</a></p> <table>\n    <thead>\n        <tr>\n            <th>Unit Sizes</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>4 lb of TinSil® Brush/Spray 25 Part A (~2 quarts)</td>\n        </tr>\n        <tr>\n            <td>40 lb of TinSil® Brush/Spray 25 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 285,
+            "name": "TinSil® Deadener",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_TinSil-Deadener_04-09-2015.pdf\" target=\"_blank\">Safety Data Sheet</a></p> "
+        },
+        {
+            "id": 244,
+            "name": "TinSil® FastCat Accelerator",
+            "warranty": "<p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_TinSil-70-30-60-A-FastCat_02-10-2015.pdf\" target=\"_blank\">Safety Data Sheet</a></p> "
+        },
+        {
+            "id": 120,
+            "name": "TinSil® Gel-10 Silicone Rubber",
+            "warranty": "<p><a class=\"tds\" href=\"/content/pdf/technicalbulletin/Polytek_TB_70Series_5-5-2021.pdf\" target=\"_blank\">Technical Bulletin</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_TinSil-70-10-Gel10-Spray25-A_02-10-2015.pdf\" target=\"_blank\">Safety Data Sheet - Part A</a></p> <p><a class=\"sds\" href=\"/content/pdf/SDS/Polytek_SDS_TINSILB-GHS_05-25-2016.pdf\" target=\"_blank\">Safety Data Sheet - Part B</a></p> \n<table>\n    <caption><strong>Kit Components</strong></caption>\n    <thead>\n        <tr>\n            <th>TinSil® Gel-10</th>\n            <th>Components</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>44-lb kit includes:</td>\n            <td>4 lb of TinSil® Gel-10 Part A (~2 quarts)<br>40 lb of TinSil® Gel-10 Part B (~5 gallons)</td>\n        </tr>\n    </tbody>\n</table>"
+        },
+        {
+            "id": 291,
+            "name": "TinThix Liquid Thickening Agent",
+            "warranty": "<p><a class=\"sds\" href=\"https://store-w28cucznaf.mybigcommerce.com/content/pdf/SDS/Polytek_SDS_TINSILB-GHS_05-25-2016.pdf\" target=\"_blank\">Safety Data Sheet</a></p>"
+        },
+        {
+            "id": 293,
+            "name": "Turbo Mixers",
+            "warranty": ""
+        },
+        {
+            "id": 294,
+            "name": "UV Additive",
+            "warranty": "<p><a class=\"sds\" href=\"https://store-w28cucznaf.mybigcommerce.com/content/pdf/SDS/Polytek_SDS_UV-Additive_09-23-2015.pdf\" target=\"_blank\">Safety Data Sheet</a></p><table><thead><tr><th>Unit Sizes</th></tr></thead><tbody><tr><td>0.25-lb Unit of UV Additive is approximately 4 oz</td></tr><tr><td>1-lb Unit of UV Additive is approximately 1 pint</td></tr></tbody></table>"
+        },
+        {
+            "id": 292,
+            "name": "Wooden Tongue Depressors",
+            "warranty": ""
+        }
+    ];
+ </script>
+ <script>
+     window.onload = function (){
+   
+   var productTechDocSelection = document.getElementById("technical-selection");
+   
+   var productArrayWarranty = productIDCalculators.reduce((productArrayWarranty, value) => {
+  if (value.warranty) {
+    productArrayWarranty.push({"id":value.id,"name":value.name});
+  }
+  return productArrayWarranty;
+}, []);
+
+   var techDocOptions = productArrayWarranty.map(element => `<option value=${element.id}>${element.name}</option>`).join('\n');
+   productTechDocSelection.innerHTML = techDocOptions;
+   $('#get-technical').click(function() {
+     var technicalProductID = $('#technical-selection').val();
+  fetchwarrantyfield(technicalProductID);
+  });
+    function fetchwarrantyfield(technicalProductID){
+        fetch("/graphql", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer {{ settings.storefront_api.token }}",
+        },
+        body: JSON.stringify({
+          query: `
+          query SingleProduct {
+site {
+product(entityId: ${technicalProductID}) {
+  entityId
+  name
+  warranty
+  path
+}
+}
+}
+                  `,
+        }),
+      })
+        .then((res) => res.json())
+        .then((result) => $("#technical-warranty").html(result.data.site.product.warranty));        
+        }
+     }
+</script>
+
+
+{{> layout/base}}

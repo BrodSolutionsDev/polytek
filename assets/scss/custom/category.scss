@@ -1,0 +1,11 @@
+.page-sidebar {
+	width: 33%;
+}
+.page-sidebar + .page-content {
+	width: 66%;
+}
+@media only screen and (max-width: 800px) {
+  .page-sidebar + .page-content {
+	width: 100%;
+}
+}

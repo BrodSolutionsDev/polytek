@@ -1,0 +1,150 @@
+<div class="4661726c6579">
+    {{#if product.videos}}
+    {{#or product.description product.videos.list.length}}
+        <div id="product-videos">
+            <h2 class="text-center">See It In Use</h2>
+            <div>
+                {{#if product.videos.list.length}}
+                    {{> components/products/videos product.videos}}
+                {{/if}}
+            </div>
+        </div>
+    {{/or}}
+    {{/if}}
+<!-- Both Custom Fields and Warranty (MSDS) -->
+{{#and product.custom_fields product.warranty}}
+<div class="bg-grey">
+  
+  <div class="container flex flex-top custom-fields">
+    <div class="flex-50">
+      <h4>Technical Specifications</h4>
+      <dl class="productView-info">
+        {{#each product.custom_fields}} {{#startsWith '__' name}} {{else}}
+        <div>
+          <dt class="productView-info-name">{{name}}:</dt>
+          <dd class="productView-info-value">{{{value}}}</dd>
+        </div>
+        {{/startsWith}} {{/each}}
+      </dl>
+    </div>
+    {{#if product.warranty}}
+    <div class="flex-50 more-info">
+      <h4>More Information</h4>
+      <span>
+        <p><a class="material-calculator" href="#material-calculator-modal" data-reveal-id="material-calculator-modal" onclick="getSpecVolume()">Material Calculator</a></p></span
+      >
+      <div id="material-calculator-modal" class="modal" data-reveal>
+        {{> components/custom/calculators/product-calculators}}
+        </div>
+          <span>{{{product.warranty}}}</span>
+        </div>
+    </div>
+    {{/if}}
+  </div>
+</div>
+<!-- Only Warranty (MSDS) -->
+{{else}} {{#if product.warranty}}
+<div>
+  <div class="flex flex-top bg-grey custom-fields">
+    <div class="flex-75 more-info">
+      <h4>More Information</h4>
+          <div>{{{product.warranty}}}</div>
+    </div>
+  </div>
+</div>
+{{/if}} {{/and}}
+</div>
+
+
+</div>
+{{#and product.related_products theme_settings.related_products_tab}}
+    <div class="accordion-block">
+        <div class="container">
+            <div
+                class="accordion-navigation toggleLink"
+                role="button"
+                data-collapsible="#accordion--related">
+                <h3 class="accordion-title">
+                    {{lang 'products.related_products'}}
+                </h3>
+        
+                <div class="accordion-navigation-actions">
+                    <svg class="icon accordion-indicator toggleLink-text toggleLink-text--off">
+                        <use xlink:href="#icon-plus" />
+                    </svg>
+                    <svg class="icon accordion-indicator toggleLink-text toggleLink-text--on">
+                        <use xlink:href="#icon-minus" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    
+        <div id="accordion--related" class="accordion-content">
+            <div class="grid-bg">
+                <div class="container">
+                    {{> components/products/related products=product.related_products columns=6}}
+                </div>
+            </div>
+        </div>
+    </div>
+{{/and}}
+
+
+{{#and product.similar_by_views theme_settings.customer_viewed_products_tab}}
+    <div class="accordion-block">
+        <div class="container">
+            <div
+                class="accordion-navigation toggleLink"
+                role="button"
+                data-collapsible="#accordion--similar">
+                <h3 class="accordion-title">
+                    {{lang 'products.similar_by_views'}}
+                </h3>
+        
+                <div class="accordion-navigation-actions">
+                    <svg class="icon accordion-indicator toggleLink-text toggleLink-text--off">
+                        <use xlink:href="#icon-plus" />
+                    </svg>
+                    <svg class="icon accordion-indicator toggleLink-text toggleLink-text--on">
+                        <use xlink:href="#icon-minus" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    
+        <div id="accordion--similar" class="accordion-content">
+            <div class="grid-bg">
+                <div class="container">
+                    {{> components/products/similar-by-views products=product.similar_by_views columns=6}}
+                </div>
+            </div>
+        </div>
+    </div>
+{{/and}}
+{{#if product.category '==' 'Epoxy Flooring'}}
+<div class="accordion-block">
+    <div class="container">
+        <div
+            class="accordion-navigation toggleLink"
+            role="button"
+            data-collapsible="#accordion--chart">
+            <h5 class="accordion-title">
+                Technical Reference Chart
+            </h5>
+    
+            <div class="accordion-navigation-actions">
+                <svg class="icon accordion-indicator toggleLink-text toggleLink-text--off">
+                    <use xlink:href="#icon-plus" />
+                </svg>
+                <svg class="icon accordion-indicator toggleLink-text toggleLink-text--on">
+                    <use xlink:href="#icon-minus" />
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <div id="accordion--chart" class="accordion-content">
+        {{> components/custom/technical-reference-chart }}
+    </div>
+</div>
+{{/if}}

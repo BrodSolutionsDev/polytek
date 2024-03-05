@@ -1,0 +1,112 @@
+<div class="email-banner">
+    <p>Ask Our Polytek Epoxy Flooring Specialist</p>
+    <form method="POST" id="questionForm" class="questionForm">
+        <div class="questionForm-radioWrapper">
+            <p class="questionForm-radioWrapper__heading">I am a:</p>
+            <p>
+                <input type="radio" name="i_am" id="contractor" value="contractor" checked>
+                <label for="contractor">Contractor</label>
+            </p>
+            <p>
+                <input type="radio" name="i_am" id="distributor" value="distributor">
+                <label for="distributor">Distributor</label>
+            </p>
+            <p>
+                <input type="radio" name="i_am" id="diyUser" value="diyUser">
+                <label for="diyUser">DIY User</label>
+            </p>
+            <p>
+                <input type="radio" name="i_am" id="privateLabel" value="privateLabelCustomer">
+                <label for="privateLabel">Private Label Customer</label>
+            </p>
+        </div>
+        <div class="iAmSelect">
+            <p class="iAmSelect-heading">I am a:</p>
+            <select name="i_am" id="iAmSelect">
+                <option value="contractor">Contractor</option>
+                <option value="distributor">Distributor</option>
+                <option value="diyUser">DIY User</option>
+                <option value="privateLabelCustomer">Private Label Customer</option>
+            </select>
+        </div>
+        
+        <div class="questionForm-textInputWrapper">
+            <p>
+                <!-- <label for="email">Email:</label> -->
+                <input type="email" id="email" placeholder="Email" required />
+            </p>
+            <p>
+                <!-- <label for="comment">Comment/Question:</label> -->
+                <!-- <textarea id="comment" placeholder="Can you help me with this?" rows="1" required></textarea> -->
+                <input type="text" id="comment" placeholder="Comment/question" required />
+            </p>
+            <input type="hidden" id="recaptchaResponse" name="recaptcha_response" />
+            <input class="questionForm-submitBtn" type="submit" value="Send" />
+        </div>
+        <p class="call">Or call our flooring expert: <a href="tel:19418300058">(941) 830-0058</a></p>
+    </form>
+
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script>
+          grecaptcha.ready(function() {
+            grecaptcha.execute('6Lc7p-0UAAAAAFcJLlPIIu23ZY-n0kbEkEkPSOHo', {action: 'submit'}).then(function(token) {
+                document.getElementById('recaptchaResponse').value = token;
+            });
+          });
+    </script>
+  
+     
+</div>
+
+<script>
+    // dom elements
+    var radioInputsWrapper = document.querySelector(".questionForm-radioWrapper");
+    var textInputsWrapper = document.querySelector(".questionForm-textInputWrapper");
+    var iAmSelectDropdown = document.getElementById("iAmSelect");
+    var radioInputs = document.getElementsByName('i_am');
+    var form = document.getElementById('questionForm');
+
+    // values to send to pipedream
+    var iAmA = document.getElementById('contractor').value;
+    var email;
+    var comment;
+
+    // listen for radio button change and set iAmA to new value
+    radioInputsWrapper.addEventListener('change', function() {
+        radioInputs.forEach(input => {
+            if (input.checked) iAmA = input.value;
+        });
+    });
+
+    iAmSelectDropdown.addEventListener('change', function() {
+        iAmA = iAmSelectDropdown.value;
+    });
+
+    // listen to the text inputs change and set the email and comment to new value
+    textInputsWrapper.addEventListener('change', function() {
+        email = document.getElementById('email').value;
+        comment = document.getElementById('comment').value;
+    });
+
+    // pipedream webhook url
+    var endpoint = "https://eoikd853jugbsae.m.pipedream.net";
+
+    // send the data on form submit
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        await fetch(endpoint, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                iAmA: iAmA,
+                email: email,
+                comment: comment
+            })
+        });
+
+        form.reset();
+    });
+</script>

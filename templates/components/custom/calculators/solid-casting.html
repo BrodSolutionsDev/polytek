@@ -1,0 +1,98 @@
+
+  <form id="solid-calc-form" class="form writeReview-form" action="#">
+    <h5>Solid Casting Estimator</h5>
+    <div class="form-row form-row--half">
+      <label for="solid-model-volume">Model Volume</label>
+      <input
+        type="number"
+        name="solid-model-volume"
+        pattern="[0-9]"
+        class="solid-model-volume number-field"
+        val=""
+      />
+       <select name="mv-unit" id="solid-mv-unit">
+        <option value="cubic inches">Cubic Inches (in&sup3;)</option>
+        <option value="fluid ounces">Fluid Ounces (fl oz)</option>
+        <option value="cups">Cups (c)</option>
+        <option value="cubic feet">Cubic Feet (ft&sup3;)</option>
+        <option value="cubic centimeters">Cubic Centimeters (cm&sup3;)</option>
+        <option value="milliliters">Milliliters (ml)</option>
+        <option value="liters">Liters (l)</option>
+        <option value="cubic meters">Cubic Meters (m&sup3;)</option>
+      </select> 
+    </div>
+    <div class="form-row">
+      <label for="solid-result-unit">Display Results As</label>
+      <select name="result-unit" class="solid-result-unit">
+        <option value="pounds">Pounds (LB)</option>
+        <option value="ounces">Ounces (Oz)</option>
+        <option value="grams">Grams (g)</option>
+        <option value="kilograms">Kilograms (kg)</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <button class="button button--primary" type="submit" id="solid-submit">
+        Calculate
+      </button>
+    </div>
+    <div class="form-row result-row">
+      Result: <span class="solid-form-result result-area"></span>
+    </div>
+  </form>
+
+
+<script>
+  /*
+		SOLID CASTING FORMULA
+	*/
+  function solidFormula(
+    modelVolume,
+    modelVolumeUnit,
+    specificVolume,
+    resultUnit
+  ) {
+    // Input conversion from model volume unit
+    switch (modelVolumeUnit) {
+			case "cubic inches":
+        modelVolume = modelVolume;break;
+			case "fluid ounces":
+        modelVolume = modelVolume/0.554113;break;
+			case "cups":
+        modelVolume = modelVolume/0.0682794;break;
+			case "cubic feet":
+        modelVolume = modelVolume/0.0005787704;break;
+			case "cubic centimeters":
+        modelVolume = modelVolume/16.3871;break;
+			case "milliliters":
+        modelVolume = modelVolume/16.3871;break;
+			case "liters":
+        modelVolume = modelVolume/0.01638710000238;break;
+      case "cubic meters":
+        modelVolume = modelVolume/1.6387e-5;break;
+		}
+    // Calculate weight
+    var resultLBS = modelVolume / specificVolume; // Answer in lbs
+    // Answer conversion from display as
+    switch (resultUnit) {
+			case "pounds":
+				result = resultLBS;break;
+			case "ounces":
+        result = resultLBS*16;break;
+			case "grams":
+        result = resultLBS*453.592;break;
+			case "kilograms":
+        result = resultLBS*0.453592;break;
+		}
+    return Math.round(100*result)/100 + " " + resultUnit;
+  }
+
+  $("#solid-submit").click(function (event) {
+    event.preventDefault();
+    var modelVolume = $(".solid-model-volume").val();
+    var modelVolumeUnit = $("select#solid-mv-unit").val();
+    var resultUnit = $(".solid-result-unit").val();
+    $(".solid-form-result").html(
+      solidFormula(modelVolume, modelVolumeUnit, specificVolume, resultUnit)
+    );
+  });
+</script>

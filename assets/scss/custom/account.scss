@@ -1,0 +1,19 @@
+.account-orderStatus-label {
+    background-color: $black;
+}
+.account-content--fixedSmall + .account-sidebar {
+	background: $grey;
+	border-radius: 4px;
+	padding: 15px;
+}
+.panel-body {
+	background: $grey;
+    border-radius: 4px;
+}
+
+.address-label, .address-description {
+	font-size: 15px;
+}
+.paymentMethod {
+	border-radius: 4px;
+}
