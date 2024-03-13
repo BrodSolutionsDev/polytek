@@ -124,3 +124,28 @@ figure.productView-image {
     padding: 36px 0;
   }
 }
+
+#inquire-form {
+  display: none;
+}
+
+#inquireFormContent {
+  max-width: 400px;
+
+  p {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .inquireFormContent-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+
+    input,
+    select,
+    text-area {
+      width: 100%;
+    }
+  }
+}

@@ -83,7 +83,10 @@
                 // if the quantity input is disabled (variant isn't purchasable)
                 if(mutationList[0].target.disabled) {
                     // change the price label
-                    document.querySelectorAll(".price").forEach(price => price.innerText = "Inquire");
+                    document.querySelectorAll(".price").forEach(price => price.innerHTML = "<a href='#inquire-form'>Click Here to Inquire</a>");
+                    document.getElementById("inquire-form").style.display = "block";
+                } else {
+                    document.getElementById('inquire-form').style.display = "none";
                 }
             };
             // create an observer to listen for mutations and call the callback function on mutate
