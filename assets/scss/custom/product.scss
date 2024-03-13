@@ -127,6 +127,21 @@ figure.productView-image {
 
 #inquire-form {
   display: none;
+  margin: 20px 0;
+
+  .inquire-form__call {
+    margin: 0;
+    font-weight: bold;
+    font-size: 20px;
+
+    a {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }
 
 #inquireFormContent {
