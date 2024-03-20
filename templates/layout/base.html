@@ -80,11 +80,25 @@
         if ("{{template_file}}".includes("product")) {
             // callback function for the observer to call
             const callback = (mutationList, observer) => {
+                // set the drum title checker to false. 
+                // this checker is to verify that a variant option has the title "drum"
+                // we  want this inquire for price on drum variants ONLY
+                let hasDrumTitle = false;
+                // loop through the product view form option labels
+                for (const option of document.querySelectorAll(".form-option")) {
+                    // if the option's title includes the word drum...
+                    if (option.innerText.toLowerCase().includes("drum")) {
+                        // set hasDrumTitle to true
+                        hasDrumTitle = true;
+                    }
+                }
                 // if the quantity input is disabled (variant isn't purchasable)
                 if(mutationList[0].target.disabled) {
-                    // change the price label
-                    document.querySelectorAll(".price").forEach(price => price.innerHTML = "<a href='#inquire-form'>Click Here to Inquire</a>");
-                    document.getElementById("inquire-form").style.display = "block";
+                    // change the price label if the variant label contains drum and show the form
+                    if (hasDrumTitle) {
+                        document.querySelectorAll(".price").forEach(price => price.innerHTML = "<a href='#inquire-form'>Click Here to Inquire</a>");
+                        document.getElementById("inquire-form").style.display = "block";
+                    }
                 } else {
                     document.getElementById('inquire-form').style.display = "none";
                 }
