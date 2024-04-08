@@ -1,0 +1,25 @@
+    <div class="blog-post-body polytek-card">
+            {{#if post.thumbnail}}
+                <a href="{{post.url}}">
+                    <img class="lazyload" data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage post.thumbnail 'blog_size'}}" alt="{{post.thumbnail.alt}}" title="{{post.thumbnail.alt}}">
+                </a>
+            {{/if}}
+            <div class="polytek-card-text">
+                <a href="{{post.url}}"><h4>{{post.title}}</a>
+            </h4>
+            <p>{{{post.summary}}}...</p>
+        </div>
+            <div class="polytek-card-button">
+                <a class="button button--primary" href="{{post.url}}"><strong>Learn More</strong></a>
+                   <!-- {{#if post.tags}}
+                <div class="blog-tags">
+                    {{#each (limit post.tags 3)}}
+                    <span class="blog-tag">
+                        <a class="button button--secondary" href="{{url}}">#{{name}}</a>
+                    </span>
+                    {{/each}}
+                </div>
+            {{/if}} -->
+            </div>
+    </div>
+

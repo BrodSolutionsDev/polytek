@@ -1,0 +1,55 @@
+<form id="weightMix-calc-form" class="form writeReview-form" action="#">
+  <h5>Weight Mix Ratio</h5>
+  <div class="form-row"></div>
+  <div class="form-row">
+    <label for="weightMix-weight">Weight</label>
+    <input type="number" name="weightMix-weight" pattern="[0-9]" val="" />
+    <select name="weightMix-sa-unit">
+      <option value="pounds">Pounds (LB)</option>
+      <option value="ounces">Ounces (Oz)</option>
+      <option value="grams">Grams (g)</option>
+      <option value="kilograms">Kilograms (kg)</option>
+    </select>
+  </div>
+  <div class="form-row">
+    <button class="button button--primary" type="submit" id="weightMix-submit">
+      Calculate
+    </button>
+  </div>
+  <div class="form-row result-row">
+    Result: <span class="weightMix-form-result result-area"></span>
+  </div>
+</form>
+
+<script>
+  $('#weightMix-submit').click(function (event) {
+    event.preventDefault();
+    const weight = $('input[name="weightMix-weight"').val();
+    const weightUnit = $('select[name="weightMix-sa-unit"').val();
+
+    $('.weightMix-form-result').html(
+      weightMixFormula(weight, weightUnit, partA, partB)
+    );
+  });
+
+  function weightMixFormula(weight, weightUnit, partA, partB) {
+    weight = roundToHundredthsPlace(parseFloat(weight));
+
+    partA = parseFloat(partA);
+    partB = parseFloat(partB);
+
+    const part = weight / (partA + partB);
+
+    let weightA = part * partA;
+    let weightB = part * partB;
+
+    weightA = roundToHundredthsPlace(parseFloat(weightA));
+    weightB = roundToHundredthsPlace(parseFloat(weightB));
+
+    if (!weightA || !weightB) {
+      return 'Single container. No weight-mix required';
+    } else {
+      return `<br/> Part A: ${weightA}${weightUnit} <br/> PartB: ${weightB}${weightUnit}`;
+    }
+  }
+</script>

@@ -1,0 +1,150 @@
+// Colors
+$blue: #001689;
+$blue-light: #286ac8;
+$white: #fff;
+$black: #222;
+$red: #f9423a;
+$yellow: #ffc629;
+$cyan: #00c1d4;
+$grey: #f0f0f0;
+$grey-dark: #424242;
+$green: #009874;
+$box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+$text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+$dark-overlay: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+$blue-gradient:linear-gradient(to top, $blue 0%, $blue-light 100%);
+//Text
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 1rem;
+}
+h1 {
+  font-size: 38px;
+}
+ html {
+  overflow-x: hidden;
+}
+
+p {line-height: 2;}
+a {
+  color: $blue;
+  text-decoration: underline;
+}
+.text-center {
+  text-align: center;
+}
+.float-right {
+  float: right;
+}
+.text-blue {
+  color: $blue;
+}
+.text-black {
+  color: $black;
+}
+.text-white {
+  color: $white;
+}
+.text-red {
+  color: $red;
+}
+.text-yellow {
+  color: $yellow;
+}
+.text-cyan {
+  color: $cyan;
+}
+.text-green {
+  color: $green;
+}
+.text-small {
+  font-size: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+// Backgrounds
+.bg-blue {
+  background-color: $blue;
+  color: $white;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 a {
+    color: $white;
+  }
+}
+.bg-black {
+  background-color: $black;
+  color: #fff;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 a {
+    color: $white;
+  }
+}
+.bg-grey {
+  background-color: $grey;
+  color: $black;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 a {
+    color: $black;
+  }
+}
+.bg-red {
+  background-color: $red;
+  color: $white;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 a {
+    color: $white;
+  }
+}
+.bg-white {
+  background-color: #fff;
+}
+.bg-yellow {
+  background-color: $yellow;
+}
+.bg-cyan {
+  background-color: $cyan;
+  color: $white;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 a {
+    color: $white;
+  }
+}
+.bg-green {
+  background-color: $green;
+  color: $white;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 a {
+    color: $white;
+  }
+}
+.breadcrumbs {
+	margin-bottom: 0;
+	padding-top: 15px;
+}

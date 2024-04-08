@@ -1,0 +1,322 @@
+<form id="weightSurface-calc-form" class="form writeReview-form" action="#">
+  <h5>Weight vs Surface Area</h5>
+  <div class="form-row"></div>
+  <div class="form-row">
+    <label for="weightSurface-weight">Weight</label>
+    <input type="number" name="weightSurface-weight" pattern="[0-9]" val="" />
+    <select name="weightSurface-sa-unit">
+      <option value="pounds">Pounds (Lb)</option>
+      <option value="ounces">Ounces (Oz)</option>
+      <option value="grams">Grams (g)</option>
+      <option value="kilograms">Kilograms (kg)</option>
+    </select>
+  </div>
+  <div class="form-row">
+    <label for="weightSurface-thickness">Thickness</label>
+    <input
+      type="number"
+      name="weightSurface-thickness"
+      pattern="[0-9]"
+      val=""
+    />
+    <select name="weightSurface-thickness-unit">
+      <option value="inches">Inches (in)</option>
+      <option value="feet">Feet (ft)</option>
+      <option value="millimeters">Millimeters (mm)</option>
+      <option value="centimeters">Centimeters (cm)</option>
+      <option value="meters">Meters (m)</option>
+    </select>
+  </div>
+  <div class="form-row">
+    <label for="weightSurface-result-unit">Display Results As</label>
+    <select name="weightSurface-result-unit">
+      <option value="square inches">Square Inches (in&sup2;)</option>
+      <option value="square feet">Square Feet (ft&sup2;)</option>
+      <option value="square millimeters">Square Millimeters (mm&sup2;)</option>
+      <option value="square centimeters">Square Centimeters (cm&sup2;)</option>
+      <option value="square meters">Square Meters (m&sup2;)</option>
+    </select>
+  </div>
+  <div class="form-row">
+    <button
+      class="button button--primary"
+      type="submit"
+      id="weightSurface-submit"
+    >
+      Calculate
+    </button>
+  </div>
+  <div class="form-row result-row">
+    Result: <span class="weightSurface-form-result result-area"></span>
+  </div>
+</form>
+
+<script>
+  // roundToHundredthsPlace comes from weight-volume.html
+  // weightUnit strings come from weight-volume.html
+
+  $('#weightSurface-submit').click(function (event) {
+    event.preventDefault();
+    var weight = $('input[name="weightSurface-weight"]').val();
+    var weightUnit = $('select[name="weightSurface-sa-unit"]').val();
+    var thickness = $('input[name="weightSurface-thickness"]').val();
+    var thicknessUnit = $('select[name="weightSurface-thickness-unit"]').val();
+    var resultUnit = $('select[name="weightSurface-result-unit"]').val();
+
+    $('.weightSurface-form-result').html(
+      weightSurfaceAreaFormula(
+        weight,
+        weightUnit,
+        specificVolume,
+        thickness,
+        thicknessUnit,
+        resultUnit
+      )
+    );
+    console.log(weightSurfaceAreaFormula());
+  });
+
+  // FIND THE SURFACE AREA FROM THE WEIGHT
+  function weightSurfaceAreaFormula(
+    weight,
+    weightUnit,
+    specificVolume,
+    thickness,
+    thicknessUnit,
+    resultUnit
+  ) {
+    weight = roundToHundredthsPlace(parseFloat(weight));
+    weight = convertWeight(weight, weightUnit, UNIT_WEIGHT_LBS);
+
+    specificVolume = parseFloat(specificVolume);
+
+    thickness = roundToHundredthsPlace(parseFloat(thickness));
+    thickness = convertThickness(thickness, thicknessUnit, UNIT_THICKNESS_IN);
+
+    var result = roundToHundredthsPlace((weight * specificVolume) / thickness);
+    result = convertSurfaceArea(result, UNIT_SURFACE_AREA_IN2, resultUnit);
+
+    var resultString =
+      result.toLocaleString('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }) + writeUnit(resultUnit);
+
+    return resultString;
+  }
+
+  // CONVERT WEIGHT
+  function convertWeight(value, inputUnit, outputUnit) {
+    value = roundToHundredthsPlace(value);
+    let normalizedValue;
+    switch (inputUnit) {
+      case UNIT_WEIGHT_LBS:
+        normalizedValue = value * 453.59;
+        break;
+      case UNIT_WEIGHT_OZ:
+        normalizedValue = value * 28.35;
+        break;
+      case UNIT_WEIGHT_G:
+        normalizedValue = value;
+        break;
+      case UNIT_WEIGHT_KG:
+        normalizedValue = value * 1000.0;
+        break;
+      default:
+        throw inputUnit + ' is not a valid unit';
+    }
+    normalizedValue = roundToHundredthsPlace(normalizedValue);
+
+    let convertedValue;
+    switch (outputUnit) {
+      case UNIT_WEIGHT_LBS:
+        convertedValue = normalizedValue / 453.59;
+        break;
+      case UNIT_WEIGHT_OZ:
+        convertedValue = normalizedValue / 28.35;
+        break;
+      case UNIT_WEIGHT_G:
+        convertedValue = normalizedValue;
+        break;
+      case UNIT_WEIGHT_KG:
+        convertedValue = normalizedValue / 1000.0;
+        break;
+      default:
+        throw inputUnit + ' is not a valid unit';
+    }
+    convertedValue = roundToHundredthsPlace(convertedValue);
+    return convertedValue;
+  }
+
+  // CONVERT THICKNESS
+  function convertThickness(value, inputUnit, outputUnit) {
+    value = roundToHundredthsPlace(value);
+    let normalizedValue;
+    switch (inputUnit) {
+      case UNIT_THICKNESS_IN:
+        normalizedValue = value;
+        break;
+      case UNIT_THICKNESS_FT:
+        normalizedValue = value * 12;
+        break;
+      case UNIT_THICKNESS_MM:
+        normalizedValue = value * 0.0393701;
+        break;
+      case UNIT_THICKNESS_CM:
+        normalizedValue = value * 0.393701;
+        break;
+      case UNIT_THICKNESS_M:
+        normalizedValue = value * 39.3701;
+        break;
+      default:
+        throw inputUnit + ' is not a valid unit';
+    }
+    normalizedValue = roundToHundredthsPlace(normalizedValue);
+
+    let convertedValue;
+    switch (outputUnit) {
+      case UNIT_THICKNESS_IN:
+        convertedValue = normalizedValue;
+        break;
+      case UNIT_THICKNESS_FT:
+        convertedValue = normalizedValue / 12;
+        break;
+      case UNIT_THICKNESS_MM:
+        convertedValue = normalizedValue / 0.0393701;
+        break;
+      case UNIT_THICKNESS_CM:
+        convertedValue = normalizedValue / 0.393701;
+        break;
+      case UNIT_THICKNESS_M:
+        convertedValue = normalizedValue / 39.3701;
+        break;
+      default:
+        throw inputUnit + ' is not a valid unit';
+    }
+    convertedValue = roundToHundredthsPlace(convertedValue);
+    return convertedValue;
+  }
+
+  // CONVERT SURFACE AREA
+  function convertSurfaceArea(value, inputUnit, outputUnit) {
+    value = roundToHundredthsPlace(value);
+    let normalizedValue;
+    switch (inputUnit) {
+      case UNIT_SURFACE_AREA_IN2:
+        normalizedValue = value;
+        break;
+      case UNIT_SURFACE_AREA_FT2:
+        normalizedValue = value * 144;
+        break;
+      case UNIT_SURFACE_AREA_MM2:
+        normalizedValue = value * 0.00155;
+        break;
+      case UNIT_SURFACE_AREA_CM2:
+        normalizedValue = value * 0.155;
+        break;
+      case UNIT_SURFACE_AREA_M2:
+        normalizedValue = value * 1550;
+        break;
+      default:
+        throw inputUnit + ' is not a valid unit';
+    }
+    normalizedValue = roundToHundredthsPlace(normalizedValue);
+
+    let convertedValue;
+    switch (outputUnit) {
+      case UNIT_SURFACE_AREA_IN2:
+        convertedValue = normalizedValue;
+        break;
+      case UNIT_SURFACE_AREA_FT2:
+        convertedValue = normalizedValue / 144;
+        break;
+      case UNIT_SURFACE_AREA_MM2:
+        convertedValue = normalizedValue / 0.00155;
+        break;
+      case UNIT_SURFACE_AREA_CM2:
+        convertedValue = normalizedValue / 0.155;
+        break;
+      case UNIT_SURFACE_AREA_M2:
+        convertedValue = normalizedValue / 1550;
+        break;
+      default:
+        throw inputUnit + ' is not a valid unit';
+    }
+    convertedValue = roundToHundredthsPlace(convertedValue);
+    return convertedValue;
+  }
+
+  function writeUnit(unit) {
+    let unitHTMLString;
+    switch (unit) {
+      case UNIT_WEIGHT_LBS:
+        unitHTMLString = ' lbs';
+        break;
+      case UNIT_WEIGHT_OZ:
+        unitHTMLString = ' oz';
+        break;
+      case UNIT_WEIGHT_G:
+        unitHTMLString = ' g';
+        break;
+      case UNIT_WEIGHT_KG:
+        unitHTMLString = ' kg';
+        break;
+      case UNIT_VOLUME_IN3:
+        unitHTMLString = ' in&sup3;';
+        break;
+      case UNIT_VOLUME_FLOZ:
+        unitHTMLString = ' fl oz';
+        break;
+      case UNIT_VOLUME_C:
+        unitHTMLString = ' c';
+        break;
+      case UNIT_VOLUME_FT3:
+        unitHTMLString = ' ft&sup3;';
+        break;
+      case UNIT_VOLUME_CM3:
+        unitHTMLString = ' cm&sup3;';
+        break;
+      case UNIT_VOLUME_ML:
+        unitHTMLString = ' ml';
+        break;
+      case UNIT_VOLUME_L:
+        unitHTMLString = ' l';
+        break;
+      case UNIT_VOLUME_M3:
+        unitHTMLString = ' m&sup3;';
+        break;
+      case UNIT_SURFACE_AREA_IN2:
+        unitHTMLString = ' in&sup2;';
+        break;
+      case UNIT_SURFACE_AREA_FT2:
+        unitHTMLString = ' ft&sup2;';
+        break;
+      case UNIT_SURFACE_AREA_MM2:
+        unitHTMLString = ' mm&sup2;';
+        break;
+      case UNIT_SURFACE_AREA_CM2:
+        unitHTMLString = ' cm&sup2;';
+        break;
+      case UNIT_SURFACE_AREA_M2:
+        unitHTMLString = ' m&sup2;';
+        break;
+      case UNIT_THICKNESS_IN:
+        unitHTMLString = ' in';
+        break;
+      case UNIT_THICKNESS_FT:
+        unitHTMLString = ' ft';
+        break;
+      case UNIT_THICKNESS_MM:
+        unitHTMLString = ' mm';
+        break;
+      case UNIT_THICKNESS_CM:
+        unitHTMLString = ' cm';
+        break;
+      case UNIT_THICKNESS_M:
+        unitHTMLString = ' m';
+        break;
+    }
+
+    return unitHTMLString;
+  }
+</script>

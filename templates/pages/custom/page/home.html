@@ -1,0 +1,142 @@
+{{#partial "page"}}
+
+{{#if banners.top}}
+    <div class="banners" data-banner-location="top">
+        {{#each (limit banners.top_metadata 1)}}
+        <div class="banner" data-event-type="promotion" data-entity-id="{{this.id}}" data-name="{{this.banner-name}}" data-position="{{this.location}}" data-banner-id="{{this.banner-name}}">
+            <div data-event-type="promotion-click">
+                {{{this.content}}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+
+<div class="polytek-home">
+    <main class="page">
+        <div class="page-content">
+                {{{page.content}}}
+                <div class="applications">
+                    <div class="container">
+                      <h3>Common Applications</h3>
+                      <div
+                        data-slick='{"slidesToShow": 6, "slidesToScroll": 6, "autoplay":true, 
+                        "responsive": [ {"breakpoint": 1000, "settings": {"slidesToShow": 4, "slidesToScroll": 4}}, {"breakpoint": 640, "settings": {"slidesToShow": 3, "slidesToScroll": 3}}, {"breakpoint": 480, "settings": {"slidesToShow": 2, "slidesToScroll": 2}}, {"breakpoint": 321, "settings": {"slidesToShow": 1, "slidesToScroll": 1, "dots": false}}]}'
+                      >
+                        <div>
+                          <a href="/industries/theming-attractions"><img
+                            title=""
+                            src="https://cdn11.bigcommerce.com/s-w28cucznaf/content/icons/Theming_Attractions_Polytek.svg"
+                            alt=""
+                          /></a>
+                          <p>Theming & Attractions</p>
+                        </div>
+                        <div>
+                          <a href="/industries/medical-modeling-simulation"><img
+                            title=""
+                            src="https://cdn11.bigcommerce.com/s-w28cucznaf/content/icons/MedicalModel_Simulation_Polytek.svg"
+                            alt=""
+                          /></a>
+                          <p>Medical Modeling & Simulation</p>
+                        </div>
+                        <div>
+                          <a href="/industries/theatrical-prosthetic-appliances-makeup-fx"><img
+                            title=""
+                            src="https://cdn11.bigcommerce.com/s-w28cucznaf/content/icons/FXMakeup_Polytek.svg"
+                            alt=""
+                          /></a>
+                          <p>Theatrical Prosthetic Appliances & Makeup FX</p>
+                        </div>
+                        <div>
+                          <a href="/industries/precast-concrete"><img
+                            title=""
+                            src="https://cdn11.bigcommerce.com/s-w28cucznaf/content/icons/PrecastConcrete_Polytek.svg"
+                            alt=""
+                          /></a>
+                          <p>Precast Concrete</p>
+                        </div>
+                        <div>
+                          <a href="/industries/millwork-ornamentation"><img
+                            title=""
+                            src="https://cdn11.bigcommerce.com/s-w28cucznaf/content/icons/Millwork_Ornamentation_Polytek.svg"
+                            alt=""
+                          /></a>
+                          <p>Millwork & Ornamentation</p>
+                        </div>
+                        <div>
+                          <a href="/industries/restoration"><img
+                            title=""
+                            src="https://cdn11.bigcommerce.com/s-w28cucznaf/content/icons/ArchitecturalRestoration_Polytek.svg"
+                            alt=""
+                          /></a>
+                          <p>Restoration</p>
+                        </div>
+                        <div>
+                          <a href="#"><img
+                            title=""
+                            src="https://cdn11.bigcommerce.com/s-w28cucznaf/content/icons/Aerospace_Polytek.svg"
+                            alt=""
+                          /></a>
+                          <p>Aerospace</p>
+                        </div>
+                        <div>
+                          <a href="#"><img
+                            title=""
+                            src="https://cdn11.bigcommerce.com/s-w28cucznaf/content/icons/Marine_Polytek.svg"
+                            alt=""
+                          /></a>
+                          <p>Marine</p>
+                        </div>
+                        <div>
+                          <a href="/industries/tooling-composites"><img
+                            title=""
+                            src="https://cdn11.bigcommerce.com/s-w28cucznaf/content/icons/Tooling_Composites_Polytek.svg"
+                            alt=""
+                          /></a>
+                          <p>Tooling & Composites</p>
+                        </div>
+                        <div>
+                          <a href="/industries/prototyping-short-run-production"><img
+                            title=""
+                            src="https://cdn11.bigcommerce.com/s-w28cucznaf/content/icons/Prototyping_Polytek.svg"
+                            alt=""
+                          /></a>
+                          <p>Prototyping & Short-Run Production</p>
+                        </div>
+                        <div>
+                          <a href="/industries/prop-making-special-effects"><img
+                            title=""
+                            src="https://cdn11.bigcommerce.com/s-w28cucznaf/content/icons/PropMaking_Polytek.svg"
+                            alt=""
+                          /></a>
+                          <p>Prop Making & Special Effects</p>
+                        </div>
+                        <div>
+                          <a href="/industries/culinary-arts-food-contact"><img
+                            title=""
+                            src="https://cdn11.bigcommerce.com/s-w28cucznaf/content/icons/FoodContact_Polytek.svg"
+                            alt=""
+                          /></a>
+                          <p>Culinary Arts & Food Contact</p>
+                        </div>
+                        <div>
+                          <a href="h/industries/fine-arts"><img
+                            title=""
+                            src="https://cdn11.bigcommerce.com/s-w28cucznaf/content/icons/FineArt_Polytek.svg"
+                            alt=""
+                          /></a>
+                          <p>Fine Arts</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+        </div>
+         
+    </main>
+</div>
+
+{{/partial}}
+
+{{> layout/base}}
+
+<script>$('.applications').prependTo('.pages');</script>

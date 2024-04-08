@@ -1,0 +1,124 @@
+
+  <form id="hollow-calc-form" class="form writeReview-form" action="#">
+    <h5>Hollow Casting Estimator</h5>
+    <div class="form-row"></div>
+    <div class="form-row">
+      <label for="model-volume">Model Surface Area</label>
+      <input
+        type="number"
+        name="hollow-model-surface-area"
+        pattern="[0-9]"
+        class="hollow-model-surface-area number-field"
+        val=""
+      />
+      <select name="solid-msa-unit" class="hollow-msa-unit">
+        <option value="square inches">Square Inches (in²)</option>
+        <option value="square feet">Square Feet (ft²)</option>
+        <option value="square millimeters">Square Millimeters (mm²)</option>
+        <option value="square centimeters">Square Centimeters (cm²)</option>
+        <option value="square meters">Square Meters (m²)</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label for="mold-volume">Wall Thickness</label>
+      <input
+        type="number"
+        name="hollow-wall-thickness"
+        pattern="[0-9]"
+        class="hollow-wall-thickness number-field"
+        val=""
+      />
+      <select name="hollow-wall-unit" id="hollow-wall-unit">
+        <option value="inches">Inches (in)</option>
+        <option value="feet">Feet (ft)</option>
+        <option value="millimeters">Millimeters (mm)</option>
+        <option value="centimeters">Centimeters (cm)</option>
+        <option value="meters">Meters (m)</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label for="hollow-result-unit">Display Results As</label>
+      <select name="result-unit" class="hollow-result-unit">
+        <option value="pounds">Pounds (LB)</option>
+        <option value="ounces">Ounces (Oz)</option>
+        <option value="grams">Grams (g)</option>
+        <option value="kilograms">Kilograms (kg)</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <button class="button button--primary" type="submit" id="hollow-submit">
+        Calculate
+      </button>
+    </div>
+    <div class="form-row result-row">
+      Result: <span class="hollow-form-result result-area"></span>
+    </div>
+  </form>
+
+<script>
+  /*
+		HOLLOW CASTING FORMULA
+	*/
+  function hollowFormula(surfaceArea,surfaceAreaUnit,wallThickness, wallThicknessUnit,specificVolume,resultUnit
+  ) {
+    // surface area unit conversion
+    switch (surfaceAreaUnit) {
+			case "square inches":
+			surfaceArea = surfaceArea;break;
+			case "square feet":
+			surfaceArea = surfaceArea/0.00694444;break;
+			case "square millimeters":
+			surfaceArea = surfaceArea/645.16;break;
+			case "square centimeters":
+			surfaceArea = surfaceArea/6.45;break;
+			case "square meters":
+			surfaceArea = surfaceArea/0.00064516;break;
+    }
+    // wall unit conversion
+    switch (wallThicknessUnit) {
+			case "inches":
+			wallThickness = wallThickness;break;
+			case "feet":
+			wallThickness = wallThickness/0.08333333;break;
+			case "millimeters":
+			wallThickness = wallThickness/25.4;break;
+			case "centimeters":
+			wallThickness = wallThickness/2.54;break;
+			case "meters":
+			wallThickness = wallThickness/0.0254;break;
+		}
+    // Calculate weight
+    var resultLBS = (surfaceArea * wallThickness) / specificVolume; // Answer in lbs
+    // Answer conversion from display as
+    switch (resultUnit) {
+			case "pounds":
+			result = resultLBS;break;
+			case "ounces":
+      result = resultLBS*16;break;
+			case "grams":
+      result = resultLBS*453.592;	break;
+			case "kilograms":
+      result = resultLBS*0.453592;break;
+		}
+    return Math.round(100*result)/100 + " " + resultUnit;
+  }
+
+  $("#hollow-submit").click(function (event) {
+    event.preventDefault();
+    var surfaceArea = $(".hollow-model-surface-area").val();
+    var surfaceAreaUnit = $(".hollow-msa-unit").val();
+    var wallThickness = $(".hollow-wall-thickness").val();
+    var wallThicknessUnit = $("select#hollow-wall-unit").val();
+    var resultUnit = $(".hollow-result-unit").val();
+    $(".hollow-form-result").html(
+      hollowFormula(
+        surfaceArea,
+        surfaceAreaUnit,
+        wallThickness,
+        wallThicknessUnit,
+        specificVolume,
+        resultUnit
+      )
+    );
+  });
+</script>

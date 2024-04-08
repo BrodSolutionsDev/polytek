@@ -1,0 +1,116 @@
+
+	<form id="poured-calc-form" class="form writeReview-form" action="#" class="pour-form">
+		<h5>Poured Mold Estimator</h5>
+		<div class="form-row">
+		<label for="pour-model-volume">Model Volume</label>
+		<input type="number" name="pour-model-volume" pattern="[0-9]" class="pour-model-volume number-field" val="">
+		<select name="mv-unit" id="pour-mv-unit">
+		<option value="cubic inches">Cubic Inches (in³)</option>
+		<option value="fluid ounces">Fluid Ounces (fl oz)</option>
+		<option value="cups">Cups (c)</option>
+		<option value="cubic feet">Cubic Feet (ft³)</option>
+		<option value="cubic centimeters">Cubic Centimeters (cm³)</option>
+		<option value="milliliters">Milliliters (ml)</option>
+		<option value="liters">Liters (l)</option>
+		<option value="cubic meters">Cubic Meters (m³)</option> </select>
+		</div>
+		<div class="form-row">
+		<label for="pour-mold-volume">Mold Box Volume</label>
+		<input type="number" name="pour-mold-volume" pattern="[0-9]" class="pour-mold-volume number-field" val="">
+		<select name="moldv-unit" id="pour-moldv-unit">
+		<option value="cubic inches">Cubic Inches (in³)</option>
+		<option value="fluid ounces">Fluid Ounces (fl oz)</option>
+		<option value="cups">Cups (c)</option>
+		<option value="cubic feet">Cubic Feet (ft³)</option>
+		<option value="cubic centimeters">Cubic Centimeters (cm³)</option>
+		<option value="milliliters">Milliliters (ml)</option>
+		<option value="liters">Liters (l)</option>
+		<option value="cubic meters">Cubic Meters (m³)</option> </select>
+		</div>
+		<div class="form-row">
+		<label for="pour-result-unit">Display Results As</label>
+		<select name="result-unit" class="pour-result-unit">
+		<option value="pounds">Pounds (LB)</option>
+		<option value="ounces">Ounces (Oz)</option>
+		<option value="grams">Grams (g)</option>
+		<option value="kilograms">Kilograms (kg)</option> </select>
+		</div>
+		<div class="form-row">
+		<button class="button button--primary" type="submit" id="pour-submit">Calculate</button>
+		</div>
+		<div class="result-row">
+		Result: <span class="pour-form-result result-area"></span>
+		</div>
+		</form>
+
+
+<script>
+  /*
+		POUR ON MOLD FORMULA
+	*/
+	function pourFormula(moldVolume, moldVolumeUnit, modelVolume, modelVolumeUnit, specificVolume, resultUnit){
+		// model volume unit conversion
+		switch (modelVolumeUnit) {
+			case "cubic inches":
+        	modelVolume = modelVolume;break;
+			case "fluid ounces":
+        	modelVolume = modelVolume/0.554113;break;
+			case "cups":
+        	modelVolume = modelVolume/0.0682794;break;
+			case "cubic feet":
+        	modelVolume = modelVolume/0.0005787704;break;
+			case "cubic centimeters":
+        	modelVolume = modelVolume/16.3871;break;
+			case "milliliters":
+        	modelVolume = modelVolume/16.3871;break;
+			case "liters":
+        	modelVolume = modelVolume/0.01638710000238;break;
+      		case "cubic meters":
+        	modelVolume = modelVolume/1.6387e-5;break;
+    	}
+    	// mold volume unit conversion
+    	 switch (moldVolumeUnit) {
+			case "cubic inches":
+        	moldVolume = moldVolume;break;
+			case "fluid ounces":
+        	moldVolume = moldVolume/0.554113;break;
+			case "cups":
+        	moldVolume = moldVolume/0.0682794;break;
+			case "cubic feet":
+        	moldVolume = moldVolume/0.0005787704;break;
+			case "cubic centimeters":
+        	moldVolume = moldVolume/16.3871;break;
+			case "milliliters":
+        	moldVolume = moldVolume/16.3871;break;
+			case "liters":
+        	moldVolume = moldVolume/0.01638710000238;break;
+      		case "cubic meters":
+			  moldVolume = moldVolume/1.6387e-5;break;
+		} 
+		// (Volume of Mold Box)-(Volume of Model) ÷ Product Density = Amount of product
+		var resultLBS = (moldVolume - modelVolume) / specificVolume;  // This is in lbs
+		// Answer conversion from display as
+		switch (resultUnit) {
+			case "pounds":
+			result = resultLBS;break;
+			case "ounces":
+      		result = resultLBS*16;break;
+			case "grams":
+     		result = resultLBS*453.592;	break;
+			case "kilograms":
+      		result = resultLBS*0.453592;break;
+		}
+    return Math.round(100*result)/100 + " " + resultUnit;
+	};
+
+	$('#pour-submit').click(function(event){
+		event.preventDefault();
+		var modelVolume = $('.pour-model-volume').val();
+		var modelVolumeUnit = $('select#pour-mv-unit').val();
+		var moldVolume = $('.pour-mold-volume').val();
+		var moldVolumeUnit = $('select#pour-moldv-unit').val();
+		var resultUnit = $('.pour-result-unit').val();
+
+		$('.pour-form-result').html(pourFormula(moldVolume, moldVolumeUnit, modelVolume, modelVolumeUnit, specificVolume, resultUnit));
+	});
+</script>

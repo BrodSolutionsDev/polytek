@@ -1,0 +1,21 @@
+.breadcrumb.is-active > .breadcrumb-label {
+  font-weight: normal;
+}
+
+.breadcrumb-label {
+  text-decoration: none;
+}
+
+.breadcrumb:not(:first-child)::before {
+  margin: 0 .5rem;
+}
+
+.breadcrumb::before {
+  @media only screen and (min-width: 481px) {
+    margin: 0 .5rem;
+  }
+}
+
+.breadcrumbs {
+  display: block !important;
+}

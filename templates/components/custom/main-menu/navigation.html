@@ -1,0 +1,40 @@
+<nav class="navUser">
+    <ul class="navUser-section">
+       <li class="navUser-item navUser-item--account">Call Us at <a class="navUser-action" href="tel:{{settings.phone_number}}">{{settings.phone_number}}</a></li>
+        <li class="navUser-item navUser-item--account">55 Hilton St, Easton, PA 18042</li>
+    </ul>
+    
+  <ul class="navUser-section navUser-section--alt">
+    {{#if customer}}
+        <li class="navUser-item navUser-item--account">
+        <a class="navUser-action" href="{{urls.account.index}}"
+            >{{lang 'common.account'}}</a
+        >
+        </li>
+        <li class="navUser-item navUser-item--account">
+        <a class="navUser-action" href="{{urls.auth.logout}}"
+            >{{lang 'common.logout'}}</a
+        >
+        </li>
+    {{else}}
+        <li class="navUser-item navUser-item--account">
+        <a class="navUser-action" href="{{urls.auth.login}}"
+            >{{lang 'common.login'}}</a
+        >
+        </li>
+            {{#if settings.account_creation_enabled}}
+            <li class="navUser-item navUser-item--account">
+            <a class="navUser-action" href="{{urls.auth.create_account}}"
+                >{{lang 'common.sign_up'}}</a
+            >
+            </li>
+            {{/if}}
+    {{/if}}
+    
+    <li class="navUser-item navUser-item--account">
+      <a class="button button--primary button--small" href="/products/" style="margin-bottom: 0; font-size: 13px;">Shop Products</a>
+    </li>
+    <!--<li class="navUser-item navUser-item--cart">
+    </li>-->
+  </ul>
+</nav>

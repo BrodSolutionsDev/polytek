@@ -1,0 +1,75 @@
+<div id="inquire-form">
+    <h2>Request More Information</h2>
+    <form id="inquireFormContent">
+        <div class="inquireFormContent-row">
+            <p>
+                <label for="firstName">First Name:*</label>
+                <input id="firstName" name="first_name" required>
+            </p>
+            <p>
+                <label for="lastName">Last Name:*</label>
+                <input id="lastName" name="last_name" required>
+            </p>
+        </div>
+        <div class="inquireFormContent-row">
+            <p>
+                <label for="email">Email:*</label>
+                <input id="email" name="email" type="email" required>
+            </p>
+            <p>
+                <label for="phone">Phone:*</label>
+                <input id="phone" name="phone" type="tel" required>
+            </p>
+        </div>
+        <div class="inquireFormContent-row">
+            <p>
+                <label for="companyName">Company Name:*</label>
+                <input type="text" id="companyName" name="company_name" required>
+            </p>
+        </div>
+        <p>
+            <label for="message">Message:</label>
+            <textarea id="message" rows="3"></textarea>
+        </p>
+
+        <button class="button button--primary" type="submit">Submit</button>
+    </form>
+    <p class="inquire-form__call">or call: <a href="tel:8663521480">(866) 352-1480</a></p>
+    <script>
+        // set the scroll margin top for the form to not go behind the header
+        document.getElementById("inquire-form").style.scrollMarginTop = `${document.querySelector("header").getBoundingClientRect().height + 50}px`;
+        // grab the form
+        const form = document.getElementById("inquireFormContent");
+
+        // when the form is submitted
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            // grab the data from the form
+            const data = {
+                first_name: document.getElementById("firstName").value,
+                last_name: document.getElementById("lastName").value,
+                email: document.getElementById("email").value,
+                phone: document.getElementById("phone").value,
+                company: document.getElementById("companyName").value,
+                product: "{{product.title}}",
+                message: document.getElementById("message").value
+            }
+
+            // send the data to pipedream
+            fetch('https://eos1dcjpy1i83cp.m.pipedream.net', {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+                .then((data) => {
+                    console.log(data);
+                    form.reset();
+                    form.innerHTML = "<p>Thank you for your submission. We will get back with you shortly.";
+                })
+                .catch(console.error);
+            });
+    </script>
+</div>

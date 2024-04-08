@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html class="no-js" lang="{{ locale_name }}">
+    <head>
+        <title>{{ head.title }}</title>
+        {{{ resourceHints }}}
+        {{{ head.meta_tags }}}
+        {{{ head.config }}}
+        {{#block "head"}} {{/block}}
+
+        <link href="{{ head.favicon }}" rel="shortcut icon">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+        <script>
+            {{!-- Change document class from no-js to js so we can detect this in css --}}
+            document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+        </script>
+
+        {{> components/common/polyfill-script }}
+        <script>window.consentManagerTranslations = `{{{langJson 'consent_manager'}}}`;</script>
+
+        {{!-- Load Lazysizes script ASAP so images will appear --}}
+        <script>
+            {{!-- Only load visible elements until the onload event fires, after which preload nearby elements. --}}
+            window.lazySizesConfig = window.lazySizesConfig || {};
+            window.lazySizesConfig.loadMode = 1;
+        </script>
+        <script async src="{{cdn 'assets/dist/theme-bundle.head_async.js'}}"></script>
+        
+        {{getFontsCollection font-display='block'}}
+        
+        <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.font.js'}}" as="script">
+        <script async src="{{cdn 'assets/dist/theme-bundle.font.js'}}"></script>
+
+        {{{stylesheet '/assets/css/theme.css'}}}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        {{{head.scripts}}}
+
+        {{~inject 'zoomSize' theme_settings.zoom_size}}
+        {{~inject 'productSize' theme_settings.product_size}}
+        {{~inject 'genericError' (lang 'common.generic_error')}}
+        {{~inject 'maintenanceModeSettings' settings.maintenance}}
+        {{~inject 'adminBarLanguage' (langJson 'admin')}}
+        {{~inject 'urls' urls}}
+        {{~inject 'secureBaseUrl' settings.secure_base_url}}
+        {{~inject 'cartId' cart_id}}
+        {{~inject 'channelId' settings.channel_id}}
+        {{~inject 'template' template}}
+        
+        {{#if page_type '===' 'product'}}
+            {{> components/common/facebook-like}}
+        {{else if page_type '===' 'blog' }}
+            {{> components/common/facebook-like}}
+        {{else if page_type '===' 'blog_post' }}
+            {{> components/common/facebook-like}}
+        {{/if}}
+
+        <script>
+            var theme_settings = {
+                show_fast_cart: {{theme_settings.show_fast_cart}},
+                linksPerCol: {{theme_settings.nav-links-per-col}},
+            };
+        </script>
+        <script src="https://www.google.com/recaptcha/api.js?render=6Lc7p-0UAAAAAFcJLlPIIu23ZY-n0kbEkEkPSOHo"></script>
+
+        {{~inject 'validationDictionaryJSON' (langJson 'validation_messages')}}
+        {{~inject 'validationFallbackDictionaryJSON' (langJson 'validation_fallback_messages')}}
+        {{~inject 'validationDefaultDictionaryJSON' (langJson 'validation_default_messages')}}
+        {{~inject 'carouselArrowAndDotAriaLabel' (lang 'carousel.arrow_and_dot_aria_label')}}
+        {{~inject 'carouselActiveDotAriaLabel' (lang 'carousel.active_dot_aria_label')}}
+        {{~inject 'carouselContentAnnounceMessage' (lang 'carousel.content_announce_message')}}
+
+        {{!-- Get this loading ASAP --}}
+        <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.main.js'}}" as="script">
+    </head>
+    <body>
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WPN69FK"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+
+        <svg data-src="{{cdn 'img/icon-sprite.svg'}}" class="icons-svg-sprite"></svg>
+
+        {{> components/custom/main-menu/header }}
+        {{> components/common/body }}
+        {{> components/custom/footer }}
+
+        <script>window.__webpack_public_path__ = "{{cdn 'assets/dist/'}}";</script>
+        <script>
+            {{!-- Exported in app.js --}}
+            function onThemeBundleMain() {
+                window.stencilBootstrap("{{page_type}}", {{jsContext}}).load();
+            }
+        </script>
+        <script async defer src="{{cdn 'assets/dist/theme-bundle.main.js'}}" onload="onThemeBundleMain()"></script>
+
+        {{{footer.scripts}}}
+    </body>
+    <script>
+    (function() {
+        const header = document.querySelector(".header-custom");
+        const body = document.querySelector(".body");
+
+        const headerRect = header.getBoundingClientRect();
+
+        body.style.marginTop = headerRect.height + "px";
+
+        window.addEventListener("resize", function() {
+            body.style.marginTop = headerRect.height + "px";
+        });
+    })();  
+    </script>
+    <script>
+        // if the template file is a product template
+        if ("{{template_file}}".includes("product")) {
+            // callback function for the observer to call
+            const callback = (mutationList, observer) => {
+                // set the drum title checker to false. 
+                // this checker is to verify that a variant option has the title "drum"
+                // we  want this inquire for price on drum variants ONLY
+                let hasDrumTitle = false;
+                // loop through the product view form option labels
+                for (const option of document.querySelectorAll(".form-option")) {
+                    // if the option's title includes the word drum...
+                    if (option.innerText.toLowerCase().includes("drum")) {
+                        // set hasDrumTitle to true
+                        hasDrumTitle = true;
+                    }
+                }
+                // if the quantity input is disabled (variant isn't purchasable)
+                if(mutationList[0].target.disabled) {
+                    // change the price label if the variant label contains drum and show the form
+                    if (hasDrumTitle) {
+                        document.querySelectorAll(".price").forEach(price => price.innerHTML = "<a href='#inquire-form'>Click Here to Inquire</a>");
+                        document.getElementById("inquire-form").style.display = "block";
+                    }
+                } else {
+                    document.getElementById('inquire-form').style.display = "none";
+                }
+            };
+            // create an observer to listen for mutations and call the callback function on mutate
+            const observer = new MutationObserver(callback);
+            // observe the quantity input to mutate on attribute change (style attribute changes visibility)
+            observer.observe(document.getElementById("qty[]"), { attributes: true });
+        }
+    </script>
+</html>

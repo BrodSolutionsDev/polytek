@@ -1,0 +1,50 @@
+.polytek-cards {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 30px 0;
+  overflow: hidden;
+  .polytek-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #d3d3d3;
+    border-radius: 2px;
+    background-color: $white;
+    transition: all 1s ease;
+    img {
+      height: 250px;
+      width: 100%;
+      object-fit: cover;
+    }
+    .polytek-card-text {
+      flex-grow: 1;
+      h4,
+      p {
+        width: 100%;
+        text-align: center;
+        padding: 0 15px;
+        flex-grow: 1;
+        line-height: 1.25em;
+      }
+    }
+    .polytek-card-button {
+      padding-right: 30px;
+      width: 100%;
+      .button {
+        width: 100%;
+        margin-left: 15px;
+        margin-right: 15px;
+        text-align: left;
+        text-transform: capitalize;
+      }
+    }
+  }
+  .polytek-card:hover {
+    box-shadow: $box-shadow;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .polytek-cards {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

@@ -1,0 +1,1750 @@
+{{#partial "page"}}
+
+<script>
+  // Title of product selected from dropdown list
+  var selectedProductTitle;
+
+  // The object assosiated with the matching title
+  var selectedProductObject; // <-- references productCalculators array
+
+  // Adding a link to the selected product
+  var linkToProduct;
+
+  function hideLink(hidden) {
+      document.querySelectorAll('.modal-close').forEach((close) => {
+      close.addEventListener('click', function () {
+        document
+          .querySelectorAll('.link-to-product')
+          .forEach((link) => link.classList.add('hide'));
+      });
+    });
+    
+    if (hidden === true) {
+      document.querySelectorAll('.link-to-product').forEach(link => link.classList.add('hide'));
+    } else {
+      document.querySelectorAll('.link-to-product').forEach(link => link.classList.remove('hide'));
+    }
+  }
+
+  function linkToProductFunc() {
+    // removes any copyright, TM, or registered watermarks, but leaves any dashes already in title
+    var removeWatermark = selectedProductTitle
+      .split(' ')[0]
+      .replace(/[^a-zA-Z0-9\-]/g, '');
+
+    // replace the title with the new title minus any watermarks
+    var replaceNewTitle = selectedProductTitle.replace(
+      selectedProductTitle.split(' ')[0],
+      removeWatermark
+    );
+
+    // adds the correct href to the link
+    if (selectedProductTitle.split(' ').includes('Latex')) {
+      linkToProduct = $('.link-to-product').attr(
+        'href',
+        `https://polytek.com/products/latex/${replaceNewTitle.replace(
+          /[^a-zA-Z0-9]/g,
+          '-'
+        )}`
+      );
+    } else {
+      linkToProduct = $('.link-to-product').attr(
+        'href',
+        `https://polytek.com/products/${replaceNewTitle.replace(
+          /[^a-zA-Z0-9]/g,
+          '-'
+        )}`
+      );
+    }
+  }
+</script>
+
+<div class="container material-calculator-page">
+  {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+  <main class="page">
+    {{#unless theme_settings.hide_page_heading }}
+    <h1 class="page-heading">{{ page.title }}</h1>
+    {{/unless}} {{{region name="page_builder_content"}}}
+
+    <div class="page-content">
+      {{{page.content}}}
+      <p style="font-style: italic">
+        <strong>Disclaimer:</strong> Polytek offers no warranty, either
+        expressed or implied, as to the reliability of the information contained
+        herein and they assume no liability for loss or damage associated with
+        use of these calculators.
+      </p>
+      <h2>Material Estimators</h2>
+      <!-- start 4 calculators -->
+      <div class="polytek-cards">
+        <!-- Pour Mold -->
+        <div class="polytek-card">
+          <img
+            src="https://cdn11.bigcommerce.com/s-w28cucznaf/product_images/uploaded_images/pouringsilicones.jpg"
+            alt=""
+          />
+          <div class="polytek-card-text">
+            <h4>Poured Mold Estimator</h4>
+            <p>Estimate how much rubber is needed to make a Poured Mold.</p>
+          </div>
+          <div class="polytek-card-button">
+            <a
+              class="button button--primary"
+              href="#"
+              data-reveal-id="poured-mold-modal"
+              >Start Calculation</a
+            >
+          </div>
+        </div>
+        <!-- Brush On Mold Estimator -->
+        <div class="polytek-card">
+          <img
+            src="https://cdn11.bigcommerce.com/s-w28cucznaf/product_images/uploaded_images/pouringsilicones.jpg"
+            alt=""
+          />
+          <div class="polytek-card-text">
+            <h4>Brush On Mold Estimator</h4>
+            <p>
+              Estimate how much rubber is needed to make a Brush On Mold @ 3/8"
+              Thick
+            </p>
+          </div>
+          <div class="polytek-card-button">
+            <a
+              class="button button--primary"
+              href="#"
+              data-reveal-id="brush-on-mold-modal"
+              >Start Calculation</a
+            >
+          </div>
+        </div>
+        <!-- Solid Casting Estimator -->
+        <div class="polytek-card">
+          <img
+            src="https://cdn11.bigcommerce.com/s-w28cucznaf/product_images/uploaded_images/pouringsilicones.jpg"
+            alt=""
+          />
+          <div class="polytek-card-text">
+            <h4>Solid Casting Estimator</h4>
+            <p>Estimate how much material is need to make a solid casting.</p>
+          </div>
+          <div class="polytek-card-button">
+            <a
+              class="button button--primary"
+              href="#"
+              data-reveal-id="solid-casting-mold-modal"
+              >Start Calculation</a
+            >
+          </div>
+        </div>
+        <!-- Hollow Casting Estimator -->
+        <div class="polytek-card">
+          <img
+            src="https://cdn11.bigcommerce.com/s-w28cucznaf/product_images/uploaded_images/pouringsilicones.jpg"
+            alt=""
+          />
+          <div class="polytek-card-text">
+            <h4>Hollow Casting Estimator</h4>
+            <p>Estimate how much material is need to make a Hollow casting.</p>
+          </div>
+          <div class="polytek-card-button">
+            <a
+              class="button button--primary"
+              href="#"
+              data-reveal-id="hollow-casting-mold-modal"
+              >Start Calculation</a
+            >
+          </div>
+        </div>
+      </div>
+      <h2>Conversion Calculators</h2>
+      <!-- start 3 calculators -->
+      <div class="polytek-cards">
+        <div class="polytek-card">
+          <img
+            src="https://cdn11.bigcommerce.com/s-w28cucznaf/product_images/uploaded_images/pouringsilicones.jpg"
+            alt=""
+          />
+          <div class="polytek-card-text">
+            <h4>Weight vs Volume</h4>
+            <p>Converts Weight of Material to the Volume it fills.</p>
+          </div>
+          <div class="polytek-card-button">
+            <a
+              class="button button--primary"
+              href="#"
+              data-reveal-id="weight-volume-conv-modal"
+              >Start Calculation</a
+            >
+          </div>
+        </div>
+        <div class="polytek-card">
+          <img
+            src="https://cdn11.bigcommerce.com/s-w28cucznaf/product_images/uploaded_images/pouringsilicones.jpg"
+            alt=""
+          />
+          <div class="polytek-card-text">
+            <h4>Weight vs Surface Area</h4>
+            <p>
+              Converts the weight of material to the surface area it covers.
+            </p>
+          </div>
+          <div class="polytek-card-button">
+            <a
+              class="button button--primary"
+              href="#"
+              data-reveal-id="weight-surface-conv-modal"
+              >Start Calculation</a
+            >
+          </div>
+        </div>
+        <div class="polytek-card">
+          <img
+            src="https://cdn11.bigcommerce.com/s-w28cucznaf/product_images/uploaded_images/pouringsilicones.jpg"
+            alt=""
+          />
+          <div class="polytek-card-text">
+            <h4>Weight Mix Ratio</h4>
+            <p>Determines how much A and B are required for a given weight.</p>
+          </div>
+          <div class="polytek-card-button">
+            <a
+              class="button button--primary"
+              href="#"
+              data-reveal-id="weight-mix-conv-modal"
+              >Start Calculation</a
+            >
+          </div>
+        </div>
+      </div>
+      <!-- end 3 calculators -->
+    </div>
+  </main>
+</div>
+
+{{/partial}} {{> layout/base}}
+
+<!-- POURED MODAL -->
+<div id="poured-mold-modal" class="modal" data-reveal="">
+  <div class="modal-header">
+    <h2 class="modal-header-title">Poured Mold Estimator</h2>
+    <a
+      href="#"
+      class="modal-close"
+      aria-label="{{lang 'common.close'}}"
+      role="button"
+    >
+      <span aria-hidden="true">&#215;</span>
+    </a>
+  </div>
+  <div class="modal-body">
+    <div class="writeReview-productDetails">
+      <h4>Select a Product Below</h4>
+      <select id="select-product-poured-mold">
+        <option value="0">Select a Product</option>
+      </select>
+      <div id="show-product-poured-mold"></div>
+    </div>
+    <script>
+      var specificVolume; // define once
+
+      $('#select-product-poured-mold').change(function () {
+        specificVolume = $('#select-product-poured-mold option:selected').val();
+        $('#show-product-poured-mold').html(
+          `Specific Volume: ${specificVolume} in<sup>3`
+        );
+      });
+    </script>
+    {{> components/custom/calculators/poured-mold}}
+  </div>
+</div>
+<!-- end POURED MODAL -->
+
+<!-- BRUSH ON MODAL -->
+<div id="brush-on-mold-modal" class="modal" data-reveal="">
+  <div class="modal-header">
+    <h2 class="modal-header-title">Brush On Estimator</h2>
+    <a
+      href="#"
+      class="modal-close"
+      aria-label="{{lang 'common.close'}}"
+      role="button"
+    >
+      <span aria-hidden="true">&#215;</span>
+    </a>
+  </div>
+  <div class="modal-body">
+    <div class="writeReview-productDetails">
+      <h4>Select a Product Below</h4>
+      <select id="select-product-brush-on-mold">
+        <option value="0">Select a Product</option>
+      </select>
+      <div id="show-product-brush-on-mold"></div>
+    </div>
+    <script>
+      $('#select-product-brush-on-mold').change(function () {
+        specificVolume = $(
+          '#select-product-brush-on-mold option:selected'
+        ).val();
+        $('#show-product-brush-on-mold').html(
+          `Specific Volume: ${specificVolume} in<sup>3`
+        );
+      });
+    </script>
+    {{> components/custom/calculators/brush-on}}
+  </div>
+</div>
+<!-- end BRUSH ON MODAL -->
+
+<!-- SOLID CASTING MODAL -->
+<div id="solid-casting-mold-modal" class="modal" data-reveal="">
+  <div class="modal-header">
+    <h2 class="modal-header-title">Solid Casting Estimator</h2>
+    <a
+      href="#"
+      class="modal-close"
+      aria-label="{{lang 'common.close'}}"
+      role="button"
+    >
+      <span aria-hidden="true">&#215;</span>
+    </a>
+  </div>
+  <div class="modal-body">
+    <div class="writeReview-productDetails">
+      <h4>Select a Product Below</h4>
+      <select id="select-product-solid-casting-mold">
+        <option value="0">Select a Product</option>
+      </select>
+      <div id="show-product-solid-casting-mold"></div>
+    </div>
+    <script>
+      $('#select-product-solid-casting-mold').change(function () {
+        specificVolume = $(
+          '#select-product-solid-casting-mold option:selected'
+        ).val();
+        $('#show-product-solid-casting-mold').html(
+          `Specific Volume: ${specificVolume} in<sup>3`
+        );
+      });
+    </script>
+    {{> components/custom/calculators/solid-casting}}
+  </div>
+</div>
+<!-- end SOLID CASTING MODAL -->
+
+<!-- HOLLOW CASTING MODAL -->
+<div id="hollow-casting-mold-modal" class="modal" data-reveal="">
+  <div class="modal-header">
+    <h2 class="modal-header-title">Hollow Casting Estimator</h2>
+    <a
+      href="#"
+      class="modal-close"
+      aria-label="{{lang 'common.close'}}"
+      role="button"
+    >
+      <span aria-hidden="true">&#215;</span>
+    </a>
+  </div>
+  <div class="modal-body">
+    <div class="writeReview-productDetails">
+      <h4>Select a Product Below</h4>
+      <select id="select-product-hollow-casting-mold">
+        <option value="0">Select a Product</option>
+      </select>
+      <div id="show-product-hollow-casting-mold"></div>
+    </div>
+    <script>
+      $('#select-product-hollow-casting-mold').change(function () {
+        specificVolume = $(
+          '#select-product-hollow-casting-mold option:selected'
+        ).val();
+        $('#show-product-hollow-casting-mold').html(
+          `Specific Volume: ${specificVolume} in<sup>3`
+        );
+      });
+    </script>
+    {{> components/custom/calculators/hollow-casting}}
+  </div>
+</div>
+<!-- end HOLLOW CASTING MODAL -->
+
+<!-- Weight vs Volume MODAL -->
+<div id="weight-volume-conv-modal" class="modal" data-reveal="">
+  <div class="modal-header">
+    <h2 class="modal-header-title">Weight vs Volume</h2>
+    <a
+      href="#"
+      class="modal-close"
+      aria-label="{{lang 'common.close'}}"
+      role="button"
+    >
+      <span aria-hidden="true">&#215;</span>
+    </a>
+  </div>
+  <div class="modal-body">
+    <div class="writeReview-productDetails">
+      <h4>Select a Product Below</h4>
+      <select id="select-product-weight-volume-conv">
+        <option value="0">Select a Product</option>
+      </select>
+      <div id="show-product-weight-volume-conv"></div>
+      <a class="link-to-product" href="">View product</a>
+    </div>
+
+    <script>
+      hideLink(true);
+      $('#select-product-weight-volume-conv').change(function () {
+        hideLink(false);
+        selectedProductTitle = $(
+          '#select-product-weight-volume-conv option:selected'
+        ).html();
+
+        linkToProductFunc();
+
+        specificVolume = $(
+          '#select-product-weight-volume-conv option:selected'
+        ).val();
+        $('#show-product-weight-volume-conv').html(
+          `Specific Volume: ${specificVolume} in<sup>3`
+        );
+      });
+    </script>
+    {{> components/custom/calculators/weight-volume}}
+  </div>
+</div>
+<!-- end Weight vs Volume -->
+
+<!-- Weight Mix MODAL -->
+
+<div id="weight-mix-conv-modal" class="modal" data-reveal="">
+  <div class="modal-header">
+    <h2 class="modal-header-title">Weight Mix Ratio</h2>
+    <a
+      href="#"
+      class="modal-close"
+      aria-label="{{lang 'common.close'}}"
+      role="button"
+    >
+      <span aria-hidden="true">&#215;</span>
+    </a>
+  </div>
+  <div class="modal-body">
+    <div class="writeReview-productDetails">
+      <h4>Select a Product Below</h4>
+      <select id="select-product-weight-mix-conv">
+        <option value="0">Select a Product</option>
+      </select>
+      <div id="show-product-weight-mix-conv"></div>
+      <a href="" class="link-to-product">View product</a>
+    </div>
+    <script>
+      hideLink(true);
+      var partA;
+      var partB;
+
+      $('#select-product-weight-mix-conv').change(function () {
+        hideLink(false);
+        selectedProductTitle = $(
+          '#select-product-weight-mix-conv option:selected'
+        ).html();
+
+        linkToProductFunc();
+
+        selectedProductObject = productCalculators.filter(
+          (product) => product.title === selectedProductTitle
+        );
+
+        partA = selectedProductObject.map((product) => product.partA);
+        partB = selectedProductObject.map((product) => product.partB);
+
+        specificVolume = $(
+          '#select-product-weight-mix-conv option:selected'
+        ).val();
+
+        if (specificVolume == 'null') {
+          $('#show-product-weight-mix-conv').html(
+            `Specific Volume: Not available`
+          );
+        } else {
+          $('#show-product-weight-mix-conv').html(
+            `Specific Volume: ${specificVolume} in<sup>3`
+          );
+        }
+      });
+    </script>
+    {{> components/custom/calculators/weight-mix-ratio}}
+  </div>
+</div>
+<!-- end Weight Mix -->
+
+<!-- Weight vs Surface MODAL -->
+<div id="weight-surface-conv-modal" class="modal" data-reveal="">
+  <div class="modal-header">
+    <h2 class="modal-header-title">Weight vs Surface Area</h2>
+    <a
+      href="#"
+      class="modal-close"
+      aria-label="{{lang 'common.close'}}"
+      role="button"
+    >
+      <span aria-hidden="true">&#215;</span>
+    </a>
+  </div>
+  <div class="modal-body">
+    <div class="writeReview-productDetails">
+      <h4>Select a Product Below</h4>
+      <select id="select-product-weight-surface-conv">
+        <option value="0">Select a Product</option>
+      </select>
+      <div id="show-product-weight-surface-conv"></div>
+
+      <a href="" class="link-to-product">View product</a>
+    </div>
+    <script>
+      hideLink(true);
+      $('#select-product-weight-surface-conv').change(function () {
+        hideLink(false);
+        selectedProductTitle = $(
+          '#select-product-weight-surface-conv option:selected'
+        ).html();
+        linkToProductFunc();
+
+        specificVolume = $(
+          '#select-product-weight-surface-conv option:selected'
+        ).val();
+        $('#show-product-weight-surface-conv').html(
+          `Specific Volume: ${specificVolume} in<sup>3`
+        );
+      });
+    </script>
+    {{> components/custom/calculators/weight-surface}}
+  </div>
+</div>
+<!-- end Weight vs Surface -->
+
+<!-- Data Set -->
+<script>
+  var productCalculators = [
+    {
+      title: 'BC-8002 Kwik-Kast II Gray Urethane Resin',
+      specificVolume: 15,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'BC-8009 Slo-Kast Gray Urethane Resin',
+      specificVolume: 15,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'BC-8010 Metal-Kast Urethane Resin',
+      specificVolume: 15.4,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'BC-8655 Kwik-Kast II Blue Urethane Resin',
+      specificVolume: 14.6,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'EasyFlo 100 FR Liquid Plastic',
+      specificVolume: 25.2,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'EasyFlo 120 Liquid Plastic',
+      specificVolume: 26.9,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: 'Cast Hollow',
+      partA: 100,
+      partB: 90,
+    },
+    {
+      title: 'EasyFlo 60 Liquid Plastic',
+      specificVolume: 26.9,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 100,
+      partB: 90,
+    },
+    {
+      title: 'EasyFlo 90 Liquid Plastic',
+      specificVolume: 26.1,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 100,
+      partB: 100,
+    },
+    {
+      title: 'EasyFlo 95 Liquid Plastic',
+      specificVolume: 26.9,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 100,
+      partB: 90,
+    },
+    {
+      title: 'EasyFlo Black Liquid Plastic',
+      specificVolume: 26.4,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 100,
+      partB: 100,
+    },
+    {
+      title: 'EasyFlo Clear Liquid Plastic',
+      specificVolume: 25.5,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 100,
+      partB: 85,
+    },
+    {
+      title: 'EasyFlo Spray FR Liquid Plastic',
+      specificVolume: 23.9,
+      cast: '',
+      poured: '',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 100,
+      partB: 90,
+    },
+    {
+      title: 'FormRub 35 Liquid Rubber',
+      specificVolume: 27.2,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'FormRub 50 Liquid Rubber',
+      specificVolume: 26.6,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'FormRub 60 Liquid Rubber',
+      specificVolume: 26.6,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'FormRub 65 Liquid Rubber',
+      specificVolume: 26.6,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'NaturForm™ 60 Molding Latex Rubber',
+      specificVolume: 28.3,
+      cast: '',
+      poured: '',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: null,
+      partB: null,
+    },
+    {
+      title: 'NaturForm™ 60-R Molding Latex Rubber',
+      specificVolume: 28.3,
+      cast: '',
+      poured: '',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: null,
+      partB: null,
+    },
+    {
+      title: 'NaturForm™ 74 Molding Latex Rubber',
+      specificVolume: 28.5,
+      cast: '',
+      poured: '',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: null,
+      partB: null,
+    },
+    {
+      title: 'PlatSil® 71-10 Silicone Rubber',
+      specificVolume: 26,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 10,
+    },
+    {
+      title: 'PlatSil® 71-11 Silicone Rubber',
+      specificVolume: 24.7,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'PlatSil® 71-20 Silicone Rubber',
+      specificVolume: 24.7,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'PlatSil® 71-25 Silicone Rubber',
+      specificVolume: 25,
+      cast: 'Cast Solid',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'PlatSil® 71-40 Silicone Rubber',
+      specificVolume: 26.6,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 10,
+    },
+    {
+      title: 'PlatSil® 73-15 Silicone Rubber',
+      specificVolume: 25,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'PlatSil® 73-20 Silicone Rubber',
+      specificVolume: 25,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'PlatSil® 73-25 Silicone Rubber',
+      specificVolume: 24.3,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'PlatSil® 73-29 Silicone Rubber',
+      specificVolume: 25,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 10,
+    },
+    {
+      title: 'PlatSil® 73-40 Silicone Rubber',
+      specificVolume: 25,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 10,
+    },
+    {
+      title: 'PlatSil® 73-45 Silicone Rubber',
+      specificVolume: 21.3,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 10,
+    },
+    {
+      title: 'PlatSil® 73-60 Silicone Rubber',
+      specificVolume: 21.3,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 10,
+    },
+    {
+      title: 'PlatSil® FS-10 Silicone Rubber',
+      specificVolume: 24.9,
+      cast: 'Cast Solid',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'PlatSil® FS-20 Silicone Rubber',
+      specificVolume: 24.9,
+      cast: 'Cast Solid',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'PlatSil® Gel-10',
+      specificVolume: 25,
+      cast: 'Cast Solid',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'PlatSil® Gel-25',
+      specificVolume: 25,
+      cast: 'Cast Solid',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'PlatSil® Gel-OO',
+      specificVolume: 25,
+      cast: 'Cast Solid',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'PlatSil® Gel-OO20',
+      specificVolume: 26,
+      cast: 'Cast Solid',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'PlatSil® Gel-OO30',
+      specificVolume: 26,
+      cast: 'Cast Solid',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'PlatSil® HTS-25 Fast Silicone Rubber',
+      specificVolume: 24.9,
+      cast: 'Cast Solid',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 10,
+    },
+    {
+      title: 'PlatSil® HTS-25 Silicone Rubber',
+      specificVolume: 24.9,
+      cast: 'Cast Solid',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 10,
+    },
+    {
+      title: 'PlatSil® HTS-40 Silicone Rubber',
+      specificVolume: 24.9,
+      cast: 'Cast Solid',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 10,
+    },
+    {
+      title: 'PlatSil® SiliFoam Casting Foam',
+      specificVolume: 113,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'PlatSil® SiliGlass',
+      specificVolume: 28,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'Poly 15-3 Liquid Plastic',
+      specificVolume: 18,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'Poly 15-3X Liquid Plastic',
+      specificVolume: 18,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: 'Cast Hollow',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'Poly 1511 Liquid Plastic',
+      specificVolume: 25.1,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'Poly 1512 Liquid Plastic ',
+      specificVolume: 25.1,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: null,
+      partB: null,
+    },
+    {
+      title: 'Poly 1512X Liquid Plastic',
+      specificVolume: 25.1,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: 'Cast Hollow',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'Poly 74-20 Liquid Rubber',
+      specificVolume: 27.5,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 2,
+    },
+    {
+      title: 'Poly 74-24 Liquid Rubber',
+      specificVolume: 27.5,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'Poly 74-29 Liquid Rubber',
+      specificVolume: 27.5,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'Poly 74-30 Clear Liquid Rubber',
+      specificVolume: 27.5,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'Poly 74-30 HT Liquid Rubber',
+      specificVolume: 27.5,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'Poly 74-30 Liquid Rubber',
+      specificVolume: 27.5,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'Poly 74-40 Liquid Rubber',
+      specificVolume: 27.5,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 2,
+      partB: 1,
+    },
+    {
+      title: 'Poly 74-41 Liquid Rubber',
+      specificVolume: 27.5,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'Poly 74-44 Liquid Rubber',
+      specificVolume: 27.5,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 2,
+      partB: 1,
+    },
+    {
+      title: 'Poly 74-45 Liquid Rubber',
+      specificVolume: 27.5,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'Poly 74-55 Liquid Rubber',
+      specificVolume: 27.5,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 4,
+      partB: 1,
+    },
+    {
+      title: 'Poly 75-59 Liquid Rubber',
+      specificVolume: 27,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'Poly 75-60 Liquid Rubber',
+      specificVolume: 27,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'Poly 75-65 Liquid Rubber',
+      specificVolume: 27,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'Poly 75-70 Liquid Rubber',
+      specificVolume: 27,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'Poly 75-75 Liquid Rubber',
+      specificVolume: 26,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 2,
+      partB: 1,
+    },
+    {
+      title: 'Poly 75-79 Liquid Rubber',
+      specificVolume: 26,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 2,
+      partB: 1,
+    },
+    {
+      title: 'Poly 75-80 Liquid Rubber',
+      specificVolume: 26,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 2,
+      partB: 1,
+    },
+    {
+      title: 'Poly 75-90 Liquid Rubber',
+      specificVolume: 26,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 2,
+      partB: 1,
+    },
+    {
+      title: 'Poly 81-90 Liquid Rubber',
+      specificVolume: 26.6,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 100,
+      partB: 40,
+    },
+    {
+      title: 'Poly 81-D45 Liquid Rubber',
+      specificVolume: 26.4,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 100,
+      partB: 20,
+    },
+    {
+      title: 'Poly GlassRub 50 Liquid Rubber',
+      specificVolume: 27.5,
+      cast: 'Cast Solid',
+      poured: 'Poured Mold',
+      brush: '',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'Poly Latex 60',
+      specificVolume: null,
+      cast: '',
+      poured: '',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: null,
+      partB: null,
+    },
+    {
+      title: 'Poly LiteCast Liquid Plastic',
+      specificVolume: 35,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'Poly Plasti-Flex Liquid Plastic',
+      specificVolume: 34,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 35,
+      partB: 100,
+    },
+    {
+      title: 'Poly-Fast 72-40 Liquid Rubber',
+      specificVolume: 20,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 10,
+    },
+    {
+      title: 'Poly-Optic® 14-70 Clear Casting Resin',
+      specificVolume: 27.5,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 4,
+      partB: 5,
+    },
+    {
+      title: 'Poly-Optic® 1410 Clear Casting Resin',
+      specificVolume: 27.5,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 3,
+      partB: 2,
+    },
+    {
+      title: 'Poly-Optic® 1411 Clear Casting Resin',
+      specificVolume: 27.5,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 100,
+      partB: 90,
+    },
+    {
+      title: 'Poly-Optic® 1412 Clear Casting Resin',
+      specificVolume: 27.5,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'Poly-Optic® 1420 Clear Casting Resin',
+      specificVolume: 27.5,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 2,
+      partB: 1,
+    },
+    {
+      title: 'Poly-Optic® 1730 Clear Urethane Resin',
+      specificVolume: 28.8,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 100,
+      partB: 100,
+    },
+    {
+      title: 'Poly-Optic® 1730X Clear Urethane Resin',
+      specificVolume: 28.8,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 100,
+      partB: 100,
+    },
+    {
+      title: 'Poly-Optic® 1740 Clear Urethane Resin',
+      specificVolume: 28.5,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 100,
+      partB: 100,
+    },
+    {
+      title: 'PolyFoam F-3 Casting Foam',
+      specificVolume: 344.83,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 1,
+      partB: 2,
+    },
+    {
+      title: 'PolyFoam F-5 Casting Foam',
+      specificVolume: 243.9,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'PolyFoam R-2 Casting Foam',
+      specificVolume: 434.78,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'PolyFoam R-5 Casting Foam',
+      specificVolume: 243.9,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'PolyFoam R-8 Casting Foam',
+      specificVolume: 172.41,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'Polygel® Brush-On 35 Rubber',
+      specificVolume: 27.5,
+      cast: '',
+      poured: '',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'Polygel® Spray 35 Rubber',
+      specificVolume: 27.5,
+      cast: '',
+      poured: '',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'Polygel® Spray 50 Rubber',
+      specificVolume: 27.5,
+      cast: '',
+      poured: '',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'PolyPoxy® 5008-2 Laminating Epoxy',
+      specificVolume: 25.2,
+      cast: '',
+      poured: '',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 100,
+      partB: 25,
+    },
+    {
+      title: 'PolyPoxy® 5010 Laminating Epoxy',
+      specificVolume: 20.4,
+      cast: '',
+      poured: '',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 6,
+      partB: 1,
+    },
+    {
+      title: 'PolyPoxy® 5105 Laminating Epoxy',
+      specificVolume: 24.1,
+      cast: '',
+      poured: '',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 100,
+      partB: 17,
+    },
+    {
+      title: 'PolyPoxy® 5114 Laminating Epoxy',
+      specificVolume: 21.2,
+      cast: '',
+      poured: '',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 100,
+      partB: 13,
+    },
+    {
+      title: 'PolyPoxy® 5403 Epoxy Clay',
+      specificVolume: 26.5,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 100,
+      partB: 20,
+    },
+    {
+      title: 'PolyPoxy® 5700 Epoxy Clay',
+      specificVolume: 46.9,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'PolyPoxy® 6005 Surface Coat Epoxy',
+      specificVolume: 18.5,
+      cast: '',
+      poured: '',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 6,
+      partB: 1,
+    },
+    {
+      title: 'PolyPoxy® 6060 Surface Coat Epoxy',
+      specificVolume: 15.8,
+      cast: '',
+      poured: '',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 100,
+      partB: 9,
+    },
+    {
+      title: 'PolyPoxy® 6126 Surface Coat Epoxy',
+      specificVolume: 18.9,
+      cast: '',
+      poured: '',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 100,
+      partB: 10,
+    },
+    {
+      title: 'PolyPoxy® 7136 Casting Epoxy',
+      specificVolume: 16.4,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 100,
+      partB: 7,
+    },
+    {
+      title: 'PolyPoxy® 7136-2 Casting Epoxy',
+      specificVolume: 16.6,
+      cast: 'Cast Solid',
+      poured: '',
+      brush: '',
+      hollow: '',
+      partA: 100,
+      partB: 9,
+    },
+    {
+      title: 'PT Flex 20 Liquid Rubber',
+      specificVolume: 27.5,
+      cast: 'Cast Solid',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: 'Cast Hollow',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'PT Flex 50 Liquid Rubber',
+      specificVolume: 26.9,
+      cast: 'Cast Solid',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: 'Cast Hollow',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'PT Flex 60 Liquid Rubber',
+      specificVolume: 26.9,
+      cast: 'Cast Solid',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: 'Cast Hollow',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'PT Flex 70 Liquid Rubber',
+      specificVolume: 26.4,
+      cast: 'Cast Solid',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: 'Cast Hollow',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'PT Flex 85 Liquid Rubber',
+      specificVolume: 26.2,
+      cast: 'Cast Solid',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: 'Cast Hollow',
+      partA: 1,
+      partB: 1,
+    },
+    {
+      title: 'PT Flex D60 Liquid Rubber',
+      specificVolume: 26.9,
+      cast: 'Cast Solid',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: 'Cast Hollow',
+      partA: 2,
+      partB: 1,
+    },
+    {
+      title: 'TinSil® 70-11 Silicone Rubber',
+      specificVolume: 25.5,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 10,
+    },
+    {
+      title: 'TinSil® 70-20 Silicone Rubber',
+      specificVolume: 25.3,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 10,
+    },
+    {
+      title: 'TinSil® 70-25 Silicone Rubber',
+      specificVolume: 25.3,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 10,
+    },
+    {
+      title: 'TinSil® 70-60 Silicone Rubber',
+      specificVolume: 18,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 5,
+      partB: 100,
+    },
+    {
+      title: 'TinSil® 80-15 Silicone Rubber',
+      specificVolume: 25.3,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 10,
+    },
+    {
+      title: 'TinSil® 80-30 Silicone Rubber',
+      specificVolume: 23.7,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 10,
+    },
+    {
+      title: 'TinSil® 80-40 Silicone Rubber',
+      specificVolume: 22.9,
+      cast: '',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 10,
+    },
+    {
+      title: 'TinSil® Brush/Spray 25 Silicone Rubber',
+      specificVolume: 25.3,
+      cast: '',
+      poured: '',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 1,
+      partB: 10,
+    },
+    {
+      title: 'TinSil® Gel-10 Silicone Rubber',
+      specificVolume: 25.3,
+      cast: 'Cast Solid',
+      poured: 'Poured Mold',
+      brush: 'Brush-On Mold',
+      hollow: '',
+      partA: 10,
+      partB: 10,
+    },
+  ];
+
+  // Product Calculator Choices
+  $.each(productCalculators, function (index, value) {
+    $('#select-product-weight-volume-conv').append(
+      '<option value="' +
+        value.specificVolume +
+        '">' +
+        value.title +
+        '</option>'
+    );
+    $('#select-product-weight-surface-conv').append(
+      '<option value="' +
+        value.specificVolume +
+        '">' +
+        value.title +
+        '</option>'
+    );
+    $('#select-product-weight-mix-conv').append(
+      '<option value="' +
+        value.specificVolume +
+        '">' +
+        value.title +
+        '</option>'
+    );
+    if (value.cast == 'Cast Solid') {
+      $('#select-product-solid-casting-mold').append(
+        '<option value="' +
+          value.specificVolume +
+          '">' +
+          value.title +
+          '</option>'
+      );
+    }
+    if (value.poured == 'Poured Mold') {
+      $('#select-product-poured-mold').append(
+        '<option value="' +
+          value.specificVolume +
+          '">' +
+          value.title +
+          '</option>'
+      );
+    }
+    if (value.brush == 'Brush-On Mold') {
+      $('#select-product-brush-on-mold').append(
+        '<option value="' +
+          value.specificVolume +
+          '">' +
+          value.title +
+          '</option>'
+      );
+    }
+    if (value.hollow == 'Cast Hollow') {
+      $('#select-product-hollow-casting-mold').append(
+        '<option value="' +
+          value.specificVolume +
+          '">' +
+          value.title +
+          '</option>'
+      );
+    }
+  });
+</script>

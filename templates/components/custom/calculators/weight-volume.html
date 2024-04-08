@@ -1,0 +1,279 @@
+<form id="weightVolume-calc-form" class="form writeReview-form" action="#">
+  <h5>Weight vs Volume</h5>
+  <div class="form-row"></div>
+  <div class="form-row">
+    <label for="weightVolume-weight">Weight</label>
+    <input type="number" name="weightVolume-weight" pattern="[0-9]" val="" />
+    <select name="weightVolume-sa-unit">
+      <option value="pounds">Pounds (LB)</option>
+      <option value="ounces">Ounces (Oz)</option>
+      <option value="grams">Grams (g)</option>
+      <option value="kilograms">Kilograms (kg)</option>
+    </select>
+  </div>
+  <div class="form-row">
+    <label for="weightVolume-result-unit">Display Results As</label>
+    <select name="weightVolume-result-unit">
+      <option value="cubic inches">Cubic Inches (in&sup3;)</option>
+      <option value="fluid ounces">Fluid Ounces (fl oz)</option>
+      <option value="cups">Cups (c)</option>
+      <option value="cubic feet">Cubic Feet (ft&sup3;)</option>
+      <option value="cubic centimeters">Cubic Centimeters (cm&sup3;)</option>
+      <option value="milliliters">Milliliters (ml)</option>
+      <option value="liters">Liters (l)</option>
+      <option value="cubic meters">Cubic Meters (m&sup3;)</option>
+    </select>
+  </div>
+  <div class="form-row">
+    <button
+      class="button button--primary"
+      type="submit"
+      id="weightVolume-submit"
+    >
+      Calculate
+    </button>
+  </div>
+  <div class="form-row result-row">
+    Result: <span class="weightVolume-form-result result-area"></span>
+  </div>
+</form>
+
+<script>
+  const roundToHundredthsPlace = (number) => Math.round(number * 100) / 100;
+
+  $('#weightVolume-submit').click(function (event) {
+    event.preventDefault();
+    const weight = $('input[name="weightVolume-weight"').val();
+    const weightUnit = $('select[name="weightVolume-sa-unit"').val();
+    const resultUnit = $('select[name="weightVolume-result-unit"').val();
+
+    $('.weightVolume-form-result').html(
+      weightVolumeFormula(weight, weightUnit, specificVolume, resultUnit)
+    );
+  });
+
+  function weightVolumeFormula(weight, weightUnit, specificVolume, resultUnit) {
+    weight = roundToHundredthsPlace(parseFloat(weight));
+    weight = convertWeight(weight, weightUnit, UNIT_WEIGHT_LBS);
+
+    specificVolume = parseFloat(specificVolume);
+
+    let result = roundToHundredthsPlace(weight * specificVolume);
+    result = convertVolume(result, UNIT_VOLUME_IN3, resultUnit);
+
+    const resultString =
+      result.toLocaleString('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }) + writeUnit(resultUnit);
+
+    return resultString;
+  }
+
+  // CONVERT WEIGHT
+  function convertWeight(value, inputUnit, outputUnit) {
+    value = roundToHundredthsPlace(value);
+    let normalizedValue;
+    switch (inputUnit) {
+      case UNIT_WEIGHT_LBS:
+        normalizedValue = value * 453.59;
+        break;
+      case UNIT_WEIGHT_OZ:
+        normalizedValue = value * 28.35;
+        break;
+      case UNIT_WEIGHT_G:
+        normalizedValue = value;
+        break;
+      case UNIT_WEIGHT_KG:
+        normalizedValue = value * 1000.0;
+        break;
+      default:
+        throw inputUnit + ' is not a valid unit';
+    }
+    normalizedValue = roundToHundredthsPlace(normalizedValue);
+
+    let convertedValue;
+    switch (outputUnit) {
+      case UNIT_WEIGHT_LBS:
+        convertedValue = normalizedValue / 453.59;
+        break;
+      case UNIT_WEIGHT_OZ:
+        convertedValue = normalizedValue / 28.35;
+        break;
+      case UNIT_WEIGHT_G:
+        convertedValue = normalizedValue;
+        break;
+      case UNIT_WEIGHT_KG:
+        convertedValue = normalizedValue / 1000.0;
+        break;
+      default:
+        throw inputUnit + ' is not a valid unit';
+    }
+    convertedValue = roundToHundredthsPlace(convertedValue);
+    return convertedValue;
+  }
+
+  // CONVERT VOLUME
+  function convertVolume(value, inputUnit, outputUnit) {
+    value = roundToHundredthsPlace(value);
+    let normalizedValue;
+    switch (inputUnit) {
+      case UNIT_VOLUME_IN3:
+        normalizedValue = value * 16.39;
+        break;
+      case UNIT_VOLUME_FLOZ:
+        normalizedValue = value * 29.58;
+        break;
+      case UNIT_VOLUME_C:
+        normalizedValue = value * 240.0;
+        break;
+      case UNIT_VOLUME_FT3:
+        normalizedValue = value * 28316.8;
+        break;
+      case UNIT_VOLUME_CM3:
+        normalizedValue = value;
+        break;
+      case UNIT_VOLUME_ML:
+        normalizedValue = value;
+        break;
+      case UNIT_VOLUME_L:
+        normalizedValue = value * 1000.0;
+        break;
+      case UNIT_VOLUME_M3:
+        normalizedValue = value * 1000000.0;
+        break;
+      default:
+        throw inputUnit + ' is not a valid unit';
+    }
+    normalizedValue = roundToHundredthsPlace(normalizedValue);
+
+    let convertedValue;
+    switch (outputUnit) {
+      case UNIT_VOLUME_IN3:
+        convertedValue = normalizedValue / 16.39;
+        break;
+      case UNIT_VOLUME_FLOZ:
+        convertedValue = normalizedValue / 29.57;
+        break;
+      case UNIT_VOLUME_C:
+        convertedValue = normalizedValue / 240.0;
+        break;
+      case UNIT_VOLUME_FT3:
+        convertedValue = normalizedValue / 28316.8;
+        break;
+      case UNIT_VOLUME_CM3:
+        convertedValue = normalizedValue;
+        break;
+      case UNIT_VOLUME_ML:
+        convertedValue = normalizedValue;
+        break;
+      case UNIT_VOLUME_L:
+        convertedValue = normalizedValue / 1000.0;
+        break;
+      case UNIT_VOLUME_M3:
+        convertedValue = normalizedValue / 1000000.0;
+        break;
+      default:
+        throw inputUnit + ' is not a valid unit';
+    }
+    convertedValue = roundToHundredthsPlace(convertedValue);
+    return convertedValue;
+  }
+
+  function writeUnit(unit) {
+    let unitHTMLString;
+    switch (unit) {
+      case UNIT_WEIGHT_LBS:
+        unitHTMLString = ' lbs';
+        break;
+      case UNIT_WEIGHT_OZ:
+        unitHTMLString = ' oz';
+        break;
+      case UNIT_WEIGHT_G:
+        unitHTMLString = ' g';
+        break;
+      case UNIT_WEIGHT_KG:
+        unitHTMLString = ' kg';
+        break;
+      case UNIT_VOLUME_IN3:
+        unitHTMLString = ' in&sup3;';
+        break;
+      case UNIT_VOLUME_FLOZ:
+        unitHTMLString = ' fl oz';
+        break;
+      case UNIT_VOLUME_C:
+        unitHTMLString = ' c';
+        break;
+      case UNIT_VOLUME_FT3:
+        unitHTMLString = ' ft&sup3;';
+        break;
+      case UNIT_VOLUME_CM3:
+        unitHTMLString = ' cm&sup3;';
+        break;
+      case UNIT_VOLUME_ML:
+        unitHTMLString = ' ml';
+        break;
+      case UNIT_VOLUME_L:
+        unitHTMLString = ' l';
+        break;
+      case UNIT_VOLUME_M3:
+        unitHTMLString = ' m&sup3;';
+        break;
+      case UNIT_SURFACE_AREA_IN2:
+        unitHTMLString = ' in&sup2;';
+        break;
+      case UNIT_SURFACE_AREA_FT2:
+        unitHTMLString = ' ft&sup2;';
+        break;
+      case UNIT_SURFACE_AREA_MM2:
+        unitHTMLString = ' mm&sup2;';
+        break;
+      case UNIT_SURFACE_AREA_CM2:
+        unitHTMLString = ' cm&sup2;';
+        break;
+      case UNIT_SURFACE_AREA_M2:
+        unitHTMLString = ' m&sup2;';
+        break;
+      case UNIT_THICKNESS_IN:
+        unitHTMLString = ' in';
+        break;
+      case UNIT_THICKNESS_FT:
+        unitHTMLString = ' ft';
+        break;
+      case UNIT_THICKNESS_MM:
+        unitHTMLString = ' mm';
+        break;
+      case UNIT_THICKNESS_CM:
+        unitHTMLString = ' cm';
+        break;
+      case UNIT_THICKNESS_M:
+        unitHTMLString = ' m';
+        break;
+    }
+
+    return unitHTMLString;
+  }
+
+  const UNIT_WEIGHT_LBS = 'pounds';
+  const UNIT_WEIGHT_OZ = 'ounces';
+  const UNIT_WEIGHT_G = 'grams';
+  const UNIT_WEIGHT_KG = 'kilograms';
+  const UNIT_VOLUME_IN3 = 'cubic inches';
+  const UNIT_VOLUME_FLOZ = 'fluid ounces';
+  const UNIT_VOLUME_C = 'cups';
+  const UNIT_VOLUME_FT3 = 'cubic feet';
+  const UNIT_VOLUME_CM3 = 'cubic centimeters';
+  const UNIT_VOLUME_ML = 'milliliters';
+  const UNIT_VOLUME_L = 'liters';
+  const UNIT_VOLUME_M3 = 'cubic meters';
+  const UNIT_SURFACE_AREA_IN2 = 'square inches';
+  const UNIT_SURFACE_AREA_FT2 = 'square feet';
+  const UNIT_SURFACE_AREA_MM2 = 'square millimeters';
+  const UNIT_SURFACE_AREA_CM2 = 'square centimeters';
+  const UNIT_SURFACE_AREA_M2 = 'square meters';
+  const UNIT_THICKNESS_IN = 'inches';
+  const UNIT_THICKNESS_FT = 'feet';
+  const UNIT_THICKNESS_MM = 'millimeters';
+  const UNIT_THICKNESS_CM = 'centimeters';
+  const UNIT_THICKNESS_M = 'meters';
+</script>

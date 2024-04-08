@@ -1,0 +1,23 @@
+.blog-tags {
+    .blog-tag {
+        .button {
+            margin-bottom: 0.25rem;
+        }
+    }
+}
+#blog-footer-tags {
+    background: $grey;
+    padding: 20px;
+    h4 {
+        text-align: center;
+    }
+    ul {
+        list-style: none;
+        margin-left: 0;
+    }
+    .button {
+        text-transform: none;
+        font-size: 14px;
+        width: 100%;
+    }
+}
